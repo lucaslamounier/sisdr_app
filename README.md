@@ -1,5 +1,5 @@
-# operacoes
-A new repository to the operations app
+# SISDR
+A new repository to the SISDR app
 
 ## Dependences
 
@@ -24,7 +24,7 @@ npm install -g grunt-cli
 ```
 then clone this repository: 
 ```
-git clone https://github.com/ibamacsr/operacoes.git
+git clone https://github.com/lucaslamounier/sisdr_app
 ```
 Go to the folder then run:
 ```
@@ -36,7 +36,7 @@ bower install
 
 clone this repository:
 ```
-git clone https://github.com/ibamacsr/operacoes.git
+git clone https://github.com/lucaslamounier/sisdr_app
 ```
 Go to the folder then run:
 ```
