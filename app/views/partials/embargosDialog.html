@@ -1,0 +1,38 @@
+<md-dialog aria-label="Lista" ng-cloak>
+    <md-toolbar class="md-inverse">
+        <div class="md-toolbar-tools">
+            <h2>Lista de Embargos (Completo)</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="closeEmbargosDialog()">
+                <md-icon md-svg-src="images/icons/close_md.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content >
+
+        <table class="table table-hover table-bordered" id="dialogTable">
+            <tr>
+                <th ng-repeat="item in csvEmbargos.titles">{{item}}</th>
+            </tr>
+            <!-- <tr ng-repeat="item in EmbargossLastData | orderBy: 'num_auto_infracao'" class="clickable-row"> -->
+            <tr ng-repeat="item in EmbargosLastData" class="clickable-row" data-geom="{{item.latLng}}">
+                <td><b>{{$index + 1}}</b></td>
+                <td ng-repeat="subitem in csvEmbargos.keys" ng-value="{{subitem}}">{{item[subitem]}}</td>
+            </tr>
+        </table>
+    </md-dialog-content>
+
+    
+    <div class="md-actions" layout="row">
+        <span flex></span>
+
+        <md-button 
+            class="md-raised md-primary"
+            ng-csv="EmbargosLastData" 
+            filename="Embargos.csv"
+            csv-header="csvEmbargos.keys">
+                Exportar<md-icon md-svg-src="images/icons/get_md.svg" aria-label="get"></md-icon>
+        </md-button>
+    </div> 
+   
+</md-dialog>

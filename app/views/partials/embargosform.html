@@ -1,0 +1,45 @@
+
+<form ng-submit='EmbargosApi(start_date, end_date)' novalidate>
+	<md-content layout-padding>
+		<alert type="danger" ng-show="alertEmbargos">Não foram encontrados registros</alert>
+		<alert type="info" ng-show="EmbargosList">
+			<a href="" ng-click="showEmbargosDialog()">
+				Visualizar tabela de dados
+			</a>
+		</alert>
+
+		<md-input-container layout="column" layout-sm="row">
+			<label>Data Inicial</label>
+			<input calendar
+				ng-pattern="regExDate"
+				type='text'
+				ng-model="start_date"
+        ng-change="changeStartDateHandler(start_date)"
+				required />
+		</md-input-container>
+
+		<md-input-container layout="column" layout-sm="row">
+			<label>Data Final</label>
+			<input id="emb_end_date" calendar
+				ng-pattern="regExDate"
+				type='text'
+        ng-disabled="!start_date"
+				ng-model="end_date"
+				required />
+		</md-input-container>
+
+		<md-progress-linear
+			class="md-warn right"
+			md-mode="indeterminate"
+			ng-show="EmbargosLoad">
+		</md-progress-linear>
+
+	</md-content>
+
+	<md-button
+		ng-disabled="!start_date || !end_date || EmbargosLoad"
+		class="md-raised md-warn right"
+		type="submit">
+			enviar
+	</md-button>
+</form>

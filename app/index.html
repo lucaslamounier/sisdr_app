@@ -1,0 +1,96 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <title>SISDR</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" />
+    <link rel="stylesheet" href="bower_components/c3/c3.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/LControlSwitch.css">
+    <!-- endbuild -->
+</head>
+
+<body ng-app="sisdrApp">
+
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <top-bar></top-bar>
+
+    <div ng-view="" flex></div>
+
+    <!-- build:js(.) scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/ng-csv/build/ng-csv.min.js"></script>
+    <script src="bower_components/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/c3/c3.js"></script>
+    <script src="bower_components/leaflet-wms-layer-info/dist/Leaflet.WMSLayerInfo.js"></script>
+    <!-- endbower -->
+    <script src="bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.js"></script>
+    <!-- endbuild -->
+
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/acl.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/operacoes.js"></script>
+    <script src="scripts/services/formdata.js"></script>
+    <script src="scripts/services/restapi.js"></script>
+    <script src="scripts/services/symbologies.js"></script>
+    <script src="scripts/directives/topbar.js"></script>
+    <script src="scripts/directives/resizable.js"></script>
+    <script src="scripts/directives/map.js"></script>
+    <script src="scripts/directives/sidenav.js"></script>
+    <script src="scripts/directives/calendar.js"></script>
+    <script src="scripts/directives/operationform.js"></script>
+    <script src="scripts/directives/helicopterform.js"></script>
+    <script src="scripts/directives/vehicleform.js"></script>
+    <script src="scripts/directives/embargosform.js"></script>
+    <script src="scripts/directives/autosform.js"></script>
+    <script src="scripts/directives/controlswitch.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/logout.js"></script>
+    <script src="scripts/controllers/estatisticas.js"></script>
+    <!-- endbuild -->
+
+</body>
+
+</html>

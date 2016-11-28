@@ -1,0 +1,74 @@
+
+<!-- <md-content> -->
+	<md-sidenav
+		md-component-id="filter"
+		class="md-sidenav-left overMap"
+		layout='column'>
+
+		<md-subheader>Selecione os dados a serem filtrados</md-subheader>
+
+		<accordion close-others="true">
+			<accordion-group is-open="openOperations">
+				<accordion-heading>
+					DUPs
+					<!--<i class="pull-right glyphicon glyphicon-small"
+						ng-class="{'glyphicon-chevron-down': openHelicopters, 'glyphicon-chevron-right': !openHelicopters}">
+					</i>-->
+				</accordion-heading>
+
+				<operation-form></operation-form>
+
+				</accordion-heading>
+			</accordion-group>
+
+			<accordion-group is-open="openHelicopters">
+				<accordion-heading>
+					Projetos
+					<i class="pull-right glyphicon glyphicon-small"
+						ng-class="{'glyphicon-chevron-down': openHelicopters, 'glyphicon-chevron-right': !openHelicopters}">
+					</i>
+				</accordion-heading>
+
+				<helicopter-form></helicopter-form>
+
+				</accordion-heading>
+			</accordion-group>
+
+			<accordion-group is-open="openVehicles">
+				<accordion-heading>
+					Propriedades Lindeiras
+					<i class="pull-right glyphicon glyphicon-small"
+						ng-class="{'glyphicon-chevron-down': openVehicles, 'glyphicon-chevron-right': !openVehicles}">
+					</i>
+				</accordion-heading>
+
+				<vehicle-form></vehicle-form>
+			</accordion-group>
+<!--
+
+			<accordion-group is-open="openEmbargos">
+				<accordion-heading>
+					Propriedades Confrontantes
+					<i class="pull-right glyphicon glyphicon-small"
+						ng-class="{'glyphicon-chevron-down': openEmbargos, 'glyphicon-chevron-right': !openEmbargos}">
+					</i>
+				</accordion-heading>
+
+				<embargos-form></embargos-form>
+			</accordion-group>
+-->
+
+		<!--	<accordion-group is-open="openAutos">
+				<accordion-heading>
+					Autos de Infração
+					<i class="pull-right glyphicon glyphicon-small"
+						ng-class="{'glyphicon-chevron-down': openAutos, 'glyphicon-chevron-right': !openAutos}">
+					</i>
+				</accordion-heading>
+
+				<autos-form></autos-form>
+			</accordion-group>-->
+
+		</accordion>
+	</md-sidenav>
+<!-- </md-content> -->

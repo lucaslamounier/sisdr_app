@@ -1,0 +1,34 @@
+
+<md-content
+	class="md-whiteframe-z5"
+	layout-align="space-around"
+	id="formLogin">
+
+	<form ng-submit="doLogin(username, password)">
+		 <md-icon ng-style="{color: font.color}"
+            aria-label="{{ font.name }}"
+            class="material-icons step"
+            ng-class="it.size">
+        </md-icon>
+		<md-input-container>
+			<label>Usuário</label>
+			<input ng-model="username" required>
+		</md-input-container>
+		<md-input-container>
+			<label>Senha</label>
+			<input ng-model="password" type="password" required>
+		</md-input-container>
+
+		<div layout="row" layout-align="center" id="loginButton">
+			<md-button
+				class="md-raised md-primary button"
+				layout="row"
+				flex="100"
+				ng-disabled="!username || !password">
+				Entrar</md-button>
+		</div>
+	</form>
+	<div ng-show="message" class="alert {{message_cls}}">{{message}}</div>
+  <md-divider></md-divider>
+  <p>O acesso a este sistema é restrito à usuários cadastrados em nossa base de dados</p>
+</md-content>

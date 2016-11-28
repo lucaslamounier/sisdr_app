@@ -1,0 +1,17 @@
+<md-progress-linear  ng-if="loading" md-mode="indeterminate"></md-progress-linear>
+
+<div class="container">
+	<div layout="row" layout-sm="column" layout-align="space-around" >
+		<form ng-submit="requestInfraction(ano)" layout-padding  layout="row">
+			<md-select ng-model="ano" placeholder="Ano" layout="column">
+				<md-option ng-repeat="item in years" ng-value='item.value' ng-selected="{{$first}}">{{item.value}}</md-option>
+			</md-select>
+			<md-button
+				ng-disabled="loading"
+				class="md-raised md-primary"
+				type="submit"
+				layout="column">enviar</md-button>
+		</form>
+	</div>
+	<div id="chart"></div>
+</div>

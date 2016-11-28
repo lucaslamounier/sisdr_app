@@ -1,0 +1,104 @@
+/* Space out content a bit */
+
+md-select, md-input-container{
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+#map{
+  height: 850px;
+}
+
+#dialog{
+	min-width: 50%;
+}
+
+#dialog > md-dialog-content{
+	max-width: 800px;
+	max-height: 810px;
+}
+
+.leaflet-top{
+	z-index: 1
+}
+
+.md-inverse{
+	background-color: #222 !important;
+}
+
+.button{
+	max-height: 3.5em;
+}
+
+.glyphicon-small{
+	font-size: 0.8em;
+}
+
+.right{
+	float: right;
+}
+
+.color-gray{
+	background-color: #F5F5F5;
+}
+.svg-marker{
+	background: none !important;
+  	border: none !important;
+}
+
+.Container
+{
+    width: 200px;
+    overflow-y: auto;
+}
+
+.Content { width: 300px; }
+
+.Container, .Content
+{
+    transform:rotateX(180deg);
+    -moz-transform:rotateX(180deg); /* Mozilla */
+    -webkit-transform:rotateX(180deg); /* Safari and Chrome */
+    -ms-transform:rotateX(180deg); /* IE 9+ */
+    -o-transform:rotateX(180deg); /* Opera */
+}
+
+/*.overMap{
+	z-index: 1005;
+}*/
+/*
+}
+.over-map, .md-datepicker-calendar-pane {
+	z-index: 1050 !important;
+}*/
+
+#loginButton {
+	margin: 2em auto;
+}
+
+#formLogin {
+	width: 380px;
+	margin: 10em auto;
+	padding: 2em 2em 1em 2em;
+	/*background: #fafafa;*/
+	/*border: 1px solid #ebebeb;*/
+	/*box-shadow: rgba(0,0,0,0.14902) 0px 2px 2px 0px,rgba(0,0,0,0.09804) 0px 2px 2px 0px;*/
+	/*border-radius: 0.2em;*/
+}
+
+#formLogin > p {
+	color: rgba(0,0,0,0.54);
+	font-size: 15px;
+	font-weight: 500;
+	letter-spacing: .01em;
+	margin: 1.5em auto;
+	line-height: 1.6em;
+	text-align: justify;
+}
+
+.btn:not(.active) {
+	opacity: 0.5;
+}
+.btn:not(.active):hover{
+	opacity:1;
+}

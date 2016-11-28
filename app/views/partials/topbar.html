@@ -1,0 +1,30 @@
+  <md-toolbar class="md-inverse">
+    <div class="md-toolbar-tools" >
+      <md-button
+        ng-click="openNav('filter')"
+        aria-label="toggleLeft"
+        class="md-icon-button">
+        <md-icon md-svg-icon="images/icons/dehaze_md.svg"></md-icon>
+      </md-button>
+
+      <span>SISDR</span>
+      <!-- fill up the space between left and right area -->
+      <span flex></span>
+
+      <div class="dropdown" ng-show="isAuthenticated">
+        <a href=""
+          class="dropdown-toggle"
+          data-toggle="dropdown" role="button"
+          aria-expanded="false">
+            <i class='glyphicon glyphicon-user'></i>
+              {{username}}
+              <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <li><a href="" ng-click='logout()'>Sair</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+  </md-toolbar>
