@@ -12,7 +12,7 @@ angular.module('sisdrApp')
             templateUrl: 'views/partials/helicopterForm.html',
             restrict: 'E',
             link: function postLink(scope, element, attrs) {
-                var rest = RestApi.get({
+               /* var rest = RestApi.get({
                     type: 'helicopters-api',
                     model: 'helicopters'
                 });
@@ -20,7 +20,7 @@ angular.module('sisdrApp')
                 rest.$promise.then(function(data) {
                     scope.helicoptersData = data.map(mapData);
                     scope.helicopters = true;
-                });
+                });*/
 
                 function mapData(data) {
                     return {
@@ -47,14 +47,14 @@ angular.module('sisdrApp')
                     $scope.alert = false;
                     $scope.HelicopterLoad = true;
 
-                    var restHeli = RestApi.routes({
+                 /*   var restHeli = RestApi.routes({
                         type: 'helicopters-api',
                         nome: heli.name,
                         start_date: GISHelper.formatDate(start_date),
                         end_date: GISHelper.formatDate(end_date)
-                    });
+                    });*/
 
-                    restHeli.$promise.then(function(data) {
+                 /*   restHeli.$promise.then(function(data) {
 
                         var layerGroup, geometry, polyline, marker, traceHandler,
                             properties, date, geometryMap, day, paths,
@@ -122,7 +122,7 @@ angular.module('sisdrApp')
 
                     }, function(error) {
                         $scope.alertHelicopters = false;
-                    });
+                    });*/
 
                     function pointToLayer(feature, latlng) {
                         var marker;

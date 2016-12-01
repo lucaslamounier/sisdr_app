@@ -14,7 +14,7 @@
  * $routeProvider
  *  .when('/application', {
  *    templateUrl: 'views/operacoes.html',
- *    controller: 'OperacoesCtrl',
+ *    controller: 'sisdrCtrl',
  *    access : ACCESS_LEVEL.USER //
  *  })
  *

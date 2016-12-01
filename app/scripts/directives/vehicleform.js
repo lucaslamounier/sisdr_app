@@ -13,12 +13,12 @@ angular.module('sisdrApp')
             restrict: 'E',
             link: function postLink(scope, element, attrs) {
 
-                var rest = RestApi.get({
+              /*  var rest = RestApi.get({
                     type: 'vehicles-api',
                     model: 'cars'
-                });
+                });*/
                 scope.geometryType = 'Pontos';
-                rest.$promise.then(function(data) {
+                /*rest.$promise.then(function(data) {
                     scope.viaturasData = data.map(mapData);
                     scope.viaturas = true;
 
@@ -28,7 +28,7 @@ angular.module('sisdrApp')
                             value: data.id
                         }
                     }
-                });
+                });*/
 
                 scope.changeStartDateHandler = function(value) {
                     var dateInput = $('#vehi_end_date');
@@ -53,6 +53,7 @@ angular.module('sisdrApp')
 
                     $scope.VehicleLoad = true;
                     $scope.alertVehicles = false;
+/*
 
                     var restHeli = RestApi.routes({
                         type: 'vehicles-api',
@@ -60,8 +61,9 @@ angular.module('sisdrApp')
                         start_date: formatDate(start_date),
                         end_date: formatDate(end_date),
                     });
+*/
 
-                    restHeli.$promise.then(function(data) {
+                  /*  restHeli.$promise.then(function(data) {
 
                         var polylines, vehicles, layerName, polyline, traceHandler, layerGroup,
                             paths, polylineTrace, marker;
@@ -119,7 +121,7 @@ angular.module('sisdrApp')
                             return symbologies.make(paths, 'vehicles-multi-line');
                         }
 
-                    });
+                    });*/
 
                     function pointToLayer(feature, latlng) {
                         var marker;

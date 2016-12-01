@@ -2,10 +2,10 @@
 
 /**
  * @ngdoc service
- * @name operationsApp.formData
+ * @name sisdrApp.formData
  * @description
  * # formData
- * Service in the operationsApp.
+ * Service in the sisdrApp.
  */
  angular.module('sisdrApp')
  .service('formData', function () {

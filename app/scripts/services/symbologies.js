@@ -2,10 +2,10 @@
 
 /**
  * @ngdoc service
- * @name operationsApp.symbologies
+ * @name sisdrApp.symbologies
  * @description
  * # symbologies
- * Service in the operationsApp.
+ * Service in the sisdrApp.
  */
 angular.module('sisdrApp')
   .provider('symbologies', function () {

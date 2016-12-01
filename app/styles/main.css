@@ -102,3 +102,7 @@ md-select, md-input-container{
 .btn:not(.active):hover{
 	opacity:1;
 }
+
+body > div > md-content > side-nav > md-sidenav > accordion > div > div.panel.panel-default.panel-open > div.panel-collapse.in > div {
+    display: none !important;
+}

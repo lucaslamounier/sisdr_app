@@ -5,23 +5,49 @@
 		class="md-sidenav-left overMap"
 		layout='column'>
 
-		<md-subheader>Selecione os dados a serem filtrados</md-subheader>
+        <md-subheader>Funcionalidades do Sistema</md-subheader>
+
+		<accordion>
+            <div class="panel panel-default">
+              <div class="panel-heading" ng-keypress="toggleOpen($event)">
+                <h4 class="panel-title">
+                  <a href="" tabindex="0" class="accordion-toggle">
+                      <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
+                       Consultar DUPs
+                  </span></span></a>
+                </h4>
+              </div>
+            </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading" ng-keypress="toggleOpen($event)">
+                <h4 class="panel-title">
+                  <a href="" tabindex="0" class="accordion-toggle">
+                      <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
+                       Consultar Projetos
+                  </span></span></a>
+                </h4>
+              </div>
+            </div>
+
+
+            <div class="panel panel-default">
+              <div class="panel-heading" ng-keypress="toggleOpen($event)">
+                <h4 class="panel-title">
+                  <a href="" tabindex="0" class="accordion-toggle">
+                      <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
+                       Consultar Propriedades Lindeiras
+                  </span></span></a>
+                </h4>
+              </div>
+            </div>
+
+
+		<md-subheader>Filtrar dados no mapa</md-subheader>
 
 		<accordion close-others="true">
-			<accordion-group is-open="openOperations">
-				<accordion-heading>
-					DUPs
-					<!--<i class="pull-right glyphicon glyphicon-small"
-						ng-class="{'glyphicon-chevron-down': openHelicopters, 'glyphicon-chevron-right': !openHelicopters}">
-					</i>-->
-				</accordion-heading>
 
-				<operation-form></operation-form>
-
-				</accordion-heading>
-			</accordion-group>
-
-			<accordion-group is-open="openHelicopters">
+			<accordion-group >
 				<accordion-heading>
 					Projetos
 					<i class="pull-right glyphicon glyphicon-small"
@@ -44,30 +70,6 @@
 
 				<vehicle-form></vehicle-form>
 			</accordion-group>
-<!--
-
-			<accordion-group is-open="openEmbargos">
-				<accordion-heading>
-					Propriedades Confrontantes
-					<i class="pull-right glyphicon glyphicon-small"
-						ng-class="{'glyphicon-chevron-down': openEmbargos, 'glyphicon-chevron-right': !openEmbargos}">
-					</i>
-				</accordion-heading>
-
-				<embargos-form></embargos-form>
-			</accordion-group>
--->
-
-		<!--	<accordion-group is-open="openAutos">
-				<accordion-heading>
-					Autos de Infração
-					<i class="pull-right glyphicon glyphicon-small"
-						ng-class="{'glyphicon-chevron-down': openAutos, 'glyphicon-chevron-right': !openAutos}">
-					</i>
-				</accordion-heading>
-
-				<autos-form></autos-form>
-			</accordion-group>-->
 
 		</accordion>
 	</md-sidenav>

@@ -2,10 +2,10 @@
 
 /**
  * @ngdoc function
- * @name operationsApp.controller:EstatisticasCtrl
+ * @name sisdrApp.controller:EstatisticasCtrl
  * @description
  * # EstatisticasCtrl
- * Controller of the operationsApp
+ * Controller of the sisdrApp
  */
 angular.module('sisdrApp')
  .controller('EstatisticasCtrl', function ($timeout, $scope, RestApi, formData) {
@@ -103,13 +103,4 @@ angular.module('sisdrApp')
 	    	alert('data contains!!');
 	    }
  	}
-
- // 	$timeout(function () {
-	//     chart.load({
-	//         columns:[
-	//             ['data1', 0, 30, 20, 50, 40, 60, 50, 100, 200]
-	//         ]
-	//     });
-	// }, 1000);
-
  });

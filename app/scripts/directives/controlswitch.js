@@ -140,13 +140,6 @@ angular.module('sisdrApp')
                                     }
                                 };
                             })(this));
-                            if (this.options.miscTabs) {
-                                obj = {
-                                    icon: "images/icons/layers_black.png",
-                                    selected: true
-                                };
-                                this._createTab(this.options.miscTabsName, obj);
-                            }
                         }
                         return $(container).append(form);
                     },
@@ -382,21 +375,11 @@ angular.module('sisdrApp')
 
                         $(input).on("switchChange.bootstrapSwitch", (function(_this) {
                             return function(e, data) {
-
-                                // if (!obj.overlayer) {
-                                //   $('input[name="leaflet-base-layers"]').bootstrapSwitch('state');
-                                // }
-                                // return _this._onInputClick(input, obj);
-
                                 if (!obj.overlayer) {
                                     return $.each(_this._baseLayers, function(key, value) {
                                         _this._onInputClick(value.input, value.obj);
                                     });
-                                    // var base = $('.leaflet-base-layers').toArray();
-                                    // var index = base.indexOf(this);
-                                    // base = base.splice(index,1);
-                                    // $(base).bootstrapSwitch('state');
-                                    // $('input[name="leaflet-base-layers"]').bootstrapSwitch('state');
+                                
                                 } else {
                                     return _this._onInputClick(input, obj);
                                 }
@@ -433,7 +416,6 @@ angular.module('sisdrApp')
                     return new L.Control['Switch'](baseLayers, overlayers, tabs, options);
                 };
 
-                // element.text('this is the controlSwitch directive');
             }
         };
     });

@@ -15,6 +15,7 @@ angular.module('sisdrApp')
 
                 var date,
                     mapOSM,
+                    googleSat,
                     mapPositron,
                     mapDark,
                     layers = {},
@@ -35,6 +36,11 @@ angular.module('sisdrApp')
 
                 mapDark = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+                });
+
+                googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+                    maxZoom: 20,
+                    subdomains:['mt0','mt1','mt2','mt3']
                 });
 
                 if (date.getHours() >= 18 || date.getHours() <= 5) {
@@ -58,15 +64,13 @@ angular.module('sisdrApp')
                     },
                     "CartoDB Dark": {
                         layer: mapDark
+                    },
+                    "Google Satellite": {
+                        layer: googleSat
                     }
-                }, {}, {
-                    wmsLayers: {
-                        icon: "images/icons/world.png",
-                        name: null
-                    }
-                }).addTo(scope.map);
+                }, {}).addTo(scope.map);
 
-                scope.popup = function(content) {
+                /*scope.popup = function(content) {
                     var html;
 
                     var element = content.features[0];
@@ -100,16 +104,16 @@ angular.module('sisdrApp')
                     html += '</table>';
 
                     return html;
-                }
+                }*/
 
-                new WMSLayerInfo(scope.map, scope.popup);
+               //new WMSLayerInfo(scope.map, scope.popup);
 
                 scope.layers = layers;
-                scope.wmsLayers = wmsLayers;
+                //scope.wmsLayers = wmsLayers;
                 scope.initialLayers = initialLayers;
                 scope.$watchCollection('layers', onLayersChange);
                 scope.$watchCollection('initialLayers', onInitialLayersChange);
-                scope.$watchCollection('wmsLayers', onWMSLayersChange);
+                //scope.$watchCollection('wmsLayers', onWMSLayersChange);
 
                 function onWMSLayersChange(value, oldValue) {
                     //var tooltip = '';
@@ -148,7 +152,6 @@ angular.module('sisdrApp')
                             if (oldLayers.hasOwnProperty(layerName)) {
                                 delete oldLayers[layerName]
                             } else {
-                                // layersControl.addOverlay(layer, layerName); //Adiciona na lista de camadas
                                 layer = currentLayers[layerName];
 
                                 if (layer.legend) {
@@ -161,7 +164,6 @@ angular.module('sisdrApp')
                                 if (initVisible)
                                     layer.addTo(scope.map);
                                 updateFitBounds(layer);
-                                //debugger;
                                 scope.control.addOverLayer(layer, layerName, tabName, allowRemove, legend, tooltip);
                             }
                         }

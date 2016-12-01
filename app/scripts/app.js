@@ -35,8 +35,8 @@ angular
                 controller: 'LogoutCtrl'
             })
             .when('/', {
-                templateUrl: 'views/operacoes.html',
-                controller: 'OperacoesCtrl',
+                templateUrl: 'views/sisdr.html',
+                controller: 'sisdrCtrl',
                 access: ACCESS_LEVEL.USER
             })
             .when('/estatisticas', {
@@ -51,6 +51,10 @@ angular
         // Application settings
         $provide.constant('settings', {
             'server': {
+                'url' : '//localhost:8000/sisdr-api'
+                //'url': '//siscom.ibama.gov.br/operacoes_api'
+            },
+            'server_user_auth': {
                 'url' : '//localhost:8000'
                 //'url': '//siscom.ibama.gov.br/operacoes_api'
             }
@@ -142,10 +146,6 @@ angular
         $provide.constant('GISHelper', {
 
             invertLatLng: function(latlng) {
-                // var lat = latlng.lat;
-                // var lng = latlng.lng;
-                // latlng.lat = lng;
-                // latlng.lng = lat;
                 return latlng;
             },
 

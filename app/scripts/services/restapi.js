@@ -2,10 +2,10 @@
 
 /**
  * @ngdoc service
- * @name operationsApp.RestApi
+ * @name sisdrApp.RestApi
  * @description
  * # RestApi
- * Service in the operationsApp.
+ * Service in the sisdrApp.
  */
 angular.module('sisdrApp')
   .factory('RestApi', function (settings, $resource) {
@@ -19,12 +19,25 @@ angular.module('sisdrApp')
           },
           isArray: true,
         },
+        get_dup: {
+          method:'GET',
+          params: {
+            format:'json'
+          },
+          isArray: true,
+        },
         getObject: {
           method:'GET',
           params: {
             format:'json'
           },
           isArray: false,
+        },
+        getPoints: {
+          method:'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
         },
         routes: {
           url : settings.server.url + '/:type/routes/:start_date/:end_date/',
@@ -43,7 +56,7 @@ angular.module('sisdrApp')
           isArray : false
         },
         obtain_pass : {
-          url : settings.server.url + '/users-api/obtain-pass/',
+          url : settings.server_user_auth.url + '/users-api/obtain-pass/',
           method : 'POST',
           params : {
             format : 'json'
