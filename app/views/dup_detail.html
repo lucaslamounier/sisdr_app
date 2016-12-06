@@ -1,0 +1,60 @@
+<div class="container">
+    <center>
+        <h3 class="page-header">DUP - Declaração de Utilidade Pública</h3>
+    </center>
+    <br />
+    <div ng-show="msg">
+        <div class="alert alert-danger">
+          <span ng-bind="msg"></span>
+        </div>
+    </div>
+    <div ng-show="!msg">
+        <div id="detalhes-box">
+            <div class="box">
+                <div class="nome"><strong>Número da Portaria:</strong></div>
+                <div class="detalhe">{{dup.portaria}}</div>
+            </div>
+            <hr>
+            <div class="box">
+                <div class="nome"><strong>Código SNV:</strong></div>
+                <div class="detalhe">{{dup.cod_snv}}</div>
+            </div>
+            <hr>
+            <div class="box">
+                <div class="nome"><strong>Código do Projeto:</strong></div>
+                <div class="detalhe">{{ dup.projeto.cod_projeto }}</div>
+            </div>
+            <hr>
+            <div class="box">
+                <div class="nome"><strong>Data de Publicação:</strong></div>
+                <div class="detalhe">
+                    <span ng-bind="dup.dt_publicacao | date:'dd/MM/yyyy'"></span>
+                </div>
+            </div>
+            <hr>
+            <div class="box">
+                <div class="nome"><strong>Data de Vencimento:</strong></div>
+                <div class="detalhe">
+                    <span ng-bind="dup.dt_vencimento | date:'dd/MM/yyyy'"></span>
+                </div>
+            </div>
+            <hr>
+            <div class="box">
+                <div class="nome"><strong>Possui geometria ?</strong></div>
+                <div class="detalhe">
+                    <span ng-show="dup.has_geometry">
+              Sim
+          </span>
+                    <span ng-show="!dup.has_geometry">
+              Não
+          </span>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div id="map-box" layout="row" layout-sm="column" ng-show="dup.has_geometry" layout-align="space-around">
+            <map flex></map>
+        </div>
+    </div>
+</div>

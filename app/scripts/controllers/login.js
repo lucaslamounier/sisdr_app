@@ -2,10 +2,10 @@
 
 /**
  * @ngdoc function
- * @name operationsApp.controller:LoginCtrl
+ * @name sisdrApp.controller:LoginCtrl
  * @description
  * # LoginCtrl
- * Controller of the operationsApp
+ * Controller of the sisdrApp
  */
 angular.module('sisdrApp')
   .controller('LoginCtrl', function ($rootScope, $scope, RestApi, auth, $location, $http, $cookies, ACCESS_LEVEL) {
@@ -80,4 +80,4 @@ angular.module('sisdrApp')
       $scope.message_cls = 'alert-'+cls;
     }
 
-  });
+});

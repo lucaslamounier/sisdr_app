@@ -10,7 +10,7 @@
 angular.module('sisdrApp')
   .factory('RestApi', function (settings, $resource) {
     var url = settings.server.url + '/:type/:model/:start/:end/';
-    return $resource(url, {type: '@type', model: '@model', start: '@start', end: "@end"},
+    return $resource(url, {type: '@type', model: '@model', state: '@state', end: "@end"},
       {
         get: {
           method:'GET',
@@ -39,13 +39,19 @@ angular.module('sisdrApp')
             'Content-Type': 'application/json'
           },
         },
-        routes: {
-          url : settings.server.url + '/:type/routes/:start_date/:end_date/',
+        getBR: {
+          url : settings.server.url + '/:type/:state/',
+          method:'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        },
+        getDup: {
+          url : settings.server.url + '/:type/:pk',
           method:'GET',
           params: {
             format:'json'
           },
-          isArray: false
         },
         last_position : {
           url : settings.server.url + '/:type/last-position/',

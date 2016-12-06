@@ -2,10 +2,10 @@
 
 /**
  * @ngdoc function
- * @name operationsApp.controller:LogoutCtrl
+ * @name sisdrApp.controller:LogoutCtrl
  * @description
  * # LogoutCtrl
- * Controller of the operationsApp
+ * Controller of the sisdrApp
  */
 angular.module('sisdrApp')
   .controller('LogoutCtrl', function ($scope, $cookies, $http, $location, auth, ACCESS_LEVEL) {
@@ -17,4 +17,4 @@ angular.module('sisdrApp')
       headers['Authorization'] = 'Token undefined';
       $http.defaults.headers.get = headers;
       $location.path('/');
-  });
+});

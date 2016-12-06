@@ -70,50 +70,12 @@ angular.module('sisdrApp')
                     }
                 }, {}).addTo(scope.map);
 
-                /*scope.popup = function(content) {
-                    var html;
-
-                    var element = content.features[0];
-                    var layername = element.id.split('.')[0];
-
-                    var layerTitle = Object.keys(scope.wmsLayers).filter(function(k, v) {
-                        var wmsParams = scope.wmsLayers[k].layer.wmsParams;
-                        if (element.properties.hasOwnProperty('tipo')) {
-                            return (wmsParams.layers.split(':')[1] == layername) && (wmsParams.viewparams == ('tipo:' + element.properties.tipo));
-                        } else {
-                            return wmsParams.layers.split(':')[1] == layername;
-                        }
-                    });
-
-                    if ($.isArray(layerTitle)) {
-                        layerTitle = layerTitle[0];
-                    } else {
-                        layerTitle = 'Camada WMS';
-                    }
-
-                    html = '<h3>' + layerTitle + '</h3>';
-                    html += '<table class="table table-striped">';
-
-                    for (var property in content.features[0].properties) {
-                        html += '<tr>';
-                        html += '<td><b>' + property + '</b></td>';
-                        html += '<td>' + content.features[0].properties[property] + '</td>';
-                        html += '</tr>';
-
-                    }
-                    html += '</table>';
-
-                    return html;
-                }*/
-
-               //new WMSLayerInfo(scope.map, scope.popup);
 
                 scope.layers = layers;
-                //scope.wmsLayers = wmsLayers;
                 scope.initialLayers = initialLayers;
                 scope.$watchCollection('layers', onLayersChange);
                 scope.$watchCollection('initialLayers', onInitialLayersChange);
-                //scope.$watchCollection('wmsLayers', onWMSLayersChange);
+
 
                 function onWMSLayersChange(value, oldValue) {
                     //var tooltip = '';

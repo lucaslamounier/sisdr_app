@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc overview
- * @name operationsApp
+ * @name sisdrApp
  * @description
- * # operationsApp
+ * # sisdrApp
  *
  * Main module of the application.
  */
@@ -19,7 +19,7 @@ angular
         'ngSanitize',
         'ngMaterial',
         'ui.bootstrap',
-        'ngCsv'
+        'ngCsv',
     ])
     .config(function($provide, $routeProvider, authProvider, symbologiesProvider, ACCESS_LEVEL) {
 
@@ -39,24 +39,30 @@ angular
                 controller: 'sisdrCtrl',
                 access: ACCESS_LEVEL.USER
             })
-            .when('/estatisticas', {
+            .when('/dups', {
                 templateUrl: 'views/stats.html',
-                controller: 'EstatisticasCtrl',
-                access: ACCESS_LEVEL.USER
+                controller: 'DupCtrl',
+                //access: ACCESS_LEVEL.USER
+            })
+            .when('/dups/detail/:id', {
+                templateUrl: 'views/dup_detail.html',
+                controller: 'DupDetailCtrl',
+                //access: ACCESS_LEVEL.USER
             })
             .otherwise({
-                redirectTo: '/'
+                redirectTo: '#/dups'
             });
+
 
         // Application settings
         $provide.constant('settings', {
             'server': {
-                'url' : '//localhost:8000/sisdr-api'
-                //'url': '//siscom.ibama.gov.br/operacoes_api'
+                'url': '//localhost:8000/sisdr-api'
+                    //'url': '//siscom.ibama.gov.br/operacoes_api'
             },
             'server_user_auth': {
-                'url' : '//localhost:8000'
-                //'url': '//siscom.ibama.gov.br/operacoes_api'
+                'url': '//localhost:8000'
+                    //'url': '//siscom.ibama.gov.br/operacoes_api'
             }
         });
 

@@ -7,13 +7,24 @@
  * # sisdrCtrl
  * Controller of the sisdrApp
  */
+
+ function isEmpty(obj) {
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
+
+    return JSON.stringify(obj) === JSON.stringify({});
+}
+
 angular.module('sisdrApp')
-  .controller('sisdrCtrl', function ($scope, $rootScope, RestApi, $q, symbologies, GISHelper, formData, $timeout, auth) {
+  .controller('sisdrCtrl', function ($scope, $rootScope, RestApi, $cookies, $q, symbologies, GISHelper, formData, $timeout, auth) {
 
 
     var profaixaLayerName = 'Profaixa';
     var RodoviaLayerName = 'Rodovias';
     var PropriedadesLindeirasLayerName = 'Propriedades Lindeiras';
+    $scope.filter = {};
 
     var user = auth.getUser();
     var username = user.username;
@@ -69,21 +80,6 @@ angular.module('sisdrApp')
       }
     }
 
-    /**
-     * Resultado da requisição
-     * @param data
-    */
-    function getColor(d) {
-        return d > 1000 ? '#800026' :
-               d > 500  ? '#BD0026' :
-               d > 200  ? '#E31A1C' :
-               d > 100  ? '#FC4E2A' :
-               d > 50   ? '#FD8D3C' :
-               d > 20   ? '#FEB24C' :
-               d > 10   ? '#FED976' :
-                          '#FFEDA0';
-    }
-
     function style(feature) {
         return {
             fillColor: '#000080',
@@ -113,23 +109,33 @@ angular.module('sisdrApp')
             
         };
     }
-     
-
+       
+     /**
+     * Resultado da requisição
+     * @param data
+      */
     function onResult(result){
 
-      //var dups = result.dups.features;
-      var profaixa = result.profaixa.features;
-      var rodovias = result.rodovia.features;
+      var rodovias, profaixa = result.profaixa.features;
+      if(result.rodovia && result.rodovia.features.length){
+            rodovias = result.rodovia.features;
+            $cookies.put('rodovias', angular.toJson(rodovias));
+      }else if($cookies.get('rodovias')){
+            console.log('cookie rodovia');
+            rodovias = $cookies.rodovias;
+      }
+     
       var propriedadesLindeiras = result.propriedadesLindeira.features;
+      
 
-      console.log('Total rodovias: ' + rodovias.length);
+      //console.log('Total rodovias: ' + rodovias.length);
 
       $scope.initialLayers[profaixaLayerName] = {
         'layer': L.geoJson(profaixa, {
             onEachFeature: propertiesProfaixa,
             style: style,
         }),
-        'legend': {'url': 'images/icons/road.png', 'type': 'png'}
+        'legend': {'url': 'images/icons/road-perspective.png', 'type': 'png'}
       };
 
       $scope.initialLayers[PropriedadesLindeirasLayerName] = {
@@ -145,40 +151,53 @@ angular.module('sisdrApp')
           onEachFeature: propertiesRodovia,
           style: styleRodovia,
         }),
-        'legend': {'url': 'images/icons/prop-lindeira.png', 'type': 'png'}
+        'legend': {'url': 'images/icons/two-roads-cross.png', 'type': 'png'}
       };
 
       console.log('add layer to map');
       console.log($scope.initialLayers);
+      $scope.filter.carregar = false;
 
       //$timeout(removeLayers, 5000);
     }
 
     /**
-     * Tratamento da falha ao pesquisar dados sobre helicópteros e veiculos
+     * Tratamento da falha ao pesquisar dados
      * @param error
     */
 
     function onError(error){
       console.error(error);
+      $scope.filter.carregar = false;
     }
 
     function dolayer(url, layer, options) {
 
     }
 
-    //var dupRequest = RestApi.get({type: 'dups'});
     var profaixaRequest = RestApi.getPoints({type: 'profaixa'});
-    var rodoviasRequest = RestApi.getPoints({type: 'rodovia'});
+
+    if(typeof $cookies.get('rodovias') === "undefined" || !$cookies.get('rodovias')){
+      var rodoviasRequest = RestApi.getPoints({type: 'rodovia'});
+      console.log('rodovias request');
+    
+    }else{
+      console.log('rodovias null');
+      var rodoviasRequest = null;
+    }
+
     var propriedadesLindeirasRequest = RestApi.getPoints({type: 'propriedade-lindeira'});
 
-    var promises = {
-      //dups : dupRequest.$promise,
-      profaixa: profaixaRequest.$promise,
-      rodovia: rodoviasRequest.$promise,
-      propriedadesLindeira: propriedadesLindeirasRequest.$promise,
+    $scope.filter.carregar = true;
 
+    var promises = {
+      profaixa: profaixaRequest.$promise,
+      propriedadesLindeira: propriedadesLindeirasRequest.$promise,
     };
+
+    if(rodoviasRequest){
+      promises.rodovias = rodoviasRequest;
+    }
 
     var allPromise = $q.all(promises);
 

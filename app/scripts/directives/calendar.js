@@ -31,11 +31,6 @@ angular.module('sisdrApp')
                     language: "pt-BR",
                     startDate: '01/01/0001',
                     endDate: finalDate
-                        // onSelect: function (dateText) {
-                        //   scope.$apply(function () {
-                        //     ngModel.$setViewValue(dateText);
-                        //   });
-                        // }
                 });
             }
         }

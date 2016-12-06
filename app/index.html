@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>SISDR</title>
+    <title>CGDR-SISDR</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -25,22 +25,9 @@
 </head>
 
 <body ng-app="sisdrApp">
-
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
-    <!-- Add your site or application content here -->
     <top-bar></top-bar>
 
     <div ng-view="" flex></div>
-
-    <!-- build:js(.) scripts/oldieshim.js -->
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.js"></script>
-    <![endif]-->
-    <!-- endbuild -->
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -66,8 +53,6 @@
     <!-- endbower -->
     <script src="bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.js"></script>
     <!-- endbuild -->
-
-
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/acl.js"></script>
     <script src="scripts/app.js"></script>
@@ -88,7 +73,7 @@
     <script src="scripts/directives/controlswitch.js"></script>
     <script src="scripts/controllers/login.js"></script>
     <script src="scripts/controllers/logout.js"></script>
-    <script src="scripts/controllers/estatisticas.js"></script>
+    <script src="scripts/controllers/dup.js"></script>
     <!-- endbuild -->
 
 </body>
