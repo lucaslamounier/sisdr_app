@@ -41,36 +41,45 @@
                 </h4>
               </div>
             </div>
+             <div class="panel panel-default" ng-show="!is_map">
+              <div class="panel-heading" ng-keypress="toggleOpen($event)">
+                <h4 class="panel-title">
+                  <a href="#/" tabindex="0" class="accordion-toggle">
+                      <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
+                       Mapa
+                  </span></span></a>
+                </h4>
+              </div>
+            </div>
 
+    <div ng-show="is_map">    
+  		<md-subheader>Filtrar dados no mapa</md-subheader>
+  		<accordion close-others="true">
 
-		<md-subheader>Filtrar dados no mapa</md-subheader>
+  			<accordion-group >
+  				<accordion-heading>
+  					Profaixa
+  					<i class="pull-right glyphicon glyphicon-small"
+  						ng-class="{'glyphicon-chevron-down': openHelicopters, 'glyphicon-chevron-right': !openHelicopters}">
+  					</i>
+  				</accordion-heading>
 
-		<accordion close-others="true">
+  				<helicopter-form></helicopter-form>
 
-			<accordion-group >
-				<accordion-heading>
-					Profaixa
-					<i class="pull-right glyphicon glyphicon-small"
-						ng-class="{'glyphicon-chevron-down': openHelicopters, 'glyphicon-chevron-right': !openHelicopters}">
-					</i>
-				</accordion-heading>
+  				</accordion-heading>
+  			</accordion-group>
 
-				<helicopter-form></helicopter-form>
+  			<accordion-group is-open="openVehicles">
+  				<accordion-heading>
+  					Propriedades Lindeiras
+  					<i class="pull-right glyphicon glyphicon-small"
+  						ng-class="{'glyphicon-chevron-down': openVehicles, 'glyphicon-chevron-right': !openVehicles}">
+  					</i>
+  				</accordion-heading>
 
-				</accordion-heading>
-			</accordion-group>
-
-			<accordion-group is-open="openVehicles">
-				<accordion-heading>
-					Propriedades Lindeiras
-					<i class="pull-right glyphicon glyphicon-small"
-						ng-class="{'glyphicon-chevron-down': openVehicles, 'glyphicon-chevron-right': !openVehicles}">
-					</i>
-				</accordion-heading>
-
-				<vehicle-form></vehicle-form>
-			</accordion-group>
-
-		</accordion>
+  				<vehicle-form></vehicle-form>
+  			</accordion-group>
+  		</accordion>
+    </div>
 	</md-sidenav>
 <!-- </md-content> -->

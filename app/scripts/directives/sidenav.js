@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc directive
- * @name operationsApp.directive:sideNav
+ * @name sisdrApp.directive:sideNav
  * @description
  * # sideNav
  */

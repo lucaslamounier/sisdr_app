@@ -16,6 +16,7 @@ angular.module('sisdrApp')
         $scope.showInputBR = false;
         $scope.showInputSegmento = false;
         $scope.uf_class = 'col-md-12';
+        $scope.is_map = false;
 
 
         $scope.filterDup = function(filter) {
@@ -104,6 +105,7 @@ angular.module('sisdrApp')
     .controller('DupDetailCtrl', function($scope, $rootScope, $q, RestApi, formData, $mdSidenav, $routeParams) {
     	
     	$scope.msg = false;
+        $scope.is_map = false;
 
         $scope.openNav = function(navID){
             $mdSidenav(navID).toggle();
@@ -177,8 +179,6 @@ angular.module('sisdrApp')
                 }
                 return updated;
             };
-
-            debugger;
 
         };
     });
