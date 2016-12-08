@@ -18,9 +18,9 @@
 }
 
 angular.module('sisdrApp')
-  .controller('sisdrCtrl', function ($scope, $rootScope, RestApi, $cookies, $q, symbologies, GISHelper, formData, $timeout, auth) {
+  .controller('sisdrCtrl', function ($scope, $rootScope, RestApi, $cookies, $q, symbologies, GISHelper, formData, $timeout, auth, $localStorage, $location) {
 
-
+    $scope.is_map = true;
     var profaixaLayerName = 'Profaixa';
     var RodoviaLayerName = 'Rodovias';
     var PropriedadesLindeirasLayerName = 'Propriedades Lindeiras';
@@ -33,6 +33,14 @@ angular.module('sisdrApp')
     /**
      * Remoção de overlayers adicionadas ao mapa, chamada por $timeout
     */
+
+    $rootScope.redirectForHome = function(){
+      debugger;
+      console.log('redirect to home...');
+      $location.path( "/" );
+
+    };
+
     function removeLayers(){
       $scope.map.setView([-16, -48], 4);
     }
@@ -116,19 +124,12 @@ angular.module('sisdrApp')
       */
     function onResult(result){
 
-      var rodovias, profaixa = result.profaixa.features;
-      if(result.rodovia && result.rodovia.features.length){
-            rodovias = result.rodovia.features;
-            $cookies.put('rodovias', angular.toJson(rodovias));
-      }else if($cookies.get('rodovias')){
-            console.log('cookie rodovia');
-            rodovias = $cookies.rodovias;
-      }
-     
+      $scope.is_map = true;
+      var profaixa = result.profaixa.features;
       var propriedadesLindeiras = result.propriedadesLindeira.features;
+      var rodovias = result.rodovias.features;
       
-
-      //console.log('Total rodovias: ' + rodovias.length);
+      console.log('Total de rodovias: ' + rodovias.length);
 
       $scope.initialLayers[profaixaLayerName] = {
         'layer': L.geoJson(profaixa, {
@@ -158,7 +159,7 @@ angular.module('sisdrApp')
       console.log($scope.initialLayers);
       $scope.filter.carregar = false;
 
-      //$timeout(removeLayers, 5000);
+      //$timeout(removeCache, 1000);
     }
 
     /**
@@ -171,36 +172,19 @@ angular.module('sisdrApp')
       $scope.filter.carregar = false;
     }
 
-    function dolayer(url, layer, options) {
-
-    }
-
-    var profaixaRequest = RestApi.getPoints({type: 'profaixa'});
-
-    if(typeof $cookies.get('rodovias') === "undefined" || !$cookies.get('rodovias')){
-      var rodoviasRequest = RestApi.getPoints({type: 'rodovia'});
-      console.log('rodovias request');
-    
-    }else{
-      console.log('rodovias null');
-      var rodoviasRequest = null;
-    }
-
-    var propriedadesLindeirasRequest = RestApi.getPoints({type: 'propriedade-lindeira'});
-
     $scope.filter.carregar = true;
+    var profaixaRequest = RestApi.getPoints({type: 'profaixa'});
+    var propriedadesLindeirasRequest = RestApi.getPoints({type: 'propriedade-lindeira'});
+    var rodoviasRequest = RestApi.getPoints({type: 'rodovia'});
+    
 
     var promises = {
       profaixa: profaixaRequest.$promise,
       propriedadesLindeira: propriedadesLindeirasRequest.$promise,
+      rodovias: rodoviasRequest.$promise,
     };
 
-    if(rodoviasRequest){
-      promises.rodovias = rodoviasRequest;
-    }
-
     var allPromise = $q.all(promises);
-
     allPromise.then(onResult, onError);
 
   });

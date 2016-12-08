@@ -1,0 +1,88 @@
+<div class="container">
+  <side-nav></side-nav>
+    <center>
+        <h3 class="page-header">Propriedades Lindeiras</h3>
+    </center>
+    <div>
+        <div class="col-md-1 no-padding-left">
+            <button class="btn btn-default" data-toggle="collapse" data-target="#search-form" aria-expanded="false" aria-controls="search-form">
+                  Filtrar Propriedade Lindeira
+          </button>
+        </div>
+    </div>
+    <br />
+    <div layout="row" layout-sm="column" layout-align="space-around">
+
+        <div class="collapse" id="search-form" style="margin-top: 30px; margin-bottom: 35px;">
+            <form class="form-horizontal formtype" ng-submit='filterDup(filter)'>
+                <div class="row form-line">
+                    <div class="col-xs-6"  ng-class="uf_class">
+                      <label class="pull-center">UF</label>
+                      <select ng-model="filter.estado" class="form-control" ng-options="estado.nome for estado in estados" ng-change='getBR(filter.estado)'>
+                           <option value="" default>UF</option>
+                      </select>
+                    </div>
+                    <div class="col-xs-6 col-md-2" ng-show="showInputBR">
+                      <label class="pull-center">BR</label>
+                      <select id="br" class="form-control" ng-model="filter.br" ng-options="br.br for br in brs">
+                            <option value="" default>BR</option>
+                      </select>
+                    </div>
+                     <div class="col-xs-6 col-md-3" ng-show="showInputSegmento">
+                      <label>Segmento Inicial</label>
+                      <input id="path" class="form-control numberInput" ng-model="filter.seg_inicial" type="number" min="0"/>
+                    </div>
+                    <div class="col-xs-6 col-md-3" ng-show="showInputSegmento">
+                      <label>Segmento Final</label>
+                      <input id="row" class="form-control numberInput" ng-model="filter.seg_final" type="number" min="0"/>
+                    </div>
+                </div>
+                 <div class="row form-line"><br /></div>
+                <div class="row form-line">
+                    <!-- Tags to store value defined by map selection and pagination -->
+                    <div id="bbox" display="none" value="bbox" value=""></div>
+                    <div id="formBounds" display="none" value="" /></div>
+
+                         <div class="col-xs-6 col-md-3">
+                                <button class="btn btn-primary" type="submit">
+                                 Pesquisar
+                              </button>
+                        </div>
+                </div>
+                 
+        </form>
+    </div>
+    <div class="table-responsive" style="margin-top: 25px;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Código SNV</th>
+                    <th>Código do Projeto</th>
+                    <th>Portaria</th>
+                    <th>Data de Publicação</th>
+                    <th>Data de Vencimento</th>
+                    <th>Rodovia</th>
+                    <th>Segmento</th> 
+                    <th>UF</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="dup in dups">
+                    <td>{{dup.projeto.codigo_snv}}</td>
+                    <td>{{dup.projeto.cod_projeto}}</td>
+                    <td><a ng-href="#/dups/detail/{{dup.id_dup}}">{{dup.portaria}}</a></td>
+                    <td>
+                        <span ng-bind="dup.dt_publicacao | date:'dd/MM/yyyy'"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="dup.dt_vencimento | date:'dd/MM/yyyy'"></span>
+                    </td>
+                    <td>{{dup.projeto.br}}</td>
+                    <td>{{dup.projeto.km_inicial}} - {{dup.projeto.km_final}} KM</td>
+                    <td>{{dup.projeto.UF}}</td>
+                </tr>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

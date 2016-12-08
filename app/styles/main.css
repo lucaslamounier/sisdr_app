@@ -9,12 +9,34 @@ md-select, md-input-container{
   height: 850px;
 }
 
+#map-mini{
+  height: 850px;
+}
+
 #carregar {
   width: 100%;
   height: 100%;
   position: absolute;
   background-color: rgba(0,0,0,.4);
   z-index: 1001;
+}
+
+.icon-download-file {
+	width: 30px;
+    display: inline-block;
+    text-align: right;
+    margin-left: 125px;
+}
+
+.panel-red {
+	color: #fff;
+    background-color: rgb(154, 44, 44);
+    border-color: #c5082b;
+}
+
+.panel-red-border {
+	
+    border-color: #e42f2f;
 }
 
 

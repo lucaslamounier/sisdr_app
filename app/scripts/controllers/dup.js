@@ -8,7 +8,7 @@
  * Controller of the sisdrApp
  */
 angular.module('sisdrApp')
-    .controller('DupCtrl', function($scope, $rootScope, $q, RestApi, formData) {
+    .controller('DupCtrl', function($scope, $rootScope, $q, RestApi, formData, $location) {
 
         $scope.dups = [];
         $scope.brs = [];
@@ -17,6 +17,12 @@ angular.module('sisdrApp')
         $scope.showInputSegmento = false;
         $scope.uf_class = 'col-md-12';
         $scope.is_map = false;
+
+           $rootScope.redirectForHome = function(){
+              console.log('redirect to home...');
+              $location.path( "/" );
+
+           };
 
 
         $scope.filterDup = function(filter) {
@@ -67,8 +73,6 @@ angular.module('sisdrApp')
          */
         function onResult(result) {
             $scope.dups = result.dups;
-            console.log($scope.dups);
-
         }
 
         function onResultBR(result) {
@@ -102,14 +106,11 @@ angular.module('sisdrApp')
 
 
 angular.module('sisdrApp')
-    .controller('DupDetailCtrl', function($scope, $rootScope, $q, RestApi, formData, $mdSidenav, $routeParams) {
+    .controller('DupDetailCtrl', function($scope, $rootScope, $http, $q, RestApi, formData, $location, $routeParams, settings) {
     	
     	$scope.msg = false;
-        $scope.is_map = false;
-
-        $scope.openNav = function(navID){
-            $mdSidenav(navID).toggle();
-        };
+        $scope.is_map = false;  
+        $('#map').css('height', '81% !important');
         
         if (!$routeParams.id) {
         		$scope.msg = "Parâmetro inválido";
@@ -119,9 +120,9 @@ angular.module('sisdrApp')
 
             function onResult(result) {
                 $scope.dup = result.dup;
-                console.log($scope.dup);
+                //console.log($scope.dup);
                 $scope.adicionarGeoJSON($scope.dup.geojson);
-                $('#map').css('height', '420px');
+                $('#map').css('height', '81% !important');
             };
 
             function onError(error) {
@@ -144,16 +145,14 @@ angular.module('sisdrApp')
             allPromise.then(onResult, onError);
 
             $scope.adicionarGeoJSON = function(geoString) {
-                console.log($scope);
                 var json = $.parseJSON(geoString);
-
-
+                
                 if (typeof json == 'object') {
                     var layer = L.geoJson(json, {
                         style: {
-                            fillColor: '#FF0000',
-                            weight: 2,
-                            color: '#DC143C',
+                            fillColor: '#8B0000',
+                            weight: 3,
+                            color: '#FF0000',
                         }
                     }).addTo($scope.map);
 
@@ -166,7 +165,9 @@ angular.module('sisdrApp')
              * Atualiza a área de visualização do mapa.
              * @param layer
              */
+
             $scope.updateFitBounds = function(layer) {
+                $('#map').css('height', '420px');
                 var bounds, layers, updated = false;
                 if ('getBounds' in layer) {
                     bounds = layer.getBounds();
@@ -181,4 +182,41 @@ angular.module('sisdrApp')
             };
 
         };
-    });
+
+        $scope.donwload = function(path){
+
+            var url = settings.server.url + '/download/' + path;
+            try{
+                $.fileDownload(url, {
+                    successCallback: function (url) {
+                        $('#map').css('height', '81% !important');
+                        console.log('sucess download...');
+                        console.log('You just got a file download dialog or ribbon for this URL :' + url);
+                    },
+                    failCallback: function (html, url) {
+                        $('#map').css('height', '81% !important');
+                        if(html != ''){
+                            console.log(html);
+                        }
+                    }
+                });
+            }catch(err){
+                debugger;
+            }
+
+        };
+
+        $rootScope.redirectForHome = function(){
+          //debugger;
+          console.log('redirect to home...');
+          $location.path( "/" );
+
+        };
+
+
+});
+
+
+$( window ).resize(function() {
+     $('#map').css('height', '81% !important');
+});

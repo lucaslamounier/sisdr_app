@@ -21,8 +21,8 @@ angular.module('sisdrApp')
         },
         get_dup: {
           method:'GET',
-          params: {
-            format:'json'
+          headers: {
+            'Content-Type': 'application/json',
           },
           isArray: true,
         },
@@ -38,6 +38,10 @@ angular.module('sisdrApp')
           headers: {
             'Content-Type': 'application/json'
           },
+        },
+        getFile: {
+          url : settings.server.url + '/:type/:state/',
+          method:'GET',
         },
         getBR: {
           url : settings.server.url + '/:type/:state/',

@@ -20,6 +20,7 @@ angular
         'ngMaterial',
         'ui.bootstrap',
         'ngCsv',
+        'ngStorage',
     ])
     .config(function($provide, $routeProvider, authProvider, symbologiesProvider, ACCESS_LEVEL) {
 
@@ -49,8 +50,28 @@ angular
                 controller: 'DupDetailCtrl',
                 //access: ACCESS_LEVEL.USER
             })
+            .when('/projetos', {
+                templateUrl: 'views/projetos.html',
+                controller: 'ProjetoCtrl',
+                //access: ACCESS_LEVEL.USER
+            })
+            .when('/projetos/detail/:id', {
+                templateUrl: 'views/projeto_detail.html',
+                controller: 'ProjetoDetailCtrl',
+                //access: ACCESS_LEVEL.USER
+            })
+            .when('/propriedades-lindeiras', {
+                templateUrl: 'views/propriedades-lindeiras.html',
+                controller: 'PropriedadesLindeirasCtrl',
+                //access: ACCESS_LEVEL.USER
+            })
+            .when('/propriedades-lindeiras/detail/:id', {
+                templateUrl: 'views/propriedades-lindeiras_detail.html',
+                controller: 'PropriedadesLindeirasDetailCtrl',
+                //access: ACCESS_LEVEL.USER
+            })
             .otherwise({
-                redirectTo: '#/dups'
+                redirectTo: '/'
             });
 
 
