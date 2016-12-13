@@ -18,13 +18,6 @@ angular.module('sisdrApp')
         $scope.uf_class = 'col-md-12';
         $scope.is_map = false;
 
-           $rootScope.redirectForHome = function(){
-              console.log('redirect to home...');
-              $location.path( "/" );
-
-           };
-
-
         $scope.filterDup = function(filter) {
             var estado = filter.estado.sigla;
 
@@ -107,22 +100,19 @@ angular.module('sisdrApp')
 
 angular.module('sisdrApp')
     .controller('DupDetailCtrl', function($scope, $rootScope, $http, $q, RestApi, formData, $location, $routeParams, settings) {
-    	
-    	$scope.msg = false;
-        $scope.is_map = false;  
-        $('#map').css('height', '81% !important');
-        
+
+        $scope.msg = false;
+        $scope.is_map = false;
+
         if (!$routeParams.id) {
-        		$scope.msg = "Parâmetro inválido";
-        }else {
+            $scope.msg = "Parâmetro inválido";
+        } else {
 
             var id_dup = $routeParams.id;
 
             function onResult(result) {
                 $scope.dup = result.dup;
-                //console.log($scope.dup);
                 $scope.adicionarGeoJSON($scope.dup.geojson);
-                $('#map').css('height', '81% !important');
             };
 
             function onError(error) {
@@ -133,9 +123,8 @@ angular.module('sisdrApp')
             /* Send request for restAPI */
             var dupRequest = RestApi.getDup({
                 type: 'dups-detail',
-                pk: id_dup
+                id: id_dup
             });
-
 
             var promises = {
                 dup: dupRequest.$promise,
@@ -146,7 +135,7 @@ angular.module('sisdrApp')
 
             $scope.adicionarGeoJSON = function(geoString) {
                 var json = $.parseJSON(geoString);
-                
+
                 if (typeof json == 'object') {
                     var layer = L.geoJson(json, {
                         style: {
@@ -157,7 +146,7 @@ angular.module('sisdrApp')
                     }).addTo($scope.map);
 
                     $scope.updateFitBounds(layer);
-                    //$scope.map.setZoom(9);
+                    //$scope.map.setZoom(11);
                 }
             };
 
@@ -183,40 +172,24 @@ angular.module('sisdrApp')
 
         };
 
-        $scope.donwload = function(path){
+        $scope.donwload = function(path) {
 
             var url = settings.server.url + '/download/' + path;
-            try{
+            try {
                 $.fileDownload(url, {
-                    successCallback: function (url) {
-                        $('#map').css('height', '81% !important');
+                    successCallback: function(url) {
                         console.log('sucess download...');
-                        console.log('You just got a file download dialog or ribbon for this URL :' + url);
                     },
-                    failCallback: function (html, url) {
-                        $('#map').css('height', '81% !important');
-                        if(html != ''){
+                    failCallback: function(html, url) {
+                        if (html != '') {
                             console.log(html);
                         }
                     }
                 });
-            }catch(err){
+            } catch (err) {
                 debugger;
             }
 
         };
 
-        $rootScope.redirectForHome = function(){
-          //debugger;
-          console.log('redirect to home...');
-          $location.path( "/" );
-
-        };
-
-
-});
-
-
-$( window ).resize(function() {
-     $('#map').css('height', '81% !important');
-});
+    });

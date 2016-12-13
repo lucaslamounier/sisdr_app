@@ -1,12 +1,12 @@
 <div class="container">
-<side-nav></side-nav>
+    <side-nav></side-nav>
     <center>
-        <h3 class="page-header">DUP - Declaração de Utilidade Pública</h3>
+        <h3 class="page-header">Projeto</h3>
     </center>
     <br />
     <div ng-show="msg">
         <div class="alert alert-danger">
-          <span ng-bind="msg"></span>
+            <span ng-bind="msg"></span>
         </div>
     </div>
     <div ng-show="!msg" class="row">
@@ -65,35 +65,35 @@
     </div>
     <br />
     <div class="row">
-      <div class="col-sm-3" ng-show="dup.lk_doc_publicacao">
+        <div class="col-sm-3" ng-show="dup.lk_doc_publicacao">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <img src ="../images/doc-logo.svg" width = "25" height = "25"/> Word
+                    <img src="../images/doc-logo.svg" width="25" height="25" /> Word
                     <div class="icon-download-file">
                         <a href="" ng-click="donwload(dup.arquivos.doc_caminho)">
-                            <img src ="../images/download-to-inbox.png" width = "25" height = "25"/>
+                            <img src="../images/download-to-inbox.png" width="25" height="25" />
                         </a>
                     </div>
                 </div>
                 <div class="panel-body">
-                <strong>Nome do arquivo:</strong> <span ng-bind="dup.arquivos.doc_nome"></span>
-                <strong>Tamanho do arquivo:</strong> <span ng-bind="dup.arquivos.doc_tamanho"></span>
+                    <strong>Nome do arquivo:</strong> <span ng-bind="dup.arquivos.doc_nome"></span>
+                    <strong>Tamanho do arquivo:</strong> <span ng-bind="dup.arquivos.doc_tamanho"></span>
                 </div>
             </div>
         </div>
-         <div class="col-sm-3" ng-show="dup.lk_pdf_publicacao">
+        <div class="col-sm-3" ng-show="dup.lk_pdf_publicacao">
             <div class="panel panel-red-border">
                 <div class="panel-heading panel-red">
-                    <img src ="../images/pdf-logo.svg" width = "25" height = "25"/> PDF
+                    <img src="../images/pdf-logo.svg" width="25" height="25" /> PDF
                     <div class="icon-download-file">
                         <a href="" ng-click="donwload(dup.arquivos.pdf_caminho)">
-                        <img src ="../images/download-to-inbox.png" width = "25" height = "25"/>
+                            <img src="../images/download-to-inbox.png" width="25" height="25" />
                         </a>
                     </div>
                 </div>
                 <div class="panel-body">
-                   <strong>Nome do arquivo:</strong> <span ng-bind="dup.arquivos.pdf_nome"></span>
-                   <strong>Tamanho do arquivo:</strong> <span ng-bind="dup.arquivos.pdf_tamanho"></span>
+                    <strong>Nome do arquivo:</strong> <span ng-bind="dup.arquivos.pdf_nome"></span>
+                    <strong>Tamanho do arquivo:</strong> <span ng-bind="dup.arquivos.pdf_tamanho"></span>
                 </div>
             </div>
         </div>

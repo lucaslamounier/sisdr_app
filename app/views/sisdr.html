@@ -1,16 +1,12 @@
- <center>
- <div id='carregar' ng-if='filter.carregar' resizable ng-style="{height: windowHeight-30, width: windowWidth-15}" >
-    <div style="margin-top: 20%;">
-	    <md-progress-circular 
-	      layout-align="space-around" 
-	      id='progressCarregar'  
-	      md-mode="indeterminate"  
-	      class="md-hue-2 centerEl"></md-progress-circular>
-	      <h3 style="color:white;">Aguarde, carregando informações</h3>
+<center>
+    <div id='carregar' ng-if='filter.carregar' resizable ng-style="{height: windowHeight-30, width: windowWidth-15}">
+        <div style="margin-top: 20%;">
+            <md-progress-circular layout-align="space-around" id='progressCarregar' md-mode="indeterminate" class="md-hue-2 centerEl"></md-progress-circular>
+            <h3 style="color:white;">Aguarde, carregando informações</h3>
+        </div>
     </div>
-</div>
 </center>
 <md-content flex layout='row'>
-	<side-nav></side-nav>
-	<map flex></map>
+    <side-nav></side-nav>
+    <map flex></map>
 </md-content>

@@ -2,10 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name operationsApp.directive:map
+ * @name sisdrApp.directive:map
  * @description
  * # map
  */
+
 angular.module('sisdrApp')
     .directive('map', function() {
         return {
@@ -38,9 +39,9 @@ angular.module('sisdrApp')
                     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
                 });
 
-                googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+                googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
                     maxZoom: 20,
-                    subdomains:['mt0','mt1','mt2','mt3']
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
                 });
 
                 if (date.getHours() >= 18 || date.getHours() <= 5) {

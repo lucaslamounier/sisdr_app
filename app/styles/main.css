@@ -9,6 +9,18 @@ md-select, md-input-container{
   height: 850px;
 }
 
+#mapfilter{
+	height: 400px;
+	width: 100%;
+	margin-top: -18px;
+}
+
+#mapprojeto{
+	height: 400px;
+	width: 100%;
+	margin-top: -18px;
+}
+
 #map-mini{
   height: 850px;
 }
@@ -19,6 +31,10 @@ md-select, md-input-container{
   position: absolute;
   background-color: rgba(0,0,0,.4);
   z-index: 1001;
+}
+
+.font-13 {
+	font-size: 13px;
 }
 
 .icon-download-file {

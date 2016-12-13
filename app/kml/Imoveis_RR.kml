@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Imoveis_RR" id="Imoveis_RR">
+	<SimpleField name="id1" type="string"></SimpleField>
+	<SimpleField name="cod_imovel" type="string"></SimpleField>
+	<SimpleField name="num_proces" type="string"></SimpleField>
+	<SimpleField name="nome_imove" type="string"></SimpleField>
+	<SimpleField name="sr" type="string"></SimpleField>
+	<SimpleField name="uf_municip" type="string"></SimpleField>
+	<SimpleField name="cod_projet" type="string"></SimpleField>
+	<SimpleField name="ind_atuali" type="string"></SimpleField>
+	<SimpleField name="cod_profis" type="string"></SimpleField>
+	<SimpleField name="num_certif" type="string"></SimpleField>
+	<SimpleField name="data_certi" type="string"></SimpleField>
+	<SimpleField name="qtd_area_c" type="string"></SimpleField>
+	<SimpleField name="perimetro_" type="string"></SimpleField>
+</Schema>
+<Folder><name>Imoveis_RR</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">83662</SimpleData>
+		<SimpleData name="cod_imovel">0310460098903</SimpleData>
+		<SimpleData name="num_proces">54390000664/2010-31</SimpleData>
+		<SimpleData name="nome_imove">FAZENDA ANDRADE II</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">D27</SimpleData>
+		<SimpleData name="num_certif">251103000002-35</SimpleData>
+		<SimpleData name="data_certi">2011-03-30 00:00:00</SimpleData>
+		<SimpleData name="qtd_area_c">141.7405</SimpleData>
+		<SimpleData name="perimetro_">8131.29</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-60.344219,2.594846 -60.340418,2.594592 -60.337455,2.562294 -60.34031,2.561268 -60.341033,2.567776 -60.34346,2.585757 -60.344219,2.594846</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">35949</SimpleData>
+		<SimpleData name="cod_imovel">0310380031239</SimpleData>
+		<SimpleData name="num_proces">54390.000712/2010-91</SimpleData>
+		<SimpleData name="nome_imove">FAZENDA BOA VIAJEM</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">BFB</SimpleData>
+		<SimpleData name="num_certif">251205000002-79</SimpleData>
+		<SimpleData name="data_certi">2012-05-04 00:00:00</SimpleData>
+		<SimpleData name="qtd_area_c">1565.0853</SimpleData>
+		<SimpleData name="perimetro_">17097.23</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-61.37392,3.115227 -61.370236,3.103315 -61.369286,3.094526 -61.381156,3.079414 -61.384384,3.078359 -61.387066,3.078016 -61.399408,3.076487 -61.408967,3.074023 -61.406631,3.090137 -61.406081,3.094028 -61.409152,3.094517 -61.408674,3.0975 -61.409482,3.099755 -61.408668,3.101541 -61.403717,3.103748 -61.401975,3.105882 -61.400888,3.108911 -61.399068,3.111201 -61.398794,3.113357 -61.39825,3.114755 -61.398597,3.115338 -61.3979,3.116192 -61.397753,3.118335 -61.396874,3.118465 -61.395005,3.113405 -61.394658,3.113714 -61.391496,3.11547 -61.387608,3.113757 -61.384597,3.118399 -61.378859,3.118795 -61.37392,3.115227</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">26272</SimpleData>
+		<SimpleData name="cod_imovel">031046008281</SimpleData>
+		<SimpleData name="num_proces">54390.001548/2009-04</SimpleData>
+		<SimpleData name="nome_imove">FAZENDA QUATRO ESTRELAS</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">D27</SimpleData>
+		<SimpleData name="num_certif">251103000004-05</SimpleData>
+		<SimpleData name="data_certi">2011-03-31 00:00:00</SimpleData>
+		<SimpleData name="qtd_area_c">1426.4382</SimpleData>
+		<SimpleData name="perimetro_">21882.17</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-60.333259,2.50385 -60.335097,2.524966 -60.338292,2.560693 -60.338252,2.561191 -60.337743,2.56212 -60.336641,2.562719 -60.333388,2.56178 -60.330463,2.562273 -60.326781,2.561835 -60.324407,2.562441 -60.323453,2.560248 -60.321563,2.558205 -60.321305,2.557253 -60.321496,2.556482 -60.321593,2.556001 -60.322305,2.520943 -60.322442,2.483163 -60.336887,2.477234 -60.339946,2.488171 -60.333259,2.50385</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">30537</SimpleData>
+		<SimpleData name="cod_imovel">0310460047829</SimpleData>
+		<SimpleData name="num_proces">54390.000563/2011-41</SimpleData>
+		<SimpleData name="nome_imove">FAZENDA MARIA PIXI</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">BFB</SimpleData>
+		<SimpleData name="num_certif">251110000001-90</SimpleData>
+		<SimpleData name="data_certi">2011-10-18 00:00:00</SimpleData>
+		<SimpleData name="qtd_area_c">2255.4788</SimpleData>
+		<SimpleData name="perimetro_">22983.72</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-60.454503,2.967489 -60.454714,2.966417 -60.453229,2.964333 -60.447991,2.962456 -60.446312,2.963148 -60.443506,2.961063 -60.445795,2.954435 -60.446974,2.945922 -60.448322,2.942367 -60.450683,2.94281 -60.451513,2.940785 -60.453833,2.9395 -60.452604,2.937496 -60.450486,2.928288 -60.45333,2.92658 -60.454783,2.922495 -60.454324,2.919657 -60.461128,2.919617 -60.456018,2.927792 -60.468128,2.933907 -60.468573,2.934136 -60.486623,2.943536 -60.49785,2.946596 -60.504774,2.947969 -60.502027,2.952992 -60.498571,2.95579 -60.489177,2.970074 -60.488612,2.970521 -60.483375,2.97927 -60.476144,2.980145 -60.474121,2.977653 -60.465336,2.97752 -60.464667,2.974522 -60.4581,2.96832 -60.455809,2.967035 -60.454503,2.967489</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">81654</SimpleData>
+		<SimpleData name="cod_imovel">0310202501477</SimpleData>
+		<SimpleData name="num_proces">54390.001533/2009-38</SimpleData>
+		<SimpleData name="nome_imove">TD SITIO BEM QUERER</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">D3L</SimpleData>
+		<SimpleData name="num_certif">251502000001-51</SimpleData>
+		<SimpleData name="data_certi">2015-02-12 13:21:43.868126</SimpleData>
+		<SimpleData name="qtd_area_c">920.8078</SimpleData>
+		<SimpleData name="perimetro_">12133.98</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-61.029691,1.958691 -61.009045,1.952422 -61.008163,1.951591 -61.007091,1.951289 -61.006836,1.950691 -61.00627,1.95034 -61.006064,1.949584 -61.005499,1.948719 -61.005653,1.947052 -61.005146,1.945851 -61.004048,1.944399 -61.003384,1.942716 -61.003658,1.941194 -61.003948,1.93747 -61.003475,1.936393 -61.002616,1.935713 -61.002128,1.934533 -61.002957,1.931019 -61.002577,1.928841 -61.003231,1.928823 -61.004557,1.92704 -61.006092,1.926165 -61.008415,1.922355 -61.010369,1.921055 -61.011397,1.921722 -61.02314,1.923525 -61.026383,1.930608 -61.029,1.945389 -61.029691,1.958691</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">82575</SimpleData>
+		<SimpleData name="cod_imovel">0310110486820</SimpleData>
+		<SimpleData name="num_proces">54390000991/2010-93</SimpleData>
+		<SimpleData name="nome_imove">SITIO LEILIANE</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">D3L</SimpleData>
+		<SimpleData name="num_certif">251504000001-04</SimpleData>
+		<SimpleData name="data_certi">2015-04-27 16:50:19.596498</SimpleData>
+		<SimpleData name="qtd_area_c">9.6042</SimpleData>
+		<SimpleData name="perimetro_">1386.54</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-60.811216,2.72539 -60.807092,2.724385 -60.811069,2.722453 -60.811217,2.722733 -60.812125,2.723403 -60.811964,2.724047 -60.811783,2.724861 -60.811403,2.725408 -60.811216,2.72539</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">57639</SimpleData>
+		<SimpleData name="cod_imovel">9501491551366</SimpleData>
+		<SimpleData name="num_proces">56377.000122/2013-13</SimpleData>
+		<SimpleData name="nome_imove">PA ALTO ARRAIA</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">t</SimpleData>
+		<SimpleData name="cod_profis">A7Q</SimpleData>
+		<SimpleData name="num_certif">251307000001-21</SimpleData>
+		<SimpleData name="data_certi">2013-07-31 16:00:45.456664</SimpleData>
+		<SimpleData name="qtd_area_c">2160.5746</SimpleData>
+		<SimpleData name="perimetro_">20096.33</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-60.210907,2.944728 -60.196621,2.94283 -60.193751,2.941573 -60.180865,2.933756 -60.171047,2.920719 -60.171465,2.919803 -60.171521,2.919658 -60.171921,2.918916 -60.172206,2.918059 -60.172378,2.91726 -60.172492,2.916689 -60.172778,2.915547 -60.173006,2.914405 -60.172702,2.91391 -60.172549,2.913662 -60.172492,2.913034 -60.172549,2.912292 -60.17272,2.911207 -60.173234,2.91035 -60.173691,2.90955 -60.173691,2.908922 -60.173634,2.908237 -60.173863,2.907495 -60.174205,2.906467 -60.174262,2.905553 -60.174491,2.905096 -60.174605,2.904125 -60.174605,2.90344 -60.174833,2.902469 -60.175347,2.901498 -60.176029,2.901026 -60.17609,2.900984 -60.176432,2.900242 -60.176775,2.899785 -60.177232,2.8991 -60.177517,2.898358 -60.177974,2.897615 -60.178488,2.897101 -60.178757,2.896743 -60.179002,2.896416 -60.179916,2.895673 -60.180156,2.895508 -60.180658,2.89516 -60.18104,2.894693 -60.181465,2.893842 -60.181726,2.892772 -60.182012,2.891986 -60.18263,2.891534 -60.183368,2.891225 -60.183831,2.891098 -60.183864,2.891086 -60.184658,2.890918 -60.185262,2.890822 -60.185792,2.890704 -60.201845,2.908646 -60.220178,2.926201 -60.227632,2.929932 -60.23166,2.93195 -60.235172,2.932876 -60.234707,2.933519 -60.23147,2.938063 -60.231328,2.940412 -60.23,2.940703 -60.21888,2.943053 -60.210907,2.944728</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">20063</SimpleData>
+		<SimpleData name="cod_imovel">0310461139565</SimpleData>
+		<SimpleData name="num_proces">54390.001568/2008-96</SimpleData>
+		<SimpleData name="nome_imove">FAZENDA SHALAKO</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">BFB</SimpleData>
+		<SimpleData name="num_certif">251006000001-52</SimpleData>
+		<SimpleData name="data_certi">2010-06-23 00:00:00</SimpleData>
+		<SimpleData name="qtd_area_c">1937.3071</SimpleData>
+		<SimpleData name="perimetro_">18254.16</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-60.150227,2.402184 -60.14746,2.404266 -60.143203,2.420884 -60.139166,2.425134 -60.138203,2.432057 -60.134453,2.435519 -60.133622,2.441559 -60.131479,2.444119 -60.126687,2.445113 -60.10248,2.445259 -60.107072,2.426099 -60.112825,2.402044 -60.113895,2.397677 -60.146025,2.397956 -60.150227,2.402184</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">82757</SimpleData>
+		<SimpleData name="cod_imovel">0310110105451</SimpleData>
+		<SimpleData name="num_proces">54390.001567/2008-41</SimpleData>
+		<SimpleData name="nome_imove">TD PANORAMA</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">DFN</SimpleData>
+		<SimpleData name="num_certif">251505000001-30</SimpleData>
+		<SimpleData name="data_certi">2015-05-14 10:44:22.807272</SimpleData>
+		<SimpleData name="qtd_area_c">1473.0313</SimpleData>
+		<SimpleData name="perimetro_">19459.23</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-61.291977,3.518622 -61.295199,3.511188 -61.330796,3.521225 -61.342316,3.502411 -61.348638,3.503769 -61.347851,3.524556 -61.331702,3.549771 -61.291977,3.518622</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">82267</SimpleData>
+		<SimpleData name="cod_imovel">0000275510157</SimpleData>
+		<SimpleData name="num_proces">54390.001413/2008-50</SimpleData>
+		<SimpleData name="nome_imove">RESSACA DE SÃ?O PEDRO</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">BFB</SimpleData>
+		<SimpleData name="num_certif">251006000002-33</SimpleData>
+		<SimpleData name="data_certi">2010-06-23 00:00:00</SimpleData>
+		<SimpleData name="qtd_area_c">5042.9295</SimpleData>
+		<SimpleData name="perimetro_">30146.35</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-60.445962,0.465358 -60.4514,0.525444 -60.44924,0.523521 -60.444405,0.523108 -60.442959,0.528446 -60.442541,0.533333 -60.440317,0.537789 -60.434539,0.540315 -60.431461,0.538764 -60.428477,0.533657 -60.420469,0.536455 -60.407629,0.537188 -60.403534,0.533888 -60.398491,0.533033 -60.398279,0.538553 -60.392571,0.536145 -60.390667,0.536279 -60.379235,0.479188 -60.445962,0.465358</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">30073</SimpleData>
+		<SimpleData name="cod_imovel">9501497166693</SimpleData>
+		<SimpleData name="num_proces">54390.001535/2009-27</SimpleData>
+		<SimpleData name="nome_imove">SERINGAL MARAVILHA</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">DLX</SimpleData>
+		<SimpleData name="num_certif">251109000001-12</SimpleData>
+		<SimpleData name="data_certi">2011-09-28 00:00:00</SimpleData>
+		<SimpleData name="qtd_area_c">3235.8200</SimpleData>
+		<SimpleData name="perimetro_">28441.39</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-60.614584,0.392993 -60.590319,0.380384 -60.619997,0.329661 -60.655278,0.352202 -60.654209,0.354919 -60.658208,0.35743 -60.657093,0.362936 -60.659837,0.365489 -60.659903,0.36843 -60.657877,0.368021 -60.655145,0.365043 -60.652216,0.369568 -60.652689,0.373895 -60.655469,0.374001 -60.654805,0.375309 -60.657207,0.377133 -60.65991,0.377007 -60.664637,0.37442 -60.664972,0.374524 -60.664998,0.375605 -60.661621,0.379866 -60.66157,0.386356 -60.660958,0.386777 -60.66079,0.382873 -60.654314,0.378428 -60.646471,0.380144 -60.64177,0.384969 -60.636737,0.385242 -60.636111,0.388669 -60.636673,0.390316 -60.635323,0.390639 -60.633082,0.389668 -60.630506,0.389635 -60.627011,0.393618 -60.621129,0.391002 -60.617718,0.390689 -60.614584,0.392993</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">75628</SimpleData>
+		<SimpleData name="cod_imovel">0310110079949</SimpleData>
+		<SimpleData name="num_proces">54390.000662/2011-23</SimpleData>
+		<SimpleData name="nome_imove">FAZENDA BELO HORIZONTE</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">BFA</SimpleData>
+		<SimpleData name="num_certif">251403000001-05</SimpleData>
+		<SimpleData name="data_certi">2014-03-28 12:20:23.263295</SimpleData>
+		<SimpleData name="qtd_area_c">1060.8964</SimpleData>
+		<SimpleData name="perimetro_">12882.18</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-61.398444,3.613522 -61.383455,3.599288 -61.406721,3.575341 -61.419834,3.579891 -61.42291,3.592724 -61.421035,3.59442 -61.420941,3.596768 -61.418511,3.59839 -61.414905,3.603985 -61.412837,3.603891 -61.406172,3.610383 -61.404465,3.609928 -61.398444,3.613522</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">75721</SimpleData>
+		<SimpleData name="cod_imovel">0310380039728</SimpleData>
+		<SimpleData name="num_proces">54390.001221/2010-68</SimpleData>
+		<SimpleData name="nome_imove">TD PRIMAVERA</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">B8K</SimpleData>
+		<SimpleData name="num_certif">251403000002-88</SimpleData>
+		<SimpleData name="data_certi">2014-03-31 12:26:35.97298</SimpleData>
+		<SimpleData name="qtd_area_c">625.4045</SimpleData>
+		<SimpleData name="perimetro_">11972.76</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-61.157019,3.381372 -61.15707,3.380647 -61.157576,3.380514 -61.16006,3.375343 -61.161097,3.371828 -61.163229,3.363671 -61.166085,3.359741 -61.167357,3.358958 -61.194345,3.353182 -61.192686,3.36102 -61.183764,3.362549 -61.178331,3.377221 -61.171208,3.379876 -61.166378,3.380386 -61.16345,3.380696 -61.157019,3.381372</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">35938</SimpleData>
+		<SimpleData name="cod_imovel">0310110085329</SimpleData>
+		<SimpleData name="num_proces">54390.000126/2012-17</SimpleData>
+		<SimpleData name="nome_imove">FAZENDA PAU RAINHA</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">D27</SimpleData>
+		<SimpleData name="num_certif">251205000001-98</SimpleData>
+		<SimpleData name="data_certi">2012-05-04 00:00:00</SimpleData>
+		<SimpleData name="qtd_area_c">2259.0290</SimpleData>
+		<SimpleData name="perimetro_">19969.94</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-60.847669,2.730724 -60.840251,2.710205 -60.855017,2.700418 -60.860567,2.691834 -60.870047,2.682979 -60.873416,2.685694 -60.884024,2.67983 -60.898461,2.694518 -60.903964,2.700191 -60.898239,2.716706 -60.874194,2.721818 -60.86647,2.723334 -60.856438,2.724074 -60.851795,2.729587 -60.849489,2.731064 -60.847669,2.730724</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">84540</SimpleData>
+		<SimpleData name="cod_imovel">0310460063000</SimpleData>
+		<SimpleData name="num_proces">54390.000224/2012-46</SimpleData>
+		<SimpleData name="nome_imove">SÃTIO SÃ?O SEBASTIÃ?O</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">BFA</SimpleData>
+		<SimpleData name="num_certif">251603000001-69</SimpleData>
+		<SimpleData name="data_certi">2016-03-14 11:11:52.095746</SimpleData>
+		<SimpleData name="qtd_area_c">80.8485</SimpleData>
+		<SimpleData name="perimetro_">6466.36</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-60.544075,2.623119 -60.540809,2.624244 -60.54088,2.623533 -60.53914,2.619379 -60.539548,2.615584 -60.538859,2.615161 -60.537083,2.598103 -60.537758,2.597285 -60.544075,2.623119</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">84541</SimpleData>
+		<SimpleData name="cod_imovel">0310460064839</SimpleData>
+		<SimpleData name="num_proces">54390.000218/2012-99</SimpleData>
+		<SimpleData name="nome_imove">SÃTIO SÃ?O GERALDO</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">BFA</SimpleData>
+		<SimpleData name="num_certif">251603000002-40</SimpleData>
+		<SimpleData name="data_certi">2016-03-14 11:17:10.37891</SimpleData>
+		<SimpleData name="qtd_area_c">66.8562</SimpleData>
+		<SimpleData name="perimetro_">6349.46</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-60.548626,2.621327 -60.547089,2.622058 -60.538522,2.596945 -60.538861,2.59708 -60.540037,2.597003 -60.540558,2.596435 -60.541136,2.596513 -60.545746,2.61236 -60.548626,2.621327</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">84544</SimpleData>
+		<SimpleData name="cod_imovel">0310460102277</SimpleData>
+		<SimpleData name="num_proces">54390.000222/2012-57</SimpleData>
+		<SimpleData name="nome_imove">SÃTIO FILADELFIO</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">BFA</SimpleData>
+		<SimpleData name="num_certif">251603000003-20</SimpleData>
+		<SimpleData name="data_certi">2016-03-14 11:24:12.145193</SimpleData>
+		<SimpleData name="qtd_area_c">66.0284</SimpleData>
+		<SimpleData name="perimetro_">6361.42</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-60.544075,2.623119 -60.537758,2.597285 -60.538522,2.596945 -60.547089,2.622058 -60.544075,2.623119</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">75915</SimpleData>
+		<SimpleData name="cod_imovel">0310460054604</SimpleData>
+		<SimpleData name="num_proces">54390.000598/2012-61</SimpleData>
+		<SimpleData name="nome_imove">FAZENDA SÃ?O LUIZ II</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">D27</SimpleData>
+		<SimpleData name="num_certif">251404000001-23</SimpleData>
+		<SimpleData name="data_certi">2014-04-04 11:11:07.942593</SimpleData>
+		<SimpleData name="qtd_area_c">2461.3469</SimpleData>
+		<SimpleData name="perimetro_">26121.07</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-60.362321,3.062774 -60.364017,3.042276 -60.368118,3.043284 -60.368703,3.041446 -60.370833,3.03475 -60.372888,3.027216 -60.361274,3.019703 -60.348664,3.009248 -60.365708,2.987072 -60.378929,2.996696 -60.41723,3.005224 -60.382286,3.04186 -60.362321,3.062774</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">26143</SimpleData>
+		<SimpleData name="cod_imovel">0310110352033</SimpleData>
+		<SimpleData name="num_proces">54390000567201049</SimpleData>
+		<SimpleData name="nome_imove">TD ESTANCIA BUENO I</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">DFN</SimpleData>
+		<SimpleData name="num_certif">251103000001-54</SimpleData>
+		<SimpleData name="data_certi">2011-03-28 00:00:00</SimpleData>
+		<SimpleData name="qtd_area_c">1317.7191</SimpleData>
+		<SimpleData name="perimetro_">17670.56</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-60.93478,2.905003 -60.933289,2.904317 -60.926963,2.903986 -60.917034,2.90217 -60.901954,2.901512 -60.900807,2.90036 -60.907938,2.895488 -60.910966,2.892412 -60.911447,2.889137 -60.91281,2.886601 -60.91512,2.884218 -60.918152,2.881983 -60.9187,2.880683 -60.920423,2.877525 -60.921274,2.873329 -60.927364,2.871417 -60.93052,2.869252 -60.933088,2.868481 -60.937275,2.863071 -60.957011,2.868785 -60.953706,2.875076 -60.947061,2.878719 -60.943674,2.878696 -60.941974,2.882563 -60.942905,2.885992 -60.941074,2.888613 -60.93891,2.889254 -60.937454,2.890799 -60.9375,2.895145 -60.93697,2.901155 -60.93478,2.905003</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">82758</SimpleData>
+		<SimpleData name="cod_imovel">0310110025695</SimpleData>
+		<SimpleData name="num_proces">54390001549/2008-60</SimpleData>
+		<SimpleData name="nome_imove">TD LAGE</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">DFN</SimpleData>
+		<SimpleData name="num_certif">251505000002-11</SimpleData>
+		<SimpleData name="data_certi">2015-05-14 10:46:14.594331</SimpleData>
+		<SimpleData name="qtd_area_c">1186.3365</SimpleData>
+		<SimpleData name="perimetro_">18559.78</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-61.277527,3.570789 -61.274461,3.570017 -61.27395,3.567244 -61.2704,3.562932 -61.268696,3.561936 -61.264872,3.547123 -61.266813,3.54306 -61.26876,3.540033 -61.270353,3.531426 -61.284897,3.515695 -61.28648,3.503463 -61.297024,3.502973 -61.294678,3.511526 -61.291456,3.51896 -61.289541,3.521322 -61.287397,3.52259 -61.286999,3.528302 -61.28793,3.528578 -61.28772,3.529987 -61.288368,3.531891 -61.288522,3.534977 -61.288,3.536699 -61.284754,3.543548 -61.285141,3.545357 -61.286197,3.548783 -61.285954,3.555327 -61.285166,3.557633 -61.285495,3.559773 -61.286034,3.561875 -61.282302,3.568198 -61.277527,3.570789</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">20069</SimpleData>
+		<SimpleData name="cod_imovel">0310460122707</SimpleData>
+		<SimpleData name="num_proces">54390.001536/2009-71</SimpleData>
+		<SimpleData name="nome_imove">FAZENDA KARINA</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">D3L</SimpleData>
+		<SimpleData name="num_certif">251006000003-14</SimpleData>
+		<SimpleData name="data_certi">2010-06-23 00:00:00</SimpleData>
+		<SimpleData name="qtd_area_c">1872.0238</SimpleData>
+		<SimpleData name="perimetro_">18464.91</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-60.319582,2.847636 -60.300232,2.795677 -60.319405,2.790067 -60.325638,2.791406 -60.327839,2.789841 -60.332551,2.791982 -60.338624,2.793676 -60.343294,2.799304 -60.343887,2.802344 -60.34129,2.803982 -60.347086,2.813701 -60.33629,2.824963 -60.333209,2.829261 -60.328087,2.832935 -60.326142,2.842371 -60.319582,2.847636</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">83076</SimpleData>
+		<SimpleData name="cod_imovel">0310110281691</SimpleData>
+		<SimpleData name="num_proces">54390000578/2011-18</SimpleData>
+		<SimpleData name="nome_imove">FAZENDA NOSSA SENHORA DE FÃTIMA</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">CJM</SimpleData>
+		<SimpleData name="num_certif">251506000001-67</SimpleData>
+		<SimpleData name="data_certi">2015-06-24 11:11:53.084513</SimpleData>
+		<SimpleData name="qtd_area_c">448.2833</SimpleData>
+		<SimpleData name="perimetro_">8537.87</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-61.224115,2.629072 -61.224906,2.629662 -61.225193,2.633294 -61.222544,2.640609 -61.204592,2.642388 -61.201179,2.637521 -61.19798,2.634364 -61.208219,2.62524 -61.210423,2.625916 -61.212931,2.624632 -61.215256,2.622746 -61.215711,2.621112 -61.219133,2.622864 -61.219227,2.623537 -61.22019,2.626383 -61.224,2.629003 -61.224115,2.629072</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Imoveis_RR">
+		<SimpleData name="id1">83077</SimpleData>
+		<SimpleData name="cod_imovel">2461581177652</SimpleData>
+		<SimpleData name="num_proces">54390000576/2011-11</SimpleData>
+		<SimpleData name="nome_imove">FAZENDA NOSSA SENHORA DE APARECIDA</SimpleData>
+		<SimpleData name="sr">25</SimpleData>
+		<SimpleData name="uf_municip">RR</SimpleData>
+		<SimpleData name="cod_projet">MC-63</SimpleData>
+		<SimpleData name="ind_atuali">f</SimpleData>
+		<SimpleData name="cod_profis">CJM</SimpleData>
+		<SimpleData name="num_certif">251506000002-48</SimpleData>
+		<SimpleData name="data_certi">2015-06-24 11:12:08.96049</SimpleData>
+		<SimpleData name="qtd_area_c">523.0993</SimpleData>
+		<SimpleData name="perimetro_">11898.34</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>clampToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>clampToGround</altitudeMode><coordinates>-61.21768,2.660398 -61.204592,2.642388 -61.222544,2.640609 -61.222903,2.64156 -61.2249,2.642736 -61.225459,2.641608 -61.23068,2.640989 -61.231792,2.64348 -61.233899,2.644269 -61.243111,2.638344 -61.242425,2.651287 -61.241211,2.650668 -61.240023,2.65029 -61.239366,2.65018 -61.238671,2.650175 -61.23734,2.650516 -61.236224,2.650982 -61.235171,2.651427 -61.233995,2.651818 -61.232231,2.652271 -61.230403,2.652631 -61.228565,2.653038 -61.227308,2.653323 -61.22612,2.65383 -61.224997,2.654373 -61.223859,2.654973 -61.222794,2.655712 -61.22178,2.656501 -61.220822,2.657363 -61.219494,2.658654 -61.218603,2.659549 -61.21768,2.660398</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>

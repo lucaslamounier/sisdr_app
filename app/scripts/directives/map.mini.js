@@ -2,22 +2,22 @@
 
 /**
  * @ngdoc directive
- * @name operationsApp.directive:map-mini
+ * @name sisdrApp.directive:mapdetail
  * @description
- * # map
+ * # mapdetail
  */
 angular.module('sisdrApp')
-    .directive('mapMini', function() {
+    .directive('mapdetail', function() {
         return {
-            template: '<div id="map-mini" control-switch resizable ng-style="{height: mapHeight}"></div>',
+            template: '<div id="mapdetail" control-switch resizable style="height: 400px"></div>',
             restrict: 'E',
             link: function postLink(scope, element, attrs) {
 
                 var date,
                     mapOSM,
-                    googleSat,
                     mapPositron,
                     mapDark,
+                    googleSat,
                     layers = {},
                     baseMaps = {},
                     initialLayers = {},
@@ -38,17 +38,17 @@ angular.module('sisdrApp')
                     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
                 });
 
-                googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+                googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
                     maxZoom: 20,
-                    subdomains:['mt0','mt1','mt2','mt3']
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
                 });
 
                 if (date.getHours() >= 18 || date.getHours() <= 5) {
-                    scope.map = L.map('map', {
+                    scope.map = L.map('mapdetail', {
                         layers: [mapDark]
                     });
                 } else {
-                    scope.map = L.map('map', {
+                    scope.map = L.map('mapdetail', {
                         layers: [mapOSM]
                     });
                 }
@@ -70,12 +70,50 @@ angular.module('sisdrApp')
                     }
                 }, {}).addTo(scope.map);
 
+                scope.popup = function(content) {
+                    var html;
+
+                    var element = content.features[0];
+                    var layername = element.id.split('.')[0];
+
+                    var layerTitle = Object.keys(scope.wmsLayers).filter(function(k, v) {
+                        var wmsParams = scope.wmsLayers[k].layer.wmsParams;
+                        if (element.properties.hasOwnProperty('tipo')) {
+                            return (wmsParams.layers.split(':')[1] == layername) && (wmsParams.viewparams == ('tipo:' + element.properties.tipo));
+                        } else {
+                            return wmsParams.layers.split(':')[1] == layername;
+                        }
+                    });
+
+                    if ($.isArray(layerTitle)) {
+                        layerTitle = layerTitle[0];
+                    } else {
+                        layerTitle = 'Camada WMS';
+                    }
+
+                    html = '<h3>' + layerTitle + '</h3>';
+                    html += '<table class="table table-striped">';
+
+                    for (var property in content.features[0].properties) {
+                        html += '<tr>';
+                        html += '<td><b>' + property + '</b></td>';
+                        html += '<td>' + content.features[0].properties[property] + '</td>';
+                        html += '</tr>';
+
+                    }
+                    html += '</table>';
+
+                    return html;
+                }
+
+                new WMSLayerInfo(scope.map, scope.popup);
 
                 scope.layers = layers;
+                scope.wmsLayers = wmsLayers;
                 scope.initialLayers = initialLayers;
                 scope.$watchCollection('layers', onLayersChange);
                 scope.$watchCollection('initialLayers', onInitialLayersChange);
-
+                scope.$watchCollection('wmsLayers', onWMSLayersChange);
 
                 function onWMSLayersChange(value, oldValue) {
                     //var tooltip = '';
@@ -114,6 +152,7 @@ angular.module('sisdrApp')
                             if (oldLayers.hasOwnProperty(layerName)) {
                                 delete oldLayers[layerName]
                             } else {
+                                // layersControl.addOverlay(layer, layerName); //Adiciona na lista de camadas
                                 layer = currentLayers[layerName];
 
                                 if (layer.legend) {
@@ -126,6 +165,7 @@ angular.module('sisdrApp')
                                 if (initVisible)
                                     layer.addTo(scope.map);
                                 updateFitBounds(layer);
+                                //debugger;
                                 scope.control.addOverLayer(layer, layerName, tabName, allowRemove, legend, tooltip);
                             }
                         }

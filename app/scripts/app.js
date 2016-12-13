@@ -19,7 +19,7 @@ angular
         'ngSanitize',
         'ngMaterial',
         'ui.bootstrap',
-        'ngCsv',
+        /* 'ngCsv',*/
         'ngStorage',
     ])
     .config(function($provide, $routeProvider, authProvider, symbologiesProvider, ACCESS_LEVEL) {

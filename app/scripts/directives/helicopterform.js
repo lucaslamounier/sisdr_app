@@ -12,15 +12,15 @@ angular.module('sisdrApp')
             templateUrl: 'views/partials/helicopterForm.html',
             restrict: 'E',
             link: function postLink(scope, element, attrs) {
-               /* var rest = RestApi.get({
-                    type: 'helicopters-api',
-                    model: 'helicopters'
-                });
-                scope.geometryType = 'Pontos';
-                rest.$promise.then(function(data) {
-                    scope.helicoptersData = data.map(mapData);
-                    scope.helicopters = true;
-                });*/
+                /* var rest = RestApi.get({
+                     type: 'helicopters-api',
+                     model: 'helicopters'
+                 });
+                 scope.geometryType = 'Pontos';
+                 rest.$promise.then(function(data) {
+                     scope.helicoptersData = data.map(mapData);
+                     scope.helicopters = true;
+                 });*/
 
                 function mapData(data) {
                     return {
@@ -47,82 +47,82 @@ angular.module('sisdrApp')
                     $scope.alert = false;
                     $scope.HelicopterLoad = true;
 
-                 /*   var restHeli = RestApi.routes({
-                        type: 'helicopters-api',
-                        nome: heli.name,
-                        start_date: GISHelper.formatDate(start_date),
-                        end_date: GISHelper.formatDate(end_date)
-                    });*/
+                    /*   var restHeli = RestApi.routes({
+                           type: 'helicopters-api',
+                           nome: heli.name,
+                           start_date: GISHelper.formatDate(start_date),
+                           end_date: GISHelper.formatDate(end_date)
+                       });*/
 
-                 /*   restHeli.$promise.then(function(data) {
+                    /*   restHeli.$promise.then(function(data) {
 
-                        var layerGroup, geometry, polyline, marker, traceHandler,
-                            properties, date, geometryMap, day, paths,
-                            polylineTrace;
+                           var layerGroup, geometry, polyline, marker, traceHandler,
+                               properties, date, geometryMap, day, paths,
+                               polylineTrace;
 
-                        var layerName = heli.name + ': ' + start_date + ' - ' + end_date + ' : ' + geometryType;
+                           var layerName = heli.name + ': ' + start_date + ' - ' + end_date + ' : ' + geometryType;
 
-                        if (data.features.length) {
+                           if (data.features.length) {
 
-                            $scope.alertHelicopters = false;
+                               $scope.alertHelicopters = false;
 
-                            if (geometryType === 'Pontos') {
+                               if (geometryType === 'Pontos') {
 
-                                layerGroup = L.geoJson(data, {
-                                    pointToLayer: pointToLayer
-                                });
-                                $scope.layers[layerName] = layerGroup;
+                                   layerGroup = L.geoJson(data, {
+                                       pointToLayer: pointToLayer
+                                   });
+                                   $scope.layers[layerName] = layerGroup;
 
-                            } else {
-                                geometryMap = {};
-                                polylineTrace = L.polyline([]);
+                               } else {
+                                   geometryMap = {};
+                                   polylineTrace = L.polyline([]);
 
-                                data.features.map(function(feature) {
-                                    return feature.geometry.coordinates.reverse();
-                                });
+                                   data.features.map(function(feature) {
+                                       return feature.geometry.coordinates.reverse();
+                                   });
 
-                                polyline = GISHelper.doMultiPolyline(data.features, getDate, getPoint, doMultiPolyline);
-                                traceHandler = GISHelper.traceRoute(polylineTrace, symbologies, 'helicopters-pos');
+                                   polyline = GISHelper.doMultiPolyline(data.features, getDate, getPoint, doMultiPolyline);
+                                   traceHandler = GISHelper.traceRoute(polylineTrace, symbologies, 'helicopters-pos');
 
-                                marker = traceHandler.marker;
-                                layerGroup = L.layerGroup([polyline, marker]);
+                                   marker = traceHandler.marker;
+                                   layerGroup = L.layerGroup([polyline, marker]);
 
-                                $scope.layers[layerName] = layerGroup;
+                                   $scope.layers[layerName] = layerGroup;
 
-                                marker.on('add', function() {
-                                    traceHandler.start();
-                                });
+                                   marker.on('add', function() {
+                                       traceHandler.start();
+                                   });
 
-                                marker.on('remove', function() {
-                                    traceHandler.stop();
-                                });
-                            }
+                                   marker.on('remove', function() {
+                                       traceHandler.stop();
+                                   });
+                               }
 
-                            $scope.toggleNav('filter');
+                               $scope.toggleNav('filter');
 
-                        } else {
-                            $scope.alertHelicopters = true;
-                        }
-                        $scope.HelicopterLoad = false;
+                           } else {
+                               $scope.alertHelicopters = true;
+                           }
+                           $scope.HelicopterLoad = false;
 
-                        function getDate(feature) {
-                            var date = new Date(feature.properties.data_hora);
-                            var day = date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear();
-                            return day;
-                        }
+                           function getDate(feature) {
+                               var date = new Date(feature.properties.data_hora);
+                               var day = date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear();
+                               return day;
+                           }
 
-                        function getPoint(feature) {
-                            polylineTrace.addLatLng(feature.geometry.coordinates);
-                            return feature.geometry.coordinates;
-                        }
+                           function getPoint(feature) {
+                               polylineTrace.addLatLng(feature.geometry.coordinates);
+                               return feature.geometry.coordinates;
+                           }
 
-                        function doMultiPolyline(paths) {
-                            return symbologies.make(paths, 'helicopters-multi-line');
-                        }
+                           function doMultiPolyline(paths) {
+                               return symbologies.make(paths, 'helicopters-multi-line');
+                           }
 
-                    }, function(error) {
-                        $scope.alertHelicopters = false;
-                    });*/
+                       }, function(error) {
+                           $scope.alertHelicopters = false;
+                       });*/
 
                     function pointToLayer(feature, latlng) {
                         var marker;
