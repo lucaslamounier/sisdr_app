@@ -56,18 +56,67 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Código SNV</th>
-                    <th>Código do Projeto</th>
-                    <th>Portaria</th>
-                    <th>Data de Publicação</th>
-                    <th>Data de Vencimento</th>
-                    <th>Rodovia</th>
+                    <th ng-click="order='projeto.codigo_snv'; reverseSort = !reverseSort">Código SNV
+                        <span ng-show="order=='projeto.codigo_snv' && !reverseSort || order==null">
+                            <img src="images/icons/arrowUp.png"/>
+                        </span>
+                        <span ng-show="order=='projeto.codigo_snv' && reverseSort">
+                            <img src="images/icons/arrowDown.png"/>
+                        </span>
+                    </th>
+                    <th ng-click="order='projeto.cod_projeto'; reverseSort = !reverseSort">Código do Projeto
+                        <span ng-show="order=='projeto.cod_projeto' && !reverseSort || order==null">
+                            <img src="images/icons/arrowUp.png"/>
+                        </span>
+                        <span ng-show="order=='projeto.cod_projeto' && reverseSort">
+                            <img src="images/icons/arrowDown.png"/>
+                        </span>
+                    </th>
+                    <th ng-click="order='portaria'; reverseSort = !reverseSort">Portaria
+                        <span ng-show="order=='portaria' && !reverseSort || order==null">
+                            <img src="images/icons/arrowUp.png"/>
+                        </span>
+                        <span ng-show="order=='portaria' && reverseSort">
+                            <img src="images/icons/arrowDown.png"/>
+                        </span>
+                    </th>
+                    <th ng-click="order='properties.vl_codigo_projeto'; reverseSort = !reverseSort">Data de Publicação
+                        <span ng-show="order=='properties.vl_codigo_projeto' && !reverseSort || order==null">
+                            <img src="images/icons/arrowUp.png"/>
+                        </span>
+                        <span ng-show="order=='properties.vl_codigo_projeto' && reverseSort">
+                            <img src="images/icons/arrowDown.png"/>
+                        </span>
+                    </th>
+                    <th ng-click="order='dt_publicacao'; reverseSort = !reverseSort">Data de Vencimento
+                        <span ng-show="order=='dt_publicacao' && !reverseSort || order==null">
+                            <img src="images/icons/arrowUp.png"/>
+                        </span>
+                        <span ng-show="order=='dt_publicacao' && reverseSort">
+                            <img src="images/icons/arrowDown.png"/>
+                        </span>
+                    </th>
+                    <th ng-click="order='projeto.br'; reverseSort = !reverseSort">BR
+                        <span ng-show="order=='projeto.br' && !reverseSort || order==null">
+                            <img src="images/icons/arrowUp.png"/>
+                        </span>
+                        <span ng-show="order=='projeto.br' && reverseSort">
+                            <img src="images/icons/arrowDown.png"/>
+                        </span>
+                    </th>
                     <th>Segmento</th>
-                    <th>UF</th>
+                    <th ng-click="order='projeto.UF'; reverseSort = !reverseSort">UF
+                        <span ng-show="order=='projeto.UF' && !reverseSort || order==null">
+                            <img src="images/icons/arrowUp.png"/>
+                        </span>
+                        <span ng-show="order=='projeto.UF' && reverseSort">
+                            <img src="images/icons/arrowDown.png"/>
+                        </span>
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="dup in dups">
+                <tr ng-repeat="dup in dups | orderBy : order : reverseSort">
                     <td>{{dup.projeto.codigo_snv}}</td>
                     <td>{{dup.projeto.cod_projeto}}</td>
                     <td><a ng-href="#/dups/detail/{{dup.id_dup}}">{{dup.portaria}}</a></td>

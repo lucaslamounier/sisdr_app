@@ -79,7 +79,13 @@ angular.module('sisdrApp')
         }
 
         function onError(error) {
-            console.log(error);
+            if (error.status === -1) {
+                console.log('reload page..');
+                window.location.reload();
+            }else{
+                $scope.msg = "Não foi possivel consultar dados.";
+            } 
+            console.log('Erro:' + error.statusText, error.status);
         }
 
         /* Send request for restAPI */
@@ -116,10 +122,14 @@ angular.module('sisdrApp')
             };
 
             function onError(error) {
-                console.log(error);
-                $scope.msg = "Não foi possivel consultar dados.";
+                if (error.status === -1) {
+                    console.log('reload page..');
+                    window.location.reload();
+                }else{
+                    $scope.msg = "Não foi possivel consultar dados.";
+                } 
+                console.log('Erro:' + error.statusText, error.status);
             }
-
             /* Send request for restAPI */
             var dupRequest = RestApi.getDup({
                 type: 'dups-detail',

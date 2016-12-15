@@ -77,6 +77,14 @@ angular.module('sisdrApp')
                 },
                 isArray: false
             },
+            getProjetoDetail: {
+                url: settings.server.url + '/:type/:id',
+                method: 'GET',
+                params: {
+                    format: 'json'
+                },
+                isArray: false
+            },
             getPropLindeiraDetail: {
                 url: settings.server.url + '/:type/:id/',
                 method: 'GET',

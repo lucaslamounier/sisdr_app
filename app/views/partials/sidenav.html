@@ -13,7 +13,28 @@
                 <h4 class="panel-title">
                   <a href="#/dups" tabindex="0" class="accordion-toggle">
                       <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
-                       Consultar DUPs
+                       DUPs
+                  </span></span></a>
+                </h4>
+              </div>
+            </div>
+             <div class="panel panel-default">
+              <div class="panel-heading" ng-keypress="toggleOpen($event)">
+                <h4 class="panel-title">
+                  <a href="#/estatistica" tabindex="2" class="accordion-toggle">
+                      <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
+                       Estatísticas
+                  </span></span></a>
+                </h4>
+              </div>
+            </div>
+
+            <div class="panel panel-default" ng-show="!is_map">
+              <div class="panel-heading" ng-keypress="toggleOpen($event)">
+                <h4 class="panel-title">
+                  <a href="#/" tabindex="0" class="accordion-toggle">
+                      <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
+                       Mapa
                   </span></span></a>
                 </h4>
               </div>
@@ -24,7 +45,7 @@
                 <h4 class="panel-title">
                   <a href="#/projetos" tabindex="1" class="accordion-toggle">
                       <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
-                       Consultar Projetos
+                       Projetos
                   </span></span></a>
                 </h4>
               </div>
@@ -36,17 +57,7 @@
                 <h4 class="panel-title">
                   <a href="#/propriedades-lindeiras" tabindex="2" class="accordion-toggle">
                       <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
-                       Consultar Propriedades Lindeiras
-                  </span></span></a>
-                </h4>
-              </div>
-            </div>
-             <div class="panel panel-default" ng-show="!is_map">
-              <div class="panel-heading" ng-keypress="toggleOpen($event)">
-                <h4 class="panel-title">
-                  <a href="#/" tabindex="0" class="accordion-toggle">
-                      <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
-                       Mapa
+                       Propriedades Lindeiras
                   </span></span></a>
                 </h4>
               </div>

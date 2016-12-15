@@ -9,93 +9,199 @@
             <span ng-bind="msg"></span>
         </div>
     </div>
-    <div ng-show="!msg" class="row">
-        <div>
+    <div ng-show="!msg">
+        <div class="row">
             <div id="detalhes-box">
                 <div class="box">
-                    <div class="nome"><strong>Número da Portaria:</strong></div>
-                    <div class="detalhe">{{dup.portaria}}</div>
+                    <div class="nome"><strong>Código do Projeto:</strong></div>
+                    <div class="detalhe">{{projeto.vl_codigo_projeto}}</div>
+                </div>
+                <hr>
+                <div class="box">
+                    <div class="nome"><strong>Fase:</strong></div>
+                    <div class="detalhe">
+                    {{projeto.ds_tipo_projeto_display}}</div>
+                </div>
+                <hr>
+                <div class="box">
+                    <div class="nome"><strong>Tipo:</strong></div>
+                    <div class="detalhe">
+                    {{projeto.ds_tipo_obra_display}}</div>
+                </div>
+                <hr>
+                <div class="box">
+                    <div class="nome"><strong>Data de Aprovação:</strong></div>
+                    <div class="detalhe">
+                        <span ng-bind="projeto.dt_aprovacao_projeto | date:'dd/MM/yyyy'"></span>
+                    </div>
                 </div>
                 <hr>
                 <div class="box">
                     <div class="nome"><strong>Código SNV:</strong></div>
-                    <div class="detalhe">{{dup.cod_snv}}</div>
-                </div>
-                <hr>
-                <div class="box">
-                    <div class="nome"><strong>Código do Projeto:</strong></div>
-                    <div class="detalhe">{{ dup.projeto.cod_projeto }}</div>
-                </div>
-                <hr>
-                <div class="box">
-                    <div class="nome"><strong>Data de Publicação:</strong></div>
                     <div class="detalhe">
-                        <span ng-bind="dup.dt_publicacao | date:'dd/MM/yyyy'"></span>
+                       {{projeto.vl_codigo_rodovia}}
                     </div>
                 </div>
                 <hr>
                 <div class="box">
-                    <div class="nome"><strong>Data de Vencimento:</strong></div>
+                    <div class="nome"><strong>Km Inicial</strong></div>
                     <div class="detalhe">
-                        <span ng-bind="dup.dt_vencimento | date:'dd/MM/yyyy'"></span>
+                        {{projeto.vl_km_inicial}}
                     </div>
                 </div>
                 <hr>
                 <div class="box">
-                    <div class="nome"><strong>Possui geometria ?</strong></div>
+                    <div class="nome"><strong>Km Final</strong></div>
                     <div class="detalhe">
-                        <span ng-show="dup.has_geometry">
-                  Sim
-              </span>
-                        <span ng-show="!dup.has_geometry">
-                  Não
-              </span>
+                    {{projeto.vl_km_final}}
                     </div>
                 </div>
+                <hr>
+                <div class="box">
+                    <div class="nome"><strong>Possui Traçado?</strong></div>
+                    <div class="detalhe">
+                        <span ng-show="projeto.has_geom">
+                            Sim
+                        </span>
+                         <span ng-show="!projeto.has_geom">
+                            Não
+                        </span>
+                    </div>
+                </div>
+                <hr>
             </div>
             <br />
             <br />
-            <div class="col-sm-4" id="map-box" ng-show="dup.has_geometry" layout-align="space-around">
-                <map flex style="height:420px !important;"></map>
+            <div class="col-sm-4" id="map-box" ng-show="projeto.has_geom" layout-align="space-around">
+                <mapdetailprojeto></mapdetailprojeto>
+               
             </div>
         </div>
-    </div>
-    <div class="row" ng-show="!msg">
-        <h4>Arquivos</h4>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-sm-3" ng-show="dup.lk_doc_publicacao">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <img src="../images/doc-logo.svg" width="25" height="25" /> Word
-                    <div class="icon-download-file">
-                        <a href="" ng-click="donwload(dup.arquivos.doc_caminho)">
-                            <img src="../images/download-to-inbox.png" width="25" height="25" />
-                        </a>
-                    </div>
+        <div class="row">     
+            <div class="box-button-wkt">
+                <div style="text-align: center;">
+                        <button class="btn btn-primary" type="button" ng-click="pegarBuffer(projeto.buffer_display, 0)"
+                            data-toggle="tooltip" data-placement="bottom" title="Após a geração do buffer o botão visualizar buffer será habilitado.">
+                            Gerar Buffer
+                        </button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" 
+                        ng-disabled="checked">
+                            Visualizar Buffer
+                        </button>
                 </div>
-                <div class="panel-body">
-                    <strong>Nome do arquivo:</strong> <span ng-bind="dup.arquivos.doc_nome"></span>
-                    <strong>Tamanho do arquivo:</strong> <span ng-bind="dup.arquivos.doc_tamanho"></span>
-                </div>
+                <br />
             </div>
-        </div>
-        <div class="col-sm-3" ng-show="dup.lk_pdf_publicacao">
-            <div class="panel panel-red-border">
-                <div class="panel-heading panel-red">
-                    <img src="../images/pdf-logo.svg" width="25" height="25" /> PDF
-                    <div class="icon-download-file">
-                        <a href="" ng-click="donwload(dup.arquivos.pdf_caminho)">
-                            <img src="../images/download-to-inbox.png" width="25" height="25" />
-                        </a>
+            <div>
+                <div style="font-size: 12px;" ng-show="projeto.lk_pdf_projeto || projeto.lk_dwg_projeto || projeto.lk_shp_projeto">
+                     <h3>Arquivos</h3>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-4" ng-show="projeto.lk_pdf_projeto">
+                            <div class="panel panel-red-border">
+                                <div class="panel-heading panel-red">
+                                    <img src="/images/pdf-logo.svg" width="25" height="25" /> PDF
+                                    <div class="icon-download-file">
+                                        <a href="" ng-click="donwload(projeto.arquivos.pdf_caminho)"
+                                            data-toggle="tooltip" data-placement="top" title="Realizar download do arquivo.">
+                                            <img src="/images/cloud-download2.svg" width="30" height="25" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <strong>Nome do arquivo:</strong> <span ng-bind="projeto.arquivos.pdf_nome"></span>
+                                    <br />
+                                    <strong>Tamanho do arquivo:</strong> <span ng-bind="projeto.arquivos.pdf_tamanho"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- -->
+                        <div class="col-sm-4" ng-show="projeto.lk_dwg_projeto">
+                            <div class="panel panel-blue-border">
+                                <div class="panel-heading panel-blue">
+                                    <img src="/images/dwg-logo.svg" width="25" height="25" /> DWG
+                                    <div class="icon-download-file">
+                                        <a href="" ng-click="donwload(projeto.arquivos.dwg_caminho)"
+                                        data-toggle="tooltip" data-placement="top" title="Realizar download do arquivo.">
+                                            <img src="/images/cloud-download2.svg" width="30" height="25" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <strong>Nome do arquivo:</strong> <span ng-bind="projeto.arquivos.dwg_nome"></span>
+                                    <br />
+                                    <strong>Tamanho do arquivo:</strong> <span ng-bind="dup.arquivos.dwg_tamanho"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- -->
+                        <div class="col-sm-4" ng-show="projeto.lk_shp_projeto">
+                            <div class="panel panel-green-border">
+                                <div class="panel-heading panel-green">
+                                    <img src="/images/shp-logo.svg" width="25" height="25" /> ShapeFile
+                                    <div class="icon-download-file">
+                                        <a href="" ng-click="donwload(projeto.arquivos.shp_caminho)"
+                                        data-toggle="tooltip" data-placement="top" title="Realizar download do arquivo.">
+                                            <img src="/images/cloud-download2.svg" width="30" height="25" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <strong>Nome do arquivo:</strong> <span ng-bind="projeto.arquivos.shp_nome"></span>
+                                    <br />
+                                    <strong>Tamanho do arquivo:</strong> <span ng-bind="projeto.arquivos.shp_tamanho"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- -->
                     </div>
                 </div>
-                <div class="panel-body">
-                    <strong>Nome do arquivo:</strong> <span ng-bind="dup.arquivos.pdf_nome"></span>
-                    <strong>Tamanho do arquivo:</strong> <span ng-bind="dup.arquivos.pdf_tamanho"></span>
-                </div>
+            </div> 
+            <div class="row" style="margin-bottom: 60px;">
+                <br />
+                <br />
             </div>
         </div>
     </div>
 </div>
+<!-- Modal BUffer -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Buffer do Projeto</h4>
+      </div>
+      <div class="modal-body">
+     <ul class="nav nav-tabs" id="myTabs">
+        <li class="active"><a data-toggle="tab" href="#wkt" ng-click="tabControl='wkt-text1';tabIndex=1" ng-init="tabControl='wkt-text1';tabIndex=1">WKT</a></li>
+        <li><a data-toggle="tab" href="#text" ng-click="tabControl='wkt-text2';tabIndex=2">TEXTO</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="wkt" class="tab-pane fade in active">
+            <h3>WKT</h3>
+                <div class="wkt-box">
+                    <p id="wkt-text1"></p>
+                </div>
+            </div>
+        <div id="text" class="tab-pane fade">
+          <h3>Texto</h3>
+                <div class="wkt-box">
+                    <p id="wkt-text2"></p>
+                </div>
+        </div>
+      </div>   
+      </div>
+      <div class="modal-footer">
+        <div id = "texto-ctrl-c" class="texto-ctrl-c" style="display: none; margin-left: 50px; font-family: 'Courier New', Courier, monospace; font-size: 0.9em;">
+            <div class="alert alert-success" style="display: inline;margin-right: 27px;">
+                Texto copiado com sucesso, precione Ctrl-V para colar.
+            </div>
+        </div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary" ng-click="selectText(tabControl)">Copiar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal BUffer -->

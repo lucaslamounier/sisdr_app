@@ -15,10 +15,33 @@ md-select, md-input-container{
 	margin-top: -18px;
 }
 
+.highcharts-credits{
+	display: none;
+}
+
 #mapprojeto{
 	height: 400px;
 	width: 100%;
 	margin-top: -18px;
+}
+
+#mapdetailprojeto{
+	height: 565px;
+	width: 100%;
+	margin-top: -18px;
+}
+
+.box-button-wkt{
+	width: 50%;
+	float: right;
+
+}
+
+
+.box-files{
+	width: 50%;
+	float: left;
+
 }
 
 #map-mini{
@@ -40,19 +63,37 @@ md-select, md-input-container{
 .icon-download-file {
 	width: 30px;
     display: inline-block;
-    text-align: right;
-    margin-left: 125px;
+    float: right;
 }
 
 .panel-red {
 	color: #fff;
     background-color: rgb(154, 44, 44);
-    border-color: #c5082b;
+}
+
+.panel-green {
+	color: #fff;
+    background-color: rgb(24, 101, 15);
+}
+
+.panel-blue {
+    color: #fff;
+    background-color: rgb(16, 112, 169);
 }
 
 .panel-red-border {
 	
     border-color: #e42f2f;
+}
+
+.panel-green-border {
+	
+    border-color: rgb(24, 101, 15);
+}
+
+.panel-blue-border {
+	
+    border-color: rgb(16, 112, 169);
 }
 
 
@@ -174,13 +215,14 @@ body > div > md-content > side-nav > md-sidenav > accordion > div > div.panel.pa
 
 #map-box {
     /* float: right; */
-    height: 475px;
+    height: 570px;
     width: 48%;
     /* margin-left: 20px; */
     /* background-color: white; */
     /* display: block; */
     float: right;
     margin-top: -40px;
+        margin-bottom: 20px;
 }
 
 .box {
@@ -220,13 +262,19 @@ body > div > md-content > side-nav > md-sidenav > accordion > div > div.panel.pa
 	overflow-x: hidden;
 }
 
-#wkt-text {
+#wkt-text1 {
 	font-family: "Courier New", Courier, monospace;
 	font-size: 0.9em;
 	text-align: left;
 	margin: 0px;
 }
 
+#wkt-text2 {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 0.9em;
+	text-align: left;
+	margin: 0px;
+}
 .texto-ctrl-c {
 	margin-left: 50px;
 	font-family: "Courier New", Courier, monospace;
@@ -252,4 +300,9 @@ body > div > md-content > side-nav > md-sidenav > accordion > div > div.panel.pa
 .arquivos-tamanho {
 	float: right;
 	margin-top: 3px;
+}
+
+@media (min-width: 1200px)
+.container {
+    width: 1200px !important;
 }

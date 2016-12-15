@@ -7,9 +7,9 @@
  * # map
  */
 angular.module('sisdrApp')
-    .directive('mapprojeto', function() {
+    .directive('mapdetailprojeto', function() {
         return {
-            template: '<div id="mapprojeto" control-switch resizable"></div>',
+            template: '<div id="mapdetailprojeto" control-switch resizable"></div>',
             restrict: 'E',
             link: function postLink(scope, element, attrs) {
                 var date,
@@ -43,11 +43,11 @@ angular.module('sisdrApp')
                 });
 
                 if (date.getHours() >= 18 || date.getHours() <= 5) {
-                    scope.map = L.map('mapprojeto', {
+                    scope.map = L.map('mapdetailprojeto', {
                         layers: [mapDark]
                     });
                 } else {
-                    scope.map = L.map('mapprojeto', {
+                    scope.map = L.map('mapdetailprojeto', {
                         layers: [mapOSM]
                     });
                 }

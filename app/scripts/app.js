@@ -41,13 +41,18 @@ angular
                 access: ACCESS_LEVEL.USER
             })
             .when('/dups', {
-                templateUrl: 'views/stats.html',
+                templateUrl: 'views/dups.html',
                 controller: 'DupCtrl',
                 //access: ACCESS_LEVEL.USER
             })
             .when('/dups/detail/:id', {
                 templateUrl: 'views/dup_detail.html',
                 controller: 'DupDetailCtrl',
+                //access: ACCESS_LEVEL.USER
+            })
+            .when('/estatistica', {
+                templateUrl: 'views/estatistica.html',
+                controller: 'estatisticaCtrl',
                 //access: ACCESS_LEVEL.USER
             })
             .when('/projetos', {

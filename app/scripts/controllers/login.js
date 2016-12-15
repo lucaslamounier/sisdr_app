@@ -69,7 +69,8 @@ angular.module('sisdrApp')
             auth.setUser(level, user_data);
             headers['Authorization'] = 'Token ' + user_data.token;
             $http.defaults.headers.get = headers;
-            $location.path('/');
+            $location.path('#/');
+            console.log('pass in initApplication');
         }
 
         /**

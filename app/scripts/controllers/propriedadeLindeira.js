@@ -10,8 +10,8 @@
 
 
 angular.module('sisdrApp')
-    .controller('PropriedadesLindeirasCtrl', function($scope, $rootScope, $q, RestApi, formData, $location) {
-        $scope.propriedadesLindeiras = {};
+    .controller('PropriedadesLindeirasCtrl', function($scope, $rootScope, $q, RestApi, formData, $location, $route) {
+        $scope.propriedadesLindeiras = [];
         $scope.estados = formData.estados;
         $scope.geoJsonLayer = {}
 
@@ -72,7 +72,13 @@ angular.module('sisdrApp')
         /*End onResult*/
 
         function onError(error) {
-            console.log(error);
+            if (error.status === -1) {
+                console.log('reload page..');
+                window.location.reload();
+            }else{
+                $scope.msg = "Não foi possivel consultar dados.";
+            } 
+            console.log('Erro:' + error.statusText, error.status);
         }
 
         $scope.seeOnMap = function(id) {
@@ -153,10 +159,14 @@ angular.module('sisdrApp')
         };
 
         function onError(error) {
-            console.log(error);
-            $scope.msg = "Não foi possivel consultar dados.";
+            if (error.status === -1) {
+                console.log('reload page..');
+                window.location.reload();
+            }else{
+                $scope.msg = "Não foi possivel consultar dados.";
+            } 
+            console.log('Erro:' + error.statusText, error.status);
         }
-
         $scope.adicionarGeoJSON = function(geoString) {
             var json = $.parseJSON(geoString);
 
