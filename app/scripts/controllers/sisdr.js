@@ -158,26 +158,26 @@ angular.module('sisdrApp')
             $scope.map.addLayer(kmlLayerES);
             $scope.map.addLayer(kmlLayerGO);
             /*$scope.map.addLayer(kmlLayerMA);
-        $scope.map.addLayer(kmlLayerMG);
-        $scope.map.addLayer(kmlLayerMS);
-        $scope.map.addLayer(kmlLayerMT);
-        $scope.map.addLayer(kmlLayerPA);
-        $scope.map.addLayer(kmlLayerPA);
-        $scope.map.addLayer(kmlLayerPB);
-        $scope.map.addLayer(kmlLayerPE);
-        $scope.map.addLayer(kmlLayerPI);
-        $scope.map.addLayer(kmlLayerPR);
-        $scope.map.addLayer(kmlLayerRJ);
-        $scope.map.addLayer(kmlLayerRN);
-        $scope.map.addLayer(kmlLayerRO);
-        $scope.map.addLayer(kmlLayerRR);
-        $scope.map.addLayer(kmlLayerRS);
-        $scope.map.addLayer(kmlLayerSC);
-        $scope.map.addLayer(kmlLayerSE);
-        $scope.map.addLayer(kmlLayerSP);
-        $scope.map.addLayer(kmlLayerTO);
+                $scope.map.addLayer(kmlLayerMG);
+                $scope.map.addLayer(kmlLayerMS);
+                $scope.map.addLayer(kmlLayerMT);
+                $scope.map.addLayer(kmlLayerPA);
+                $scope.map.addLayer(kmlLayerPA);
+                $scope.map.addLayer(kmlLayerPB);
+                $scope.map.addLayer(kmlLayerPE);
+                $scope.map.addLayer(kmlLayerPI);
+                $scope.map.addLayer(kmlLayerPR);
+                $scope.map.addLayer(kmlLayerRJ);
+                $scope.map.addLayer(kmlLayerRN);
+                $scope.map.addLayer(kmlLayerRO);
+                $scope.map.addLayer(kmlLayerRR);
+                $scope.map.addLayer(kmlLayerRS);
+                $scope.map.addLayer(kmlLayerSC);
+                $scope.map.addLayer(kmlLayerSE);
+                $scope.map.addLayer(kmlLayerSP);
+                $scope.map.addLayer(kmlLayerTO);
 
-*/
+            */
 
             $scope.filter.carregar = false;
         }
@@ -221,9 +221,9 @@ angular.module('sisdrApp')
             $scope.is_map = true;
             var profaixa = result.profaixa.features;
             var propriedadesLindeiras = result.propriedadesLindeira.features;
-            var rodovias = result.rodovias.features;
+            //var rodovias = result.rodovias.features;
 
-            console.log('Total de rodovias: ' + rodovias.length);
+            /* console.log('Total de rodovias: ' + rodovias.length);*/
 
             $scope.initialLayers[profaixaLayerName] = {
                 'layer': L.geoJson(profaixa, {
@@ -247,7 +247,44 @@ angular.module('sisdrApp')
                 }
             };
 
-            $scope.initialLayers[RodoviaLayerName] = {
+            var layerRodoviasFederais = L.esri.featureLayer({
+                url: "//servicos.dnit.gov.br/arcgis/rest/services/DNIT_Geo/SNV/MapServer/10",
+                style: function() {
+                    return {
+                        color: "#2E8B57",
+                        weight: 3
+                    };
+                }
+            });
+
+            var layerRodoviasEstaduais = L.esri.featureLayer({
+                url: "//servicos.dnit.gov.br/arcgis/rest/services/DNIT_Geo/SNV/MapServer/11",
+                style: function() {
+                    return {
+                        color: "#FF0000",
+                        weight: 3
+                    };
+                }
+            });
+
+
+            $scope.wmsLayers['Rodovias Federais'] = {
+                'layer': layerRodoviasFederais,
+                'legend': {
+                    'url': 'images/icons/prop-lindeira.png',
+                    'type': 'png'
+                }
+            };
+
+            $scope.wmsLayers['Rodovias Estaduais'] = {
+                'layer': layerRodoviasEstaduais,
+                'legend': {
+                    'url': 'images/icons/prop-lindeira.png',
+                    'type': 'png'
+                }
+            };
+
+            /*$scope.initialLayers[RodoviaLayerName] = {
                 'layer': L.geoJson(rodovias, {
                     onEachFeature: propertiesRodovia,
                     style: styleRodovia,
@@ -256,11 +293,21 @@ angular.module('sisdrApp')
                     'url': 'images/icons/two-roads-cross.png',
                     'type': 'png'
                 }
-            };
+            };*/
             //KmlLayerLoad();
 
             console.log('add layer to map');
             console.log($scope.initialLayers);
+
+            /* Initial Layer Active */
+            var controlLayers = $( "#tabsOverLayers li");
+            if(!controlLayers.hasClass('active')){      
+                var layer = controlLayers[1];
+                var outros = $("#Outros")[0];
+                $("#tabLinkOutros").click();
+                layer.className = "active";
+                
+            }
             $scope.filter.carregar = false;
 
             //$timeout(removeCache, 1000);
@@ -283,15 +330,15 @@ angular.module('sisdrApp')
         var propriedadesLindeirasRequest = RestApi.getPoints({
             type: 'propriedade-lindeira'
         });
-        var rodoviasRequest = RestApi.getPoints({
+        /*var rodoviasRequest = RestApi.getPoints({
             type: 'rodovia'
-        });
+        });*/
 
 
         var promises = {
             profaixa: profaixaRequest.$promise,
             propriedadesLindeira: propriedadesLindeirasRequest.$promise,
-            rodovias: rodoviasRequest.$promise,
+            /* rodovias: rodoviasRequest.$promise,*/
         };
 
         var allPromise = $q.all(promises);

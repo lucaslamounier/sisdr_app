@@ -197,7 +197,7 @@ angular.module('sisdrApp')
                     }
                 });
             } catch (err) {
-                debugger;
+                console.log('error in download file '+ err);
             }
 
         };

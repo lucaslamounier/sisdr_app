@@ -46,6 +46,13 @@ angular.module('sisdrApp')
         function onResult(result) {
             $scope.projetos = result.projetos.features;
             $scope.geoJSON = L.geoJson($scope.projetos, {
+                style: function(feature) {
+                    return {
+                        color: '#03f',
+                        weight: 4,
+                        fillColor: '#03f',
+                    }
+                },
                 onEachFeature: function(feature, layer) {
                     var name = 'projeto_' + feature.id;
                     $scope.geoJsonLayer[name] = layer;
@@ -71,7 +78,7 @@ angular.module('sisdrApp')
                     ].join('');
                     layer.bindPopup(html);
                 },
-                style: styleProjeto,
+                
             });
             $scope.msg = false;
             $scope.geoJSON.addTo($scope.map);
@@ -291,7 +298,7 @@ angular.module('sisdrApp')
                     }
                 });
             } catch (err) {
-                debugger;
+                console.log('err' + err);
             }
 
         };

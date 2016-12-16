@@ -55,6 +55,16 @@ angular
                 controller: 'estatisticaCtrl',
                 //access: ACCESS_LEVEL.USER
             })
+            .when('/profaixa', {
+                templateUrl: 'views/profaixa.html',
+                controller: 'ProfaixaCtrl',
+                //access: ACCESS_LEVEL.USER
+            })
+            .when('/profaixa/detail/:id', {
+                templateUrl: 'views/profaixa_detail.html',
+                controller: 'ProfaixaDetailCtrl',
+                //access: ACCESS_LEVEL.USER
+            })
             .when('/projetos', {
                 templateUrl: 'views/projetos.html',
                 controller: 'ProjetoCtrl',

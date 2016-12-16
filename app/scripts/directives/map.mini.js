@@ -165,7 +165,6 @@ angular.module('sisdrApp')
                                 if (initVisible)
                                     layer.addTo(scope.map);
                                 updateFitBounds(layer);
-                                //debugger;
                                 scope.control.addOverLayer(layer, layerName, tabName, allowRemove, legend, tooltip);
                             }
                         }

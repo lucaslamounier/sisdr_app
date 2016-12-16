@@ -39,7 +39,7 @@ $(document).ready(function() {
         },
     });
     console.log($scope);
-    debugger;
+
     imageryMap.addLayer(drawnItems);
     imageryMap.addControl(drawControl);
 

@@ -2,18 +2,25 @@
 
 /**
  * @ngdoc function
- * @name sisdrApp.controller:PropriedadesLindeirasCtrl
+ * @name sisdrApp.controller:ProfaixaCtrl
  * @description
- * # PropriedadesLindeirasCtrl
+ * # ProfaixaCtrl
  * Controller of the sisdrApp
  */
-
-
 angular.module('sisdrApp')
-    .controller('PropriedadesLindeirasCtrl', function($scope, $rootScope, $q, RestApi, formData, $location, $route) {
-        $scope.propriedadesLindeiras = [];
-        $scope.estados = formData.estados;
-        $scope.geoJsonLayer = {}
+    .controller('ProfaixaCtrl', function($scope, $rootScope, $q, RestApi, formData, $location) {
+        $scope.geoJsonLayer = {};
+        $scope.profaixas = [];
+
+        function onError(error) {
+            if (error.status === -1) {
+                console.log('reload page..');
+                window.location.reload();
+            }else{
+                 $scope.msg = "Não foi possivel consultar dados.";
+            } 
+            console.log('Erro:' + error.statusText, error.status);
+        };
 
         /**
          * Atualiza a área de visualização do mapa.
@@ -33,9 +40,10 @@ angular.module('sisdrApp')
             return updated;
         }
 
+
         function onResult(result) {
-            $scope.propriedadesLindeiras = result.propLindeira.features;
-            $scope.geoJSON = L.geoJson($scope.propriedadesLindeiras, {
+            $scope.profaixas = result.profaixas.features;
+            $scope.geoJSON = L.geoJson($scope.profaixas, {
                 style: function(feature) {
                     return {
                         color: '#03f',
@@ -44,21 +52,24 @@ angular.module('sisdrApp')
                     }
                 },
                 onEachFeature: function(feature, layer) {
-                    var name = 'propriedade_' + feature.id;
+                    var name = 'profaixa_' + feature.id;
                     $scope.geoJsonLayer[name] = layer;
                     var html = [
                         '<p><strong>',
                         "<a href=''>",
-                        feature.properties.nm_propriedade,
+                            feature.properties.vl_codigo_rodovia,
                         '</a>',
                         '</strong>',
                         '</p>',
                         '<div class="btn-group btn-group-sm">',
                         '<div>',
-                        '<p><strong>Municipio:</strong> ' + feature.properties.nm_municipio + '<br />',
-                        '<strong>Proprietário:</strong>: ' + feature.properties.nm_proprietario + '<br />',
-                        '<strong>BR:</strong> ' + feature.properties.profaixa.br + '<br />',
-                        '<strong>UF:</strong>: ' + feature.properties.sg_uf + '</p>',
+                        '<p><strong>BR:</strong> ' + feature.properties.vl_br + '<br />',
+                        '<strong>Municipíos:</strong>: ' + feature.properties.li_municipio + '<br />',
+                        '<strong>UF:</strong> ' + feature.properties.sg_uf + '<br />',
+                        '<strong>Código rodovia:</strong> ' + feature.properties.vl_codigo_rodovia + '<br />',
+                        '<strong>KM Inicial:</strong> ' + feature.properties.vl_km_inicial + '<br />',
+                        '<strong>KM Final:</strong> ' + feature.properties.vl_km_final + '<br />',
+                        '<strong>Tipo de Trecho:</strong>: ' + feature.properties.sg_tipo_trecho_display + '</p>',
                         '</div>',
                         '</div>'
                     ].join('');
@@ -66,29 +77,26 @@ angular.module('sisdrApp')
                 }
             });
             $scope.geoJSON.addTo($scope.map);
-            updateFitBounds($scope.geoJSON);
+            updateFitBounds($scope.geoJSON);        
         };
 
-        /*End onResult*/
+        var profaixaRequest = RestApi.getObject({
+            type: 'profaixa'
+        });
 
-        function onError(error) {
-            if (error.status === -1) {
-                console.log('reload page..');
-                window.location.reload();
-            }else{
-                $scope.msg = "Não foi possivel consultar dados.";
-            } 
-            console.log('Erro:' + error.statusText, error.status);
-        }
+        var promises = {
+            profaixas: profaixaRequest.$promise,
+        };
+
+        var allPromise = $q.all(promises);
+        allPromise.then(onResult, onError);
 
         $scope.seeOnMap = function(id) {
-
-            //id = $(id).attr('id');
-            id = 'propriedade_' + id;
+            id = 'profaixa_' + id;
             if ($scope.lastSelectedLayer)
                 $scope.lastSelectedLayer.setStyle({
                     color: '#03f',
-                    weight: 3,
+                    weight: 1,
                     fillColor: '#03f',
                 });
 
@@ -103,69 +111,15 @@ angular.module('sisdrApp')
             }
         };
 
-        /* Send request for restAPI */
-        var propLindeiraRequest = RestApi.getPropLindeira({
-            type: 'propriedade-lindeira'
-        });
-
-        var promises = {
-            propLindeira: propLindeiraRequest.$promise,
-        };
-
-        var allPromise = $q.all(promises);
-        allPromise.then(onResult, onError);
-
-
-        function onResultBR(result) {
-            if (result.brs.length) {
-                $scope.brs = result.brs;
-                $scope.showInputBR = true;
-                $scope.showInputSegmento = true;
-                $scope.uf_class = 'col-md-4';
-            }
-
-        }
-
-        $scope.getBR = function(filter) {
-            $scope.showInputBR = false;
-            $scope.showInputSegmento = false;
-            $scope.uf_class = 'col-md-12';
-
-            var brRequest = RestApi.getObject({
-                type: 'propriedade-lindeira-br',
-                'state': filter.sigla
-            });
-            var promises = {
-                brs: brRequest.$promise,
-            };
-
-            var allPromise = $q.all(promises);
-            allPromise.then(onResultBR, onError);
-        };
-
-
-    });
-
+});
 
 angular.module('sisdrApp')
-    .controller('PropriedadesLindeirasDetailCtrl', function($scope, $rootScope, $q, RestApi, formData, $location, $routeParams) {
+    .controller('ProfaixaDetailCtrl', function($scope, $rootScope, $q, RestApi, $routeParams) {
 
-        $scope.propriedadeLindeira = {};
+        $scope.msg = false;
+        $scope.is_map = false;
 
-        function onResult(result) {
-            $scope.propriedadeLindeira = result.propriedade;
-            $scope.adicionarGeoJSON($scope.propriedadeLindeira.geojson)
-        };
 
-        function onError(error) {
-            if (error.status === -1) {
-                console.log('reload page..');
-                window.location.reload();
-            }else{
-                $scope.msg = "Não foi possivel consultar dados.";
-            } 
-            console.log('Erro:' + error.statusText, error.status);
-        }
         $scope.adicionarGeoJSON = function(geoString) {
             var json = $.parseJSON(geoString);
 
@@ -182,7 +136,6 @@ angular.module('sisdrApp')
                 //$scope.map.setZoom(11);
             }
         };
-
 
         /**
          * Atualiza a área de visualização do mapa.
@@ -203,22 +156,50 @@ angular.module('sisdrApp')
             return updated;
         };
 
+
+        function onError(error) {
+            if (error.status === -1) {
+                   console.log('reload page..');
+                    window.location.reload();
+                }else{
+                     $scope.msg = "Não foi possivel consultar dados.";
+                } 
+                console.log('Erro:' + error.statusText, error.status);
+        };
+
+        function onResult(result) {
+                $scope.profaixa = result.profaixa;
+                $scope.municipios_profaixa = '';
+                $scope.adicionarGeoJSON($scope.profaixa.properties.geojson);
+                for(var i = 0; i < $scope.profaixa.properties.li_municipio.length; i++){
+                    $scope.municipios_profaixa +=  $scope.profaixa.properties.li_municipio[i];
+                    if($scope.profaixa.properties.li_municipio[i+1]){
+                        $scope.municipios_profaixa += ', ';
+                    }
+                };
+            };
+
+
+
         if (!$routeParams.id) {
             $scope.msg = "Parâmetro inválido";
-
         } else {
 
-            /* Send request for restAPI */
-            var propLindeiraRequest = RestApi.getPropLindeiraDetail({
-                type: 'propriedade-lindeira-c',
-                id: $routeParams.id,
+            var id_profaixa = $routeParams.id;
+
+            var profaixaRequest = RestApi.getProfaixaDetail({
+                type: 'profaixa',
+                id: id_profaixa
             });
 
             var promises = {
-                propriedade: propLindeiraRequest.$promise,
+                profaixa: profaixaRequest.$promise,
             };
 
             var allPromise = $q.all(promises);
             allPromise.then(onResult, onError);
-        }
-    });
+
+    };
+
+});
+

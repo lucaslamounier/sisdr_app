@@ -93,6 +93,14 @@ angular.module('sisdrApp')
                 },
                 isArray: false
             },
+            getProfaixaDetail: {
+                url: settings.server.url + '/:type/:id/',
+                method: 'GET',
+                params: {
+                    format: 'json'
+                },
+                isArray: false
+            },
             obtain_pass: {
                 url: settings.server_user_auth.url + '/users-api/obtain-pass/',
                 method: 'POST',
