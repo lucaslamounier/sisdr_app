@@ -8,9 +8,33 @@
  * Controller of the sisdrApp
  */
 angular.module('sisdrApp')
-    .controller('ProfaixaCtrl', function($scope, $rootScope, $q, RestApi, formData, $location) {
+    .controller('ProfaixaCtrl', function($scope, $rootScope, $q, RestApi, formData, $location, $cookies, auth, ACCESS_LEVEL) {
         $scope.geoJsonLayer = {};
         $scope.profaixas = [];
+
+        if ($cookies.get('user_data')) {
+            auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
+            $rootScope.dataUser = {};
+            $rootScope.dataUser.userName = auth.getUser();
+        }
+
+        $scope.$watch(auth.isAuthenticated, function(value, oldValue) {
+            if (!value && oldValue) {
+                console.info('User Disconnected');
+                $location.path('#/');
+            }
+
+            var dataUser = {};
+
+            if (value) {
+                console.info('User Connected');
+                auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
+                dataUser.userName = auth.getUser();
+                $rootScope.dataUser = dataUser;
+            }
+        }, true);
+
+        auth.isAuthenticated() ? $rootScope.logged = true : $rootScope.logged = false;
 
         function onError(error) {
             if (error.status === -1) {
@@ -114,10 +138,34 @@ angular.module('sisdrApp')
 });
 
 angular.module('sisdrApp')
-    .controller('ProfaixaDetailCtrl', function($scope, $rootScope, $q, RestApi, $routeParams) {
+    .controller('ProfaixaDetailCtrl', function($scope, $rootScope, $q, RestApi, $routeParams, $cookies, auth, $location, ACCESS_LEVEL) {
 
         $scope.msg = false;
         $scope.is_map = false;
+
+        if ($cookies.get('user_data')) {
+            auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
+            $rootScope.dataUser = {};
+            $rootScope.dataUser.userName = auth.getUser();
+        }
+
+        $scope.$watch(auth.isAuthenticated, function(value, oldValue) {
+            if (!value && oldValue) {
+                console.info('User Disconnected');
+                $location.path('#/');
+            }
+
+            var dataUser = {};
+
+            if (value) {
+                console.info('User Connected');
+                auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
+                dataUser.userName = auth.getUser();
+                $rootScope.dataUser = dataUser;
+            }
+        }, true);
+
+        auth.isAuthenticated() ? $rootScope.logged = true : $rootScope.logged = false;
 
 
         $scope.adicionarGeoJSON = function(geoString) {

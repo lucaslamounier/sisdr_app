@@ -1,3 +1,4 @@
+<md-progress-linear  ng-if="loading" md-mode="indeterminate"></md-progress-linear>
 <div class="container">
     <side-nav></side-nav>
     <center>
@@ -18,7 +19,7 @@
                 <div class="row form-line">
                     <div class="col-xs-6" ng-class="uf_class">
                         <label class="pull-center">UF</label>
-                        <select ng-model="filter.estado" class="form-control" ng-options="estado.nome for estado in estados" ng-change='getBR(filter.estado)'>
+                        <select ng-model="filter.estado" class="form-control" ng-options="estado.nome for estado in estados track by estado.sigla" ng-change='getBR(filter.estado)'>
                            <option value="" default>UF</option>
                       </select>
                     </div>
@@ -46,7 +47,7 @@
                 <div class="col-xs-6 col-md-3">
                     <button class="btn btn-primary" type="submit">
                                  Pesquisar
-                              </button>
+                        </button>
                 </div>
         </div>
 
@@ -80,19 +81,19 @@
                             <img src="images/icons/arrowDown.png"/>
                         </span>
                     </th>
-                    <th ng-click="order='properties.vl_codigo_projeto'; reverseSort = !reverseSort">Data de Publicação
-                        <span ng-show="order=='properties.vl_codigo_projeto' && !reverseSort || order==null">
-                            <img src="images/icons/arrowUp.png"/>
-                        </span>
-                        <span ng-show="order=='properties.vl_codigo_projeto' && reverseSort">
-                            <img src="images/icons/arrowDown.png"/>
-                        </span>
-                    </th>
-                    <th ng-click="order='dt_publicacao'; reverseSort = !reverseSort">Data de Vencimento
+                    <th ng-click="order='dt_publicacao'; reverseSort = !reverseSort">Data de Publicação
                         <span ng-show="order=='dt_publicacao' && !reverseSort || order==null">
                             <img src="images/icons/arrowUp.png"/>
                         </span>
                         <span ng-show="order=='dt_publicacao' && reverseSort">
+                            <img src="images/icons/arrowDown.png"/>
+                        </span>
+                    </th>
+                    <th ng-click="order='dt_vencimento'; reverseSort = !reverseSort">Data de Vencimento
+                        <span ng-show="order=='dt_vencimento' && !reverseSort || order==null">
+                            <img src="images/icons/arrowUp.png"/>
+                        </span>
+                        <span ng-show="order=='dt_vencimento' && reverseSort">
                             <img src="images/icons/arrowDown.png"/>
                         </span>
                     </th>
@@ -116,10 +117,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="dup in dups | orderBy : order : reverseSort">
+                <tr ng-show="dups.length" ng-repeat="dup in dups | orderBy : order : reverseSort">
                     <td>{{dup.projeto.codigo_snv}}</td>
-                    <td>{{dup.projeto.cod_projeto}}</td>
-                    <td><a ng-href="#/dups/detail/{{dup.id_dup}}">{{dup.portaria}}</a></td>
+                    <td><a ng-href="#/projetos/detail/{{dup.projeto.id_projeto}}" 
+                        target="_blank" data-toggle="popover" data-trigger="hover" data-content="Clique aqui para visualizar detalhes do Projeto.">{{dup.projeto.cod_projeto}}</a></td>
+                    <td><a ng-href="#/dups/detail/{{dup.id_dup}}" 
+                        data-toggle="popover" data-trigger="hover" data-content="Clique aqui para visualizar detalhes da DUP.">{{dup.portaria}}</a></td>
                     <td>
                         <span ng-bind="dup.dt_publicacao | date:'dd/MM/yyyy'"></span>
                     </td>
@@ -130,6 +133,12 @@
                     <td>{{dup.projeto.km_inicial}} - {{dup.projeto.km_final}} KM</td>
                     <td>{{dup.projeto.UF}}</td>
                 </tr>
+                 <tr ng-show="!dups.length">
+                    <td colspan="8" style="text-align: center;">
+                        <div class="alert alert-info">
+                         Nenhum registro encontrado.
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>

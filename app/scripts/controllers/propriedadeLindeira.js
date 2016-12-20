@@ -10,10 +10,34 @@
 
 
 angular.module('sisdrApp')
-    .controller('PropriedadesLindeirasCtrl', function($scope, $rootScope, $q, RestApi, formData, $location, $route) {
+    .controller('PropriedadesLindeirasCtrl', function($scope, $rootScope, $q, RestApi, formData, $location, $route, $cookies, ACCESS_LEVEL, auth) {
         $scope.propriedadesLindeiras = [];
         $scope.estados = formData.estados;
         $scope.geoJsonLayer = {}
+
+        if ($cookies.get('user_data')) {
+            auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
+            $rootScope.dataUser = {};
+            $rootScope.dataUser.userName = auth.getUser();
+        }
+
+        $scope.$watch(auth.isAuthenticated, function(value, oldValue) {
+            if (!value && oldValue) {
+                console.info('User Disconnected');
+                $location.path('#/');
+            }
+
+            var dataUser = {};
+
+            if (value) {
+                console.info('User Connected');
+                auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
+                dataUser.userName = auth.getUser();
+                $rootScope.dataUser = dataUser;
+            }
+        }, true);
+
+        auth.isAuthenticated() ? $rootScope.logged = true : $rootScope.logged = false;
 
         /**
          * Atualiza a área de visualização do mapa.
@@ -148,9 +172,34 @@ angular.module('sisdrApp')
 
 
 angular.module('sisdrApp')
-    .controller('PropriedadesLindeirasDetailCtrl', function($scope, $rootScope, $q, RestApi, formData, $location, $routeParams) {
+    .controller('PropriedadesLindeirasDetailCtrl', function($scope, $rootScope, $q, RestApi, formData, $location, $routeParams, $cookies, auth, ACCESS_LEVEL) {
 
         $scope.propriedadeLindeira = {};
+
+        if ($cookies.get('user_data')) {
+            auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
+            $rootScope.dataUser = {};
+            $rootScope.dataUser.userName = auth.getUser();
+        }
+
+        $scope.$watch(auth.isAuthenticated, function(value, oldValue) {
+            if (!value && oldValue) {
+                console.info('User Disconnected');
+                $location.path('#/');
+            }
+
+            var dataUser = {};
+
+            if (value) {
+                console.info('User Connected');
+                auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
+                dataUser.userName = auth.getUser();
+                $rootScope.dataUser = dataUser;
+            }
+        }, true);
+
+        auth.isAuthenticated() ? $rootScope.logged = true : $rootScope.logged = false;
+
 
         function onResult(result) {
             $scope.propriedadeLindeira = result.propriedade;

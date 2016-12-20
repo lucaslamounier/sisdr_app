@@ -15,6 +15,12 @@ md-select, md-input-container{
 	margin-top: -18px;
 }
 
+#mapprofaixa{
+	height: 400px;
+	width: 100%;
+	margin-top: -18px;
+}
+
 .highcharts-credits{
 	display: none;
 }

@@ -8,11 +8,35 @@
  * Controller of the sisdrApp
  */
 angular.module('sisdrApp')
-    .controller('ProjetoCtrl', function($scope, $rootScope, $q, RestApi, formData, $location, $route,  auth) {
+    .controller('ProjetoCtrl', function($scope, $rootScope, $q, RestApi, formData, $location, $route,  auth, $cookies, ACCESS_LEVEL) {
 
         $scope.projetos = [];
         $scope.geoJsonLayer = {};
         $scope.msg = false;
+
+        if ($cookies.get('user_data')) {
+            auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
+            $rootScope.dataUser = {};
+            $rootScope.dataUser.userName = auth.getUser();
+        }
+
+        $scope.$watch(auth.isAuthenticated, function(value, oldValue) {
+            if (!value && oldValue) {
+                console.info('User Disconnected');
+                $location.path('#/');
+            }
+
+            var dataUser = {};
+
+            if (value) {
+                console.info('User Connected');
+                auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
+                dataUser.userName = auth.getUser();
+                $rootScope.dataUser = dataUser;
+            }
+        }, true);
+
+        auth.isAuthenticated() ? $rootScope.logged = true : $rootScope.logged = false;
         
 
         function styleProjeto(feature) {

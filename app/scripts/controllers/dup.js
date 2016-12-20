@@ -8,7 +8,31 @@
  * Controller of the sisdrApp
  */
 angular.module('sisdrApp')
-    .controller('DupCtrl', function($scope, $rootScope, $q, RestApi, formData, $location) {
+    .controller('DupCtrl', function(auth, $scope, $rootScope, $q, RestApi, formData, $location, $cookies, $filter, ACCESS_LEVEL) {
+
+        if ($cookies.get('user_data')) {
+            auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
+            $rootScope.dataUser = {};
+            $rootScope.dataUser.userName = auth.getUser();
+        }
+
+        $scope.$watch(auth.isAuthenticated, function(value, oldValue) {
+            if (!value && oldValue) {
+                console.info('User Disconnected');
+                $location.path('#/');
+            }
+
+            var dataUser = {};
+
+            if (value) {
+                console.info('User Connected');
+                auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
+                dataUser.userName = auth.getUser();
+                $rootScope.dataUser = dataUser;
+            }
+        }, true);
+
+        auth.isAuthenticated() ? $rootScope.logged = true : $rootScope.logged = false;
 
         $scope.dups = [];
         $scope.brs = [];
@@ -17,46 +41,92 @@ angular.module('sisdrApp')
         $scope.showInputSegmento = false;
         $scope.uf_class = 'col-md-12';
         $scope.is_map = false;
+        $scope.filtros = null;
 
         $scope.filterDup = function(filter) {
-            var estado = filter.estado.sigla;
+            var estado = null,
+                br = null,
+                seg_inicial = null,
+                seg_final = null,
+                filtros = {};
 
-            if (filter.br && filter.br.br) {
-                var br = filter.br.br;
-                var sg_inicial = filter.seg_inicial;
-                var sg_final = filter.seg_final;
-
-                var filtros = {
-                    'UF': estado,
-                    'BR': br,
-                    'KM_INICIO': sg_inicial,
-                    'KM_FINAL': sg_final
-                };
-            } else {
-                var filtros = {
-                    'UF': estado,
-                };
+            if (!$scope.lastResults) {
+                $scope.lastResults = $scope.dups;
+            } else if (!$scope.dups.length && $scope.lastResults.length) {
+                $scope.dups = $scope.lastResults;
             }
 
-            console.log(filtros);
+            /* Checa os filtros */
+            if (filter && filter.estado && filter.estado.sigla) {
+                estado = filter.estado.sigla;
+                filtros['UF'] = estado;
+            }
 
+            if (filter && filter.br && filter.br.br) {
+                br = filter.br.br;
+                filtros['BR'] = br;
+            }
+
+            if (filter && filter.seg_inicial) {
+                seg_inicial = filter.seg_inicial;
+                filtros['KM_INICIO'] = seg_inicial;
+            }
+
+            if (filter && filter.seg_final) {
+                seg_final = filter.seg_final;
+                filtros['KM_FINAL'] = seg_final;
+            }
+
+            if (isEmpty(filtros)) {
+                if (!$scope.dups.length && $scope.lastResults.length) {
+                    $scope.dups = $scope.lastResults;
+                }
+            } else if (estado && !br && !seg_inicial && !seg_final) {
+                $scope.dups = $scope.lastResults.filter(function(dup) {
+                    return (dup.projeto.UF === estado)
+                })
+            } else if (estado && br && !seg_inicial && !seg_final) {
+                $scope.dups = $scope.lastResults.filter(function(dup) {
+                    return (dup.projeto.UF === estado && dup.projeto.br === br)
+                })
+            } else if (estado && br && seg_inicial && !seg_final) {
+                $scope.dups = $scope.lastResults.filter(function(dup) {
+                    return (dup.projeto.UF === estado && dup.projeto.br === br && dup.projeto.km_inicial == seg_inicial)
+                })
+            } else if (estado && br && seg_inicial && seg_final) {
+                $scope.dups = $scope.lastResults.filter(function(dup) {
+                    return (dup.projeto.UF === estado && dup.projeto.br === br &&
+                        dup.projeto.km_inicial == seg_inicial && dup.projeto.km_final == seg_final)
+                })
+            }else if (estado && br && !seg_inicial && seg_final) {
+                $scope.dups = $scope.lastResults.filter(function(dup) {
+                    return (dup.projeto.UF === estado && dup.projeto.br === br &&
+                          dup.projeto.km_final == seg_final)
+                })
+            }
         };
 
         $scope.getBR = function(filter) {
+
             $scope.showInputBR = false;
             $scope.showInputSegmento = false;
             $scope.uf_class = 'col-md-12';
+            $scope.filter.br = null;
+            var brRequest, promises, allPromise;
 
-            var brRequest = RestApi.get({
-                type: 'projetos-br',
-                'state': filter.sigla
-            });
-            var promises = {
-                brs: brRequest.$promise,
-            };
+            if (filter && filter.sigla) {
+                brRequest = RestApi.get({
+                    type: 'projetos-br',
+                    'state': filter.sigla
+                });
 
-            var allPromise = $q.all(promises);
-            allPromise.then(onResultBR, onError);
+                promises = {
+                    brs: brRequest.$promise,
+                };
+
+                allPromise = $q.all(promises);
+                allPromise.then(onResultBR, onError);
+            }
         };
 
 
@@ -66,6 +136,7 @@ angular.module('sisdrApp')
          */
         function onResult(result) {
             $scope.dups = result.dups;
+            $scope.loading = false;
         }
 
         function onResultBR(result) {
@@ -82,11 +153,14 @@ angular.module('sisdrApp')
             if (error.status === -1) {
                 console.log('reload page..');
                 window.location.reload();
-            }else{
+            } else {
+                $scope.loading = false;
                 $scope.msg = "Não foi possivel consultar dados.";
-            } 
+            }
             console.log('Erro:' + error.statusText, error.status);
         }
+
+        $scope.loading = true;
 
         /* Send request for restAPI */
         var dupRequest = RestApi.get({
@@ -105,10 +179,34 @@ angular.module('sisdrApp')
 
 
 angular.module('sisdrApp')
-    .controller('DupDetailCtrl', function($scope, $rootScope, $http, $q, RestApi, formData, $location, $routeParams, settings) {
+    .controller('DupDetailCtrl', function($scope, $rootScope, $http, $q, RestApi, formData, $location, $cookies, $routeParams, settings, ACCESS_LEVEL, auth) {
 
         $scope.msg = false;
         $scope.is_map = false;
+
+        if ($cookies.get('user_data')) {
+            auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
+            $rootScope.dataUser = {};
+            $rootScope.dataUser.userName = auth.getUser();
+        }
+
+        $scope.$watch(auth.isAuthenticated, function(value, oldValue) {
+            if (!value && oldValue) {
+                console.info('User Disconnected');
+                $location.path('#/');
+            }
+
+            var dataUser = {};
+
+            if (value) {
+                console.info('User Connected');
+                auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
+                dataUser.userName = auth.getUser();
+                $rootScope.dataUser = dataUser;
+            }
+        }, true);
+
+        auth.isAuthenticated() ? $rootScope.logged = true : $rootScope.logged = false;
 
         if (!$routeParams.id) {
             $scope.msg = "Parâmetro inválido";
@@ -125,9 +223,9 @@ angular.module('sisdrApp')
                 if (error.status === -1) {
                     console.log('reload page..');
                     window.location.reload();
-                }else{
+                } else {
                     $scope.msg = "Não foi possivel consultar dados.";
-                } 
+                }
                 console.log('Erro:' + error.statusText, error.status);
             }
             /* Send request for restAPI */
@@ -197,7 +295,7 @@ angular.module('sisdrApp')
                     }
                 });
             } catch (err) {
-                console.log('error in download file '+ err);
+                console.log('error in download file ' + err);
             }
 
         };

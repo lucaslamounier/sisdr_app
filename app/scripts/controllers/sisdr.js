@@ -227,8 +227,14 @@ angular.module('sisdrApp')
 
             $scope.initialLayers[profaixaLayerName] = {
                 'layer': L.geoJson(profaixa, {
+                    style: function(feature) {
+                        return {
+                          "color": "#78c679",
+                          "weight": 5,
+                          "opacity": 0.9
+                        }
+                    },
                     onEachFeature: propertiesProfaixa,
-                    style: style,
                 }),
                 'legend': {
                     'url': 'images/icons/road-perspective.png',
@@ -238,8 +244,8 @@ angular.module('sisdrApp')
 
             $scope.initialLayers[PropriedadesLindeirasLayerName] = {
                 'layer': L.geoJson(propriedadesLindeiras, {
-                    onEachFeature: propertiesPropLindeira,
                     style: stylePropLindeira,
+                    onEachFeature: propertiesPropLindeira,
                 }),
                 'legend': {
                     'url': 'images/icons/prop-lindeira.png',
@@ -247,7 +253,7 @@ angular.module('sisdrApp')
                 }
             };
 
-            var layerRodoviasFederais = L.esri.featureLayer({
+            /*var layerRodoviasFederais = L.esri.featureLayer({
                 url: "//servicos.dnit.gov.br/arcgis/rest/services/DNIT_Geo/SNV/MapServer/10",
                 style: function() {
                     return {
@@ -282,7 +288,7 @@ angular.module('sisdrApp')
                     'url': 'images/icons/prop-lindeira.png',
                     'type': 'png'
                 }
-            };
+            };*/
 
             /*$scope.initialLayers[RodoviaLayerName] = {
                 'layer': L.geoJson(rodovias, {
