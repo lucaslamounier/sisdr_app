@@ -227,13 +227,7 @@ angular.module('sisdrApp')
 
             $scope.initialLayers[profaixaLayerName] = {
                 'layer': L.geoJson(profaixa, {
-                    style: function(feature) {
-                        return {
-                          "color": "#78c679",
-                          "weight": 5,
-                          "opacity": 0.9
-                        }
-                    },
+                    style: style,
                     onEachFeature: propertiesProfaixa,
                 }),
                 'legend': {
@@ -253,7 +247,7 @@ angular.module('sisdrApp')
                 }
             };
 
-            /*var layerRodoviasFederais = L.esri.featureLayer({
+            var layerRodoviasFederais = L.esri.featureLayer({
                 url: "//servicos.dnit.gov.br/arcgis/rest/services/DNIT_Geo/SNV/MapServer/10",
                 style: function() {
                     return {
@@ -288,7 +282,7 @@ angular.module('sisdrApp')
                     'url': 'images/icons/prop-lindeira.png',
                     'type': 'png'
                 }
-            };*/
+            };
 
             /*$scope.initialLayers[RodoviaLayerName] = {
                 'layer': L.geoJson(rodovias, {
@@ -306,13 +300,13 @@ angular.module('sisdrApp')
             console.log($scope.initialLayers);
 
             /* Initial Layer Active */
-            var controlLayers = $( "#tabsOverLayers li");
-            if(!controlLayers.hasClass('active')){      
+            var controlLayers = $("#tabsOverLayers li");
+            if (!controlLayers.hasClass('active')) {
                 var layer = controlLayers[1];
                 var outros = $("#Outros")[0];
                 $("#tabLinkOutros").click();
                 layer.className = "active";
-                
+
             }
             $scope.filter.carregar = false;
 

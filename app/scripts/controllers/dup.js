@@ -80,6 +80,8 @@ angular.module('sisdrApp')
             if (isEmpty(filtros)) {
                 if (!$scope.dups.length && $scope.lastResults.length) {
                     $scope.dups = $scope.lastResults;
+                } else if ($scope.dups.length !== $scope.lastResults.length) {
+                    $scope.dups = $scope.lastResults;
                 }
             } else if (estado && !br && !seg_inicial && !seg_final) {
                 $scope.dups = $scope.lastResults.filter(function(dup) {
@@ -98,10 +100,10 @@ angular.module('sisdrApp')
                     return (dup.projeto.UF === estado && dup.projeto.br === br &&
                         dup.projeto.km_inicial == seg_inicial && dup.projeto.km_final == seg_final)
                 })
-            }else if (estado && br && !seg_inicial && seg_final) {
+            } else if (estado && br && !seg_inicial && seg_final) {
                 $scope.dups = $scope.lastResults.filter(function(dup) {
                     return (dup.projeto.UF === estado && dup.projeto.br === br &&
-                          dup.projeto.km_final == seg_final)
+                        dup.projeto.km_final == seg_final)
                 })
             }
         };
@@ -183,6 +185,7 @@ angular.module('sisdrApp')
 
         $scope.msg = false;
         $scope.is_map = false;
+        $scope.box_with = 'detalhe-box-50';
 
         if ($cookies.get('user_data')) {
             auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
@@ -216,6 +219,15 @@ angular.module('sisdrApp')
 
             function onResult(result) {
                 $scope.dup = result.dup;
+
+                if(!$scope.dup.has_geometry){
+
+                    $scope.box_with = 'detalhe-box-100';
+
+                }else{
+                    
+                    $scope.box_with = 'detalhe-box-50';
+                }
                 $scope.adicionarGeoJSON($scope.dup.geojson);
             };
 
@@ -242,20 +254,21 @@ angular.module('sisdrApp')
             allPromise.then(onResult, onError);
 
             $scope.adicionarGeoJSON = function(geoString) {
-                var json = $.parseJSON(geoString);
 
-                if (typeof json == 'object') {
-                    var layer = L.geoJson(json, {
-                        style: {
-                            fillColor: '#8B0000',
-                            weight: 3,
-                            color: '#FF0000',
-                        }
-                    }).addTo($scope.map);
+                if(!isEmpty(geoString)){
+                    var json = $.parseJSON(geoString);
 
-                    $scope.updateFitBounds(layer);
-                    //$scope.map.setZoom(11);
-                }
+                    if (typeof json == 'object') {
+                        var layer = L.geoJson(json, {
+                            style: {
+                                fillColor: '#8B0000',
+                                weight: 3,
+                                color: '#FF0000',
+                            }
+                        }).addTo($scope.map);
+                        $scope.updateFitBounds(layer);
+                    }
+                };
             };
 
             /**

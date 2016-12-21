@@ -14,6 +14,8 @@ angular.module('sisdrApp')
         $scope.propriedadesLindeiras = [];
         $scope.estados = formData.estados;
         $scope.geoJsonLayer = {}
+        $scope.loading = false;
+        $scope.uf_class = 'col-md-2';
 
         if ($cookies.get('user_data')) {
             auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
@@ -90,6 +92,7 @@ angular.module('sisdrApp')
                 }
             });
             $scope.geoJSON.addTo($scope.map);
+            $scope.loading = false;
             updateFitBounds($scope.geoJSON);
         };
 
@@ -127,6 +130,8 @@ angular.module('sisdrApp')
             }
         };
 
+        $scope.loading = true;
+
         /* Send request for restAPI */
         var propLindeiraRequest = RestApi.getPropLindeira({
             type: 'propriedade-lindeira'
@@ -141,6 +146,7 @@ angular.module('sisdrApp')
 
 
         function onResultBR(result) {
+            debugger;
             if (result.brs.length) {
                 $scope.brs = result.brs;
                 $scope.showInputBR = true;

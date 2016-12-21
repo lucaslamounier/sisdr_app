@@ -8,11 +8,18 @@
  * Controller of the sisdrApp
  */
 angular.module('sisdrApp')
-    .controller('ProjetoCtrl', function($scope, $rootScope, $q, RestApi, formData, $location, $route,  auth, $cookies, ACCESS_LEVEL) {
+    .controller('ProjetoCtrl', function($scope, $rootScope, $q, RestApi, formData, $location, $route, auth, $cookies, ACCESS_LEVEL) {
 
         $scope.projetos = [];
         $scope.geoJsonLayer = {};
         $scope.msg = false;
+        $scope.estados = formData.estados;
+        $scope.uf_class = 'col-md-3';
+        $scope.class_segmento = 'padding-0';
+        $scope.br_class = 'col-md-4';
+        $scope.showInputTipoProjeto = false;
+        $scope.showInputTipoObra = false;
+        $scope.showInputSegmento = false;
 
         if ($cookies.get('user_data')) {
             auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
@@ -37,7 +44,7 @@ angular.module('sisdrApp')
         }, true);
 
         auth.isAuthenticated() ? $rootScope.logged = true : $rootScope.logged = false;
-        
+
 
         function styleProjeto(feature) {
             return {
@@ -102,9 +109,10 @@ angular.module('sisdrApp')
                     ].join('');
                     layer.bindPopup(html);
                 },
-                
+
             });
             $scope.msg = false;
+            $scope.loading = false;
             $scope.geoJSON.addTo($scope.map);
             updateFitBounds($scope.geoJSON);
         };
@@ -130,15 +138,195 @@ angular.module('sisdrApp')
             }
         };
 
+        $scope.cleanFilters = function() {
+
+            $scope.filter = {};
+            $scope.showInputBR = false;
+            $scope.showInputTipoProjeto = false;
+            $scope.showInputTipoObra = false;
+            $scope.showInputSegmento = false;
+            $scope.class_segmento = 'padding-0';
+            $scope.uf_class = 'col-md-3';
+        };
+
+        $scope.filterProjeto = function(filter) {
+            var estado = null,
+                br = null,
+                tipo_projeto = null,
+                tipo_obra = null,
+                seg_inicial = null,
+                seg_final = null,
+                filtros = {};
+
+            if (!$scope.lastResults) {
+                $scope.lastResults = $scope.projetos;
+            } else if (!$scope.projetos.length && $scope.lastResults.length) {
+                $scope.projetos = $scope.lastResults;
+            }
+
+
+            /* Checa os filtros */
+            if (filter && filter.estado && filter.estado.sigla) {
+                estado = filter.estado.sigla;
+                filtros['UF'] = estado;
+            }
+
+            if (filter && filter.br && filter.br.br) {
+                br = filter.br.br;
+                filtros['BR'] = br;
+            }
+            if (filter && filter.tipo_obra) {
+                tipo_obra = filter.tipo_obra;
+                filtros['tipo_obra'] = tipo_obra;
+            }
+
+            if (filter && filter.tipo_projeto) {
+                tipo_projeto = filter.tipo_projeto;
+                filtros['tipo_projeto'] = tipo_projeto;
+            }
+
+            if (filter && filter.seg_inicial) {
+                seg_inicial = filter.seg_inicial;
+                filtros['KM_INICIO'] = seg_inicial;
+            }
+
+            if (filter && filter.seg_final) {
+                seg_final = filter.seg_final;
+                filtros['KM_FINAL'] = seg_final;
+            }
+
+            if (isEmpty(filtros)) {
+                if (!$scope.projetos.length && $scope.lastResults.length) {
+                    $scope.projetos = $scope.lastResults;
+                } else if ($scope.projetos.length !== $scope.lastResults.length) {
+                    $scope.projetos = $scope.lastResults;
+                }
+            } else if (estado && !br && !tipo_obra && !tipo_projeto && !seg_inicial && !seg_final) {
+                $scope.projetos = $scope.lastResults.filter(function(projeto) {
+                    return (projeto.properties.sg_uf === estado)
+                })
+
+            } else if (estado && br && !tipo_obra && !tipo_projeto && !seg_inicial && !seg_final) {
+                $scope.projetos = $scope.lastResults.filter(function(projeto) {
+                    return (projeto.properties.sg_uf === estado &&
+                        projeto.properties.vl_br === br)
+                })
+            } else if (estado && br && tipo_obra && !tipo_projeto && !seg_inicial && !seg_final) {
+                $scope.projetos = $scope.lastResults.filter(function(projeto) {
+                    return (projeto.properties.sg_uf === estado &&
+                        projeto.properties.vl_br === br &&
+                        projeto.properties.ds_tipo_obra === tipo_obra)
+                })
+            } 
+            else if (estado && br && !tipo_obra && tipo_projeto && !seg_inicial && !seg_final) {
+                $scope.projetos = $scope.lastResults.filter(function(projeto) {
+                    return (projeto.properties.sg_uf === estado &&
+                        projeto.properties.vl_br === br &&
+                        projeto.properties.ds_tipo_projeto == tipo_projeto)
+                })
+            }else if (estado && !br && tipo_obra && !tipo_projeto && !seg_inicial && !seg_final) {
+                $scope.projetos = $scope.lastResults.filter(function(projeto) {
+                    return (projeto.properties.sg_uf === estado &&
+                            projeto.properties.ds_tipo_obra == tipo_obra)
+                })
+            }else if (estado && !br && !tipo_obra && tipo_projeto && !seg_inicial && !seg_final) {
+                $scope.projetos = $scope.lastResults.filter(function(projeto) {
+                    return (projeto.properties.sg_uf === estado &&
+                            projeto.properties.ds_tipo_projeto == tipo_projeto)
+                })
+            }
+            else if (estado && br && tipo_obra && tipo_projeto && !seg_inicial && !seg_final) {
+                $scope.projetos = $scope.lastResults.filter(function(projeto) {
+                    return (projeto.properties.sg_uf === estado &&
+                        projeto.properties.vl_br === br &&
+                        projeto.properties.ds_tipo_obra === tipo_obra &&
+                        projeto.properties.ds_tipo_projeto == tipo_projeto)
+                })
+            } else if (estado && br && tipo_obra && tipo_projeto && seg_inicial && !seg_final) {
+                $scope.projetos = $scope.lastResults.filter(function(projeto) {
+                    return (projeto.properties.sg_uf === estado &&
+                        projeto.properties.vl_br === br &&
+                        projeto.properties.ds_tipo_obra === tipo_obra &&
+                        projeto.properties.ds_tipo_projeto == tipo_projeto &&
+                        projeto.properties.vl_km_inicial == String(seg_inicial))
+                })
+            } else if (estado && br && tipo_obra && tipo_projeto && !seg_inicial && seg_final) {
+                $scope.projetos = $scope.lastResults.filter(function(projeto) {
+                    return (projeto.properties.sg_uf === estado &&
+                        projeto.properties.vl_br === br &&
+                        projeto.properties.ds_tipo_obra === tipo_obra &&
+                        projeto.properties.ds_tipo_projeto == tipo_projeto &&
+                        projeto.properties.vl_km_final == String(seg_final))
+                })
+
+            } else if (estado && br && tipo_obra && tipo_projeto && !seg_inicial && seg_final) {
+                $scope.projetos = $scope.lastResults.filter(function(projeto) {
+                    return (projeto.properties.sg_uf === estado &&
+                        projeto.properties.vl_br === br &&
+                        projeto.properties.ds_tipo_obra === tipo_obra &&
+                        projeto.properties.ds_tipo_projeto == tipo_projeto &&
+                        projeto.properties.vl_km_inicial == String(seg_inicial) &&
+                        projeto.properties.vl_km_final == String(seg_final))
+                })
+            }
+        }
+
         function onError(error) {
             if (error.status === -1) {
                 console.log('reload page..');
                 window.location.reload();
-            }else{
+            } else {
                 $scope.msg = "Não foi possivel consultar dados.";
-            } 
+            }
             console.log('Erro:' + error.statusText, error.status);
+            $scope.loading = false;
         }
+
+        function onResultBR(result) {
+            if (result.brs.length) {
+                $scope.brs = result.brs;
+                $scope.showInputBR = true;
+                $scope.uf_class = 'col-md-3';
+                $scope.br_class = 'col-md-3';
+                $scope.class_segmento = 'padding-10';
+            }
+
+        }
+
+        $scope.activeFields = function(){
+            $scope.showInputTipoProjeto = true;
+            $scope.showInputTipoObra = true;
+            $scope.showInputSegmento = true;
+            $scope.class_segmento = 'padding-10';
+
+        }
+
+        $scope.getBR = function(filter) {
+
+            $scope.showInputBR = false;
+            $scope.showInputSegmento = false;
+            $scope.showInputTipoProjeto = false;
+            $scope.showInputTipoObra = false;
+            $scope.uf_class = 'col-md-3';
+            $scope.filter.br = null;
+            var brRequest, promises, allPromise;
+
+            if (filter && filter.sigla) {
+                brRequest = RestApi.get({
+                    type: 'projetos-br',
+                    'state': filter.sigla
+                });
+
+                promises = {
+                    brs: brRequest.$promise,
+                };
+
+                allPromise = $q.all(promises);
+                allPromise.then(onResultBR, onError);
+            }
+        };
+
+        $scope.loading = true;
 
         /* Send request for restAPI */
         var projetosRequest = RestApi.getProjetos({
@@ -165,13 +353,13 @@ angular.module('sisdrApp')
         $scope.checked = true;
 
 
-        $('#myModal').on('shown.bs.modal', function () {
+        $('#myModal').on('shown.bs.modal', function() {
             $('#myInput').focus()
         });
 
-        $('#myTabs a').click(function (e) {
-          e.preventDefault()
-          $(this).tab('show')
+        $('#myTabs a').click(function(e) {
+            e.preventDefault()
+            $(this).tab('show')
         });
 
         if (!$routeParams.id) {
@@ -189,9 +377,9 @@ angular.module('sisdrApp')
                 if (error.status === -1) {
                     console.log('reload page..');
                     window.location.reload();
-                }else{
+                } else {
                     $scope.msg = "Não foi possivel consultar dados.";
-                } 
+                }
                 console.log('Erro:' + error.statusText, error.status);
             }
 
@@ -244,14 +432,14 @@ angular.module('sisdrApp')
             };
 
             $scope.pegarBuffer = function(buffer) {
-                
+
                 buffer = JSON.parse(buffer);
-                
+
                 var buffer_wkt = buffer[0];
                 var buffer_geoJson = buffer[1];
                 var buffer_texto = buffer[2];
-                               
-                if(buffer_geoJson === 'None') {
+
+                if (buffer_geoJson === 'None') {
                     return;
                 } else {
                     printWKT(buffer_wkt);
@@ -264,7 +452,7 @@ angular.module('sisdrApp')
             function printHelp() {
                 document.getElementById('texto-ctrl-c').style.display = 'initial';
             };
-        
+
             function printWKT(buffer_wkt) {
                 document.getElementById('wkt-text1').innerHTML = buffer_wkt;
             };
@@ -279,7 +467,7 @@ angular.module('sisdrApp')
                     text = doc.getElementById(element),
                     range,
                     selection;
-                
+
                 if (doc.body.createTextRange) {
                     range = document.body.createTextRange();
                     range.moveToElementText(text);
@@ -299,13 +487,11 @@ angular.module('sisdrApp')
                     printHelp();
                 } catch (err) {
                     console.log('Oops, unable to copy');
-                }   
-                
+                }
+
             };
-
-
         };
-         /* End else */
+        /* End else */
 
         $scope.donwload = function(path) {
 
@@ -326,6 +512,4 @@ angular.module('sisdrApp')
             }
 
         };
-       
-
     });

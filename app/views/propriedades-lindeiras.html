@@ -1,3 +1,4 @@
+<md-progress-linear ng-if="loading" md-mode="indeterminate"></md-progress-linear>
 <div class="container">
     <side-nav></side-nav>
     <center>
@@ -14,10 +15,10 @@
     <br />
     <div layout="row" layout-sm="column" layout-align="space-around">
 
-        <div class="collapse" id="search-form" style="margin-top: 30px; margin-bottom: 35px;">
+        <div class="collapse" id="search-form" style="margin-bottom: 35px;width: 100%;">
             <form class="form-horizontal formtype" ng-submit='filterDup(filter)'>
                 <div class="row form-line">
-                    <div class="col-xs-6" ng-class="uf_class">
+                    <div class="col-xs-6 col-md-3" ng-class="uf_class">
                         <label class="pull-center">UF</label>
                         <select ng-model="filter.estado" class="form-control" ng-options="estado.nome for estado in estados" ng-change='getBR(filter.estado)'>
                            <option value="" default>UF</option>
@@ -118,7 +119,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="prop in propriedadesLindeiras | orderBy : order : reverseSort">
+                <tr ng-show="propriedadesLindeiras.length" ng-repeat="prop in propriedadesLindeiras | orderBy : order : reverseSort">
                     <td>
                         <span ng-show="!prop.properties.numero_matricula"> - </span>
                         <span ng-show="prop.properties.numero_matricula"> {{prop.properties.numero_matricula}} </span>
@@ -136,6 +137,13 @@
                     </span>
                     </td>
                 </tr>
+                <tr ng-show="!propriedadesLindeiras.length">
+                        <td colspan="10" style="text-align: center;">
+                            <div class="alert alert-info">
+                                Nenhum registro encontrado.
+                            </div>
+                        </td>
+                    </tr>
             </tbody>
         </table>
     </div>

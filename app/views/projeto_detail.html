@@ -1,7 +1,7 @@
 <div class="container">
     <side-nav></side-nav>
     <center>
-        <h3 class="page-header">Projeto</h3>
+        <h3 class="page-header">Projeto Geométrico</h3>
     </center>
     <br />
     <div ng-show="msg">
@@ -20,13 +20,13 @@
                 <div class="box">
                     <div class="nome"><strong>Fase:</strong></div>
                     <div class="detalhe">
-                    {{projeto.ds_tipo_projeto_display}}</div>
+                        {{projeto.ds_tipo_projeto_display}}</div>
                 </div>
                 <hr>
                 <div class="box">
                     <div class="nome"><strong>Tipo:</strong></div>
                     <div class="detalhe">
-                    {{projeto.ds_tipo_obra_display}}</div>
+                        {{projeto.ds_tipo_obra_display}}</div>
                 </div>
                 <hr>
                 <div class="box">
@@ -39,7 +39,7 @@
                 <div class="box">
                     <div class="nome"><strong>Código SNV:</strong></div>
                     <div class="detalhe">
-                       {{projeto.vl_codigo_rodovia}}
+                        {{projeto.vl_codigo_rodovia}}
                     </div>
                 </div>
                 <hr>
@@ -53,7 +53,7 @@
                 <div class="box">
                     <div class="nome"><strong>Km Final</strong></div>
                     <div class="detalhe">
-                    {{projeto.vl_km_final}}
+                        {{projeto.vl_km_final}}
                     </div>
                 </div>
                 <hr>
@@ -63,7 +63,7 @@
                         <span ng-show="projeto.has_geom">
                             Sim
                         </span>
-                         <span ng-show="!projeto.has_geom">
+                        <span ng-show="!projeto.has_geom">
                             Não
                         </span>
                     </div>
@@ -74,18 +74,16 @@
             <br />
             <div class="col-sm-4" id="map-box" ng-show="projeto.has_geom" layout-align="space-around">
                 <mapdetailprojeto></mapdetailprojeto>
-               
+
             </div>
         </div>
-        <div class="row">     
+        <div class="row">
             <div class="box-button-wkt">
                 <div style="text-align: center;">
-                        <button class="btn btn-primary" type="button" ng-click="pegarBuffer(projeto.buffer_display, 0)"
-                            data-toggle="tooltip" data-placement="bottom" title="Após a geração do buffer o botão visualizar buffer será habilitado.">
+                    <button class="btn btn-primary" type="button" ng-click="pegarBuffer(projeto.buffer_display, 0)" data-toggle="tooltip" data-placement="bottom" title="Após a geração do buffer o botão visualizar buffer será habilitado.">
                             Gerar Buffer
                         </button>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" 
-                        ng-disabled="checked">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-disabled="checked">
                             Visualizar Buffer
                         </button>
                 </div>
@@ -93,7 +91,7 @@
             </div>
             <div>
                 <div style="font-size: 12px;" ng-show="projeto.lk_pdf_projeto || projeto.lk_dwg_projeto || projeto.lk_shp_projeto">
-                     <h3>Arquivos</h3>
+                    <h3>Arquivos</h3>
                     <br />
                     <div class="row">
                         <div class="col-sm-4" ng-show="projeto.lk_pdf_projeto">
@@ -101,8 +99,7 @@
                                 <div class="panel-heading panel-red">
                                     <img src="/images/pdf-logo.svg" width="25" height="25" /> PDF
                                     <div class="icon-download-file">
-                                        <a href="" ng-click="donwload(projeto.arquivos.pdf_caminho)"
-                                            data-toggle="tooltip" data-placement="top" title="Realizar download do arquivo.">
+                                        <a href="" ng-click="donwload(projeto.arquivos.pdf_caminho)" data-toggle="tooltip" data-placement="top" title="Realizar download do arquivo.">
                                             <img src="/images/cloud-download2.svg" width="30" height="25" />
                                         </a>
                                     </div>
@@ -120,8 +117,7 @@
                                 <div class="panel-heading panel-blue">
                                     <img src="/images/dwg-logo.svg" width="25" height="25" /> DWG
                                     <div class="icon-download-file">
-                                        <a href="" ng-click="donwload(projeto.arquivos.dwg_caminho)"
-                                        data-toggle="tooltip" data-placement="top" title="Realizar download do arquivo.">
+                                        <a href="" ng-click="donwload(projeto.arquivos.dwg_caminho)" data-toggle="tooltip" data-placement="top" title="Realizar download do arquivo.">
                                             <img src="/images/cloud-download2.svg" width="30" height="25" />
                                         </a>
                                     </div>
@@ -139,8 +135,7 @@
                                 <div class="panel-heading panel-green">
                                     <img src="/images/shp-logo.svg" width="25" height="25" /> ShapeFile
                                     <div class="icon-download-file">
-                                        <a href="" ng-click="donwload(projeto.arquivos.shp_caminho)"
-                                        data-toggle="tooltip" data-placement="top" title="Realizar download do arquivo.">
+                                        <a href="" ng-click="donwload(projeto.arquivos.shp_caminho)" data-toggle="tooltip" data-placement="top" title="Realizar download do arquivo.">
                                             <img src="/images/cloud-download2.svg" width="30" height="25" />
                                         </a>
                                     </div>
@@ -155,7 +150,7 @@
                         <!-- -->
                     </div>
                 </div>
-            </div> 
+            </div>
             <div class="row" style="margin-bottom: 60px;">
                 <br />
                 <br />
@@ -165,43 +160,43 @@
 </div>
 <!-- Modal BUffer -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Buffer do Projeto</h4>
-      </div>
-      <div class="modal-body">
-     <ul class="nav nav-tabs" id="myTabs">
-        <li class="active"><a data-toggle="tab" href="#wkt" ng-click="tabControl='wkt-text1';tabIndex=1" ng-init="tabControl='wkt-text1';tabIndex=1">WKT</a></li>
-        <li><a data-toggle="tab" href="#text" ng-click="tabControl='wkt-text2';tabIndex=2">TEXTO</a></li>
-      </ul>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Buffer do Projeto</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="myTabs">
+                    <li class="active"><a data-toggle="tab" href="#wkt" ng-click="tabControl='wkt-text1';tabIndex=1" ng-init="tabControl='wkt-text1';tabIndex=1">WKT</a></li>
+                    <li><a data-toggle="tab" href="#text" ng-click="tabControl='wkt-text2';tabIndex=2">TEXTO</a></li>
+                </ul>
 
-      <div class="tab-content">
-        <div id="wkt" class="tab-pane fade in active">
-            <h3>WKT</h3>
-                <div class="wkt-box">
-                    <p id="wkt-text1"></p>
+                <div class="tab-content">
+                    <div id="wkt" class="tab-pane fade in active">
+                        <h3>WKT</h3>
+                        <div class="wkt-box">
+                            <p id="wkt-text1"></p>
+                        </div>
+                    </div>
+                    <div id="text" class="tab-pane fade">
+                        <h3>Texto</h3>
+                        <div class="wkt-box">
+                            <p id="wkt-text2"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        <div id="text" class="tab-pane fade">
-          <h3>Texto</h3>
-                <div class="wkt-box">
-                    <p id="wkt-text2"></p>
+            <div class="modal-footer">
+                <div id="texto-ctrl-c" class="texto-ctrl-c" style="display: none; margin-left: 50px; font-family: 'Courier New', Courier, monospace; font-size: 0.9em;">
+                    <div class="alert alert-success" style="display: inline;margin-right: 27px;">
+                        Texto copiado com sucesso, precione Ctrl-V para colar.
+                    </div>
                 </div>
-        </div>
-      </div>   
-      </div>
-      <div class="modal-footer">
-        <div id = "texto-ctrl-c" class="texto-ctrl-c" style="display: none; margin-left: 50px; font-family: 'Courier New', Courier, monospace; font-size: 0.9em;">
-            <div class="alert alert-success" style="display: inline;margin-right: 27px;">
-                Texto copiado com sucesso, precione Ctrl-V para colar.
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" ng-click="selectText(tabControl)">Copiar</button>
             </div>
         </div>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary" ng-click="selectText(tabControl)">Copiar</button>
-      </div>
     </div>
-  </div>
 </div>
 <!-- End Modal BUffer -->

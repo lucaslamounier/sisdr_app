@@ -1,7 +1,7 @@
 <div class="container">
     <side-nav></side-nav>
     <center>
-        <h3 class="page-header">DUP - Declaração de Utilidade Pública</h3>
+        <h3 class="page-header">Declaração de Utilidade Pública (DUP)</h3>
     </center>
     <br />
     <div ng-show="msg">
@@ -11,7 +11,7 @@
     </div>
     <div ng-show="!msg" class="row">
         <div>
-            <div id="detalhes-box">
+            <div class="detalhes-box" ng-class="box_with">
                 <div class="box">
                     <div class="nome"><strong>Número da Portaria:</strong></div>
                     <div class="detalhe">{{dup.portaria}}</div>
@@ -54,13 +54,16 @@
                 </div>
             </div>
             <br />
-            <br />
             <div class="col-sm-4" id="map-box" ng-show="dup.has_geometry" layout-align="space-around">
                 <mapdetail></mapdetail>
             </div>
         </div>
     </div>
     <div class="row" ng-show="!msg">
+        <div ng-show="!dup.has_geometry">
+            <br />
+            <br /><br />
+        </div>
         <h4>Arquivos</h4>
     </div>
     <br />

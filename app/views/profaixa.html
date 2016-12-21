@@ -1,7 +1,8 @@
+<md-progress-linear ng-if="loading" md-mode="indeterminate"></md-progress-linear>
 <div class="container">
     <side-nav></side-nav>
     <center>
-        <h3 class="page-header">Profaixa</h3>
+        <h3 class="page-header">Programa Federal de Faixas de Domínio (PROFAIXA)</h3>
     </center>
     <div ng-show="msg">
         <div class="alert alert-danger">
@@ -12,7 +13,7 @@
         <mapprofaixa class="row"></mapprofaixa>
         <div class="row">
             <div class="col-md-1 no-padding-left">
-                <button class="btn btn-default" data-toggle="collapse" data-target="#search-form" aria-expanded="false" aria-controls="search-form">
+                <button class="btn btn-default" data-toggle="collapse" data-target="#search-form" aria-expanded="false" aria-controls="search-form" ng-click="cleanFilters()">
                       Filtrar Profaixa
                 </button>
             </div>
@@ -20,26 +21,32 @@
         <br />
         <div layout="row" layout-sm="column" layout-align="space-around">
 
-            <div class="collapse" id="search-form" style="margin-top: 30px; margin-bottom: 35px;">
-                <form class="form-horizontal formtype" ng-submit='filterDup(filter)'>
+            <div class="collapse" id="search-form" style="margin-bottom: 35px;width: 100%;">
+                <form class="form-horizontal formtype" ng-submit='filterProfaixa(filter)'>
                     <div class="row form-line">
                         <div class="col-xs-6" ng-class="uf_class">
                             <label class="pull-center">UF</label>
-                            <select ng-model="filter.estado" class="form-control" ng-options="estado.nome for estado in estados" ng-change='getBR(filter.estado)'>
-                               <option value="" default>UF</option>
-                          </select>
+                            <select ng-model="filter.estado" class="form-control" ng-options="estado.nome for estado in estados track by estado.sigla" ng-change='getBR(filter.estado)'>
+                           <option value="" default>UF</option>
+                      </select>
                         </div>
                         <div class="col-xs-6 col-md-2" ng-show="showInputBR">
                             <label class="pull-center">BR</label>
-                            <select id="br" class="form-control" ng-model="filter.br" ng-options="br.br for br in brs">
+                            <select id="br" class="form-control" ng-model="filter.br" ng-options="br.br for br in brs | orderBy:'br'" ng-change='getLote(filter.estado, filter.br)'>
                                 <option value="" default>BR</option>
+                          </select>
+                        </div>
+                        <div class="col-xs-6 col-md-2" ng-show="showInputLote">
+                            <label class="pull-center">Lote</label>
+                            <select id="br" class="form-control" ng-model="filter.lote" ng-options="lote.lote for lote in lotes | orderBy:'lote'">
+                                <option value="" default>Lote</option>
                           </select>
                         </div>
                         <div class="col-xs-6 col-md-3" ng-show="showInputSegmento">
                             <label>Segmento Inicial</label>
                             <input id="path" class="form-control numberInput" ng-model="filter.seg_inicial" type="number" min="0" />
                         </div>
-                        <div class="col-xs-6 col-md-3" ng-show="showInputSegmento">
+                        <div class="col-xs-6 col-md-3" ng-show="showInputSegmento" ng-class="class_seg_final">
                             <label>Segmento Final</label>
                             <input id="row" class="form-control numberInput" ng-model="filter.seg_final" type="number" min="0" />
                         </div>
@@ -120,7 +127,7 @@
                                 <img src="images/icons/arrowDown.png"/>
                             </span>
                         </th>
-                       <!--  <th ng-click="order='properties.vl_km_inicial'; reverseSort = !reverseSort">Municipio
+                        <!--  <th ng-click="order='properties.vl_km_inicial'; reverseSort = !reverseSort">Municipio
                             <span ng-show="order=='properties.vl_km_inicial' && !reverseSort || order==null">
                                 <img src="images/icons/arrowUp.png"/>
                             </span>
@@ -148,9 +155,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="profaixa in profaixas | orderBy : order : reverseSort">
+                    <tr ng-show="profaixas.length" ng-repeat="profaixa in profaixas | orderBy : order : reverseSort">
                         <td>{{profaixa.properties.vl_lote}}</td>
-                        <td><a ng-href="#/profaixa/detail/{{profaixa.id}}">{{profaixa.properties.vl_br}}</a></td>
+                        <td><a ng-href="#/profaixa/detail/{{profaixa.id}}" data-toggle="tooltip" data-placement="top" title="Clique aqui para visualizar detalhes da Profaixa.">{{profaixa.properties.vl_br}}</a></td>
                         <td>{{profaixa.properties.sg_tipo_trecho_display}}</td>
                         <td>
                             <span ng-show="!profaixa.properties.vl_subtrecho">
@@ -168,7 +175,7 @@
                             {{profaixa.properties.vl_km_inicial}}
                         </td>
                         <td>
-                           {{profaixa.properties.vl_km_final}}
+                            {{profaixa.properties.vl_km_final}}
                         </td>
                         <!-- <td>
                             {{profaixa.properties.li_municipio}}
@@ -184,9 +191,17 @@
                         </span>
                         </td>
                     </tr>
+                    <tr ng-show="!profaixas.length">
+                        <td colspan="10" style="text-align: center;">
+                            <div class="alert alert-info">
+                                Nenhum registro encontrado.
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div style="height: 100px;">
         </div>
     </div>
 </div>

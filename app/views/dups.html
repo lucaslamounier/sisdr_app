@@ -1,8 +1,8 @@
-<md-progress-linear  ng-if="loading" md-mode="indeterminate"></md-progress-linear>
+<md-progress-linear ng-if="loading" md-mode="indeterminate"></md-progress-linear>
 <div class="container">
     <side-nav></side-nav>
     <center>
-        <h3 class="page-header">DUP - Declaração de Utilidade Pública</h3>
+        <h3 class="page-header">Declaração de Utilidade Pública (DUP)</h3>
     </center>
     <div>
         <div class="col-md-1 no-padding-left">
@@ -119,10 +119,8 @@
             <tbody>
                 <tr ng-show="dups.length" ng-repeat="dup in dups | orderBy : order : reverseSort">
                     <td>{{dup.projeto.codigo_snv}}</td>
-                    <td><a ng-href="#/projetos/detail/{{dup.projeto.id_projeto}}" 
-                        target="_blank" data-toggle="popover" data-trigger="hover" data-content="Clique aqui para visualizar detalhes do Projeto.">{{dup.projeto.cod_projeto}}</a></td>
-                    <td><a ng-href="#/dups/detail/{{dup.id_dup}}" 
-                        data-toggle="popover" data-trigger="hover" data-content="Clique aqui para visualizar detalhes da DUP.">{{dup.portaria}}</a></td>
+                    <td><a ng-href="#/projetos/detail/{{dup.projeto.id_projeto}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Clique aqui para visualizar detalhes do Projeto.">{{dup.projeto.cod_projeto}}</a></td>
+                    <td><a ng-href="#/dups/detail/{{dup.id_dup}}" data-toggle="tooltip" data-placement="top" title="Clique aqui para visualizar detalhes da DUP.">{{dup.portaria}}</a></td>
                     <td>
                         <span ng-bind="dup.dt_publicacao | date:'dd/MM/yyyy'"></span>
                     </td>
@@ -133,10 +131,10 @@
                     <td>{{dup.projeto.km_inicial}} - {{dup.projeto.km_final}} KM</td>
                     <td>{{dup.projeto.UF}}</td>
                 </tr>
-                 <tr ng-show="!dups.length">
+                <tr ng-show="!dups.length">
                     <td colspan="8" style="text-align: center;">
                         <div class="alert alert-info">
-                         Nenhum registro encontrado.
+                            Nenhum registro encontrado.
                         </div>
                     </td>
                 </tr>
