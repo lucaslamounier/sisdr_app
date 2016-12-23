@@ -10,6 +10,15 @@
 angular.module('sisdrApp')
     .controller('DupCtrl', function(auth, $scope, $rootScope, $q, RestApi, formData, $location, $cookies, $filter, ACCESS_LEVEL) {
 
+        $scope.dups = [];
+        $scope.brs = [];
+        $scope.estados = formData.estados;
+        $scope.showInputBR = false;
+        $scope.showInputSegmento = false;
+        $scope.is_map = false;
+        $scope.filtros = null;
+        $scope.button_position = 'button-initial';
+
         if ($cookies.get('user_data')) {
             auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
             $rootScope.dataUser = {};
@@ -34,15 +43,6 @@ angular.module('sisdrApp')
 
         auth.isAuthenticated() ? $rootScope.logged = true : $rootScope.logged = false;
 
-        $scope.dups = [];
-        $scope.brs = [];
-        $scope.estados = formData.estados;
-        $scope.showInputBR = false;
-        $scope.showInputSegmento = false;
-        $scope.uf_class = 'col-md-12';
-        $scope.is_map = false;
-        $scope.filtros = null;
-
         $scope.filterDup = function(filter) {
             var estado = null,
                 br = null,
@@ -62,18 +62,18 @@ angular.module('sisdrApp')
                 filtros['UF'] = estado;
             }
 
-            if (filter && filter.br && filter.br.br) {
-                br = filter.br.br;
+            if (filter && filter.br && filter.br.vl_br) {
+                br = filter.br.vl_br;
                 filtros['BR'] = br;
             }
 
-            if (filter && filter.seg_inicial) {
-                seg_inicial = filter.seg_inicial;
+            if (filter && filter.seg_inicial || filter && filter.seg_inicial != null) {
+                seg_inicial = String(filter.seg_inicial);
                 filtros['KM_INICIO'] = seg_inicial;
             }
 
             if (filter && filter.seg_final) {
-                seg_final = filter.seg_final;
+                seg_final = String(filter.seg_final);
                 filtros['KM_FINAL'] = seg_final;
             }
 
@@ -105,20 +105,45 @@ angular.module('sisdrApp')
                     return (dup.projeto.UF === estado && dup.projeto.br === br &&
                         dup.projeto.km_final == seg_final)
                 })
+
+            }else if (estado && !br && seg_inicial && seg_final) {
+                $scope.dups = $scope.lastResults.filter(function(dup) {
+                    return (dup.projeto.UF === estado 
+                            && dup.projeto.km_inicial == seg_inicial 
+                            && dup.projeto.km_final == seg_final)
+                })
+
+            }else if (estado && !br && seg_inicial || seg_inicial != null && !seg_final) {
+                $scope.dups = $scope.lastResults.filter(function(dup) {
+                    return (dup.projeto.UF === estado && dup.projeto.km_inicial == seg_inicial)
+                })
+
+            }else if (estado && !br && !seg_inicial && seg_final) {
+                $scope.dups = $scope.lastResults.filter(function(dup) {
+                    return (dup.projeto.UF === estado 
+                            && dup.projeto.km_final == seg_final)
+                })
             }
         };
 
-        $scope.getBR = function(filter) {
+        $scope.cleanFilters = function() {
 
+            $scope.filter = {};
             $scope.showInputBR = false;
             $scope.showInputSegmento = false;
-            $scope.uf_class = 'col-md-12';
+            $scope.showInputLote = false;
+        };
+
+        $scope.getBR = function(filter) {
+            $scope.showInputBR = false;
+            $scope.showInputSegmento = false;
             $scope.filter.br = null;
             var brRequest, promises, allPromise;
 
+
             if (filter && filter.sigla) {
                 brRequest = RestApi.get({
-                    type: 'projetos-br',
+                    type: 'dups-list-brs',
                     'state': filter.sigla
                 });
 
@@ -128,7 +153,11 @@ angular.module('sisdrApp')
 
                 allPromise = $q.all(promises);
                 allPromise.then(onResultBR, onError);
-            }
+            
+            }else{
+                $scope.filter = {};
+            };
+
         };
 
 
@@ -143,10 +172,13 @@ angular.module('sisdrApp')
 
         function onResultBR(result) {
             if (result.brs.length) {
-                $scope.brs = result.brs;
+                var brs = [];
+                for(var i=0; i < result.brs.length; i++){
+                    brs.push(result.brs[i].vl_br);
+                }
+                $scope.brs = brs;
                 $scope.showInputBR = true;
                 $scope.showInputSegmento = true;
-                $scope.uf_class = 'col-md-4';
             }
 
         }

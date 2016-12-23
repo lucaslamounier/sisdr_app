@@ -5,6 +5,11 @@ md-select, md-input-container{
 	padding: 0 !important;
 }
 
+@media (min-width: 992px)
+.col-21 {
+    width: 17.666667%;
+}
+
 #map{
   height: 850px;
 }
@@ -23,6 +28,18 @@ md-select, md-input-container{
 
 .padding-10 {
 	padding-top: 10px;
+}
+
+.button-initial {
+	margin-top: 22px;
+}
+
+.button-initial-25 {
+	margin-top: 25px;
+}
+
+.button-open-all {
+	margin-top: 33px;
 }
 
 .padding-0 {

@@ -17,6 +17,7 @@ angular.module('sisdrApp')
         $scope.uf_class = 'col-md-3';
         $scope.class_segmento = 'padding-0';
         $scope.br_class = 'col-md-4';
+        $scope.button_position = 'button-initial';
         $scope.showInputTipoProjeto = false;
         $scope.showInputTipoObra = false;
         $scope.showInputSegmento = false;
@@ -146,7 +147,7 @@ angular.module('sisdrApp')
             $scope.showInputTipoObra = false;
             $scope.showInputSegmento = false;
             $scope.class_segmento = 'padding-0';
-            $scope.uf_class = 'col-md-3';
+            $scope.button_position = 'button-initial';
         };
 
         $scope.filterProjeto = function(filter) {
@@ -298,6 +299,7 @@ angular.module('sisdrApp')
             $scope.showInputTipoObra = true;
             $scope.showInputSegmento = true;
             $scope.class_segmento = 'padding-10';
+            $scope.button_position = 'button-open-all';
 
         }
 

@@ -15,7 +15,7 @@ angular.module('sisdrApp')
         $scope.estados = formData.estados;
         $scope.geoJsonLayer = {}
         $scope.loading = false;
-        $scope.uf_class = 'col-md-2';
+        $scope.button_position = 'button-initial-25';
 
         if ($cookies.get('user_data')) {
             auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
@@ -96,6 +96,82 @@ angular.module('sisdrApp')
             updateFitBounds($scope.geoJSON);
         };
 
+        $scope.filterPropLindeira = function(filter) {
+            var estado = null,
+                br = null,
+                lote = null,
+                filtros = {};
+
+            if (!$scope.lastResults) {
+                $scope.lastResults = $scope.propriedadesLindeiras;
+            } else if (!$scope.propriedadesLindeiras.length && $scope.lastResults.length) {
+                $scope.propriedadesLindeiras = $scope.lastResults;
+            }
+
+            /* Checa os filtros */
+            if (filter && filter.estado && filter.estado.sigla) {
+                estado = filter.estado.sigla;
+                filtros['UF'] = estado;
+            }
+
+            if (filter && filter.br) {
+                br = filter.br;
+                filtros['BR'] = br;
+            }
+
+            if (filter && filter.lote && filter.lote.vl_lote) {
+                lote = filter.vl_lote;
+                filtros['lote'] = lote;
+            }
+
+            if (isEmpty(filtros)) {
+                if (!$scope.propriedadesLindeiras.length && $scope.lastResults.length) {
+                    $scope.propriedadesLindeiras = $scope.lastResults;
+                } else if ($scope.propriedadesLindeiras.length !== $scope.lastResults.length) {
+                    $scope.propriedadesLindeiras = $scope.lastResults;
+                }
+            } else if (estado && !br && !lote) {
+                $scope.propriedadesLindeiras = $scope.lastResults.filter(function(prop) {
+                    return (prop.properties.sg_uf === estado)
+                })
+            } else if (estado && br && !lote) {
+                $scope.propriedadesLindeiras = $scope.lastResults.filter(function(prop) {
+                    return (prop.properties.sg_uf === estado 
+                            && prop.properties.profaixa.br === br)
+                })
+            } else if (estado && !br && lote) {
+                $scope.propriedadesLindeiras = $scope.lastResults.filter(function(prop) {
+                    return (prop.properties.sg_uf === estado 
+                            && prop.properties.profaixa.lote == lote)
+                })
+            } else if (estado && br && lote) {
+                $scope.propriedadesLindeiras = $scope.lastResults.filter(function(prop) {
+                    return (prop.properties.sg_uf === estado 
+                            && prop.properties.profaixa.br === br 
+                            && prop.properties.profaixa.lote == lote)
+                })
+            } 
+        };
+
+        $scope.getLote = function(estado, BR) {
+            var loteRequest, promises, allPromise;
+
+            if (estado && estado.sigla && BR) {
+                loteRequest = RestApi.get({
+                    type: 'propriedade-lindeira-lote',
+                    'state': estado.sigla,
+                    'br': BR
+                });
+
+                promises = {
+                    lotes: loteRequest.$promise,
+                };
+
+                allPromise = $q.all(promises);
+                allPromise.then(onResultLote, onError);
+            }
+        };
+
         /*End onResult*/
 
         function onError(error) {
@@ -106,6 +182,8 @@ angular.module('sisdrApp')
                 $scope.msg = "Não foi possivel consultar dados.";
             } 
             console.log('Erro:' + error.statusText, error.status);
+            $scope.loading = false;
+            
         }
 
         $scope.seeOnMap = function(id) {
@@ -146,32 +224,58 @@ angular.module('sisdrApp')
 
 
         function onResultBR(result) {
-            debugger;
             if (result.brs.length) {
-                $scope.brs = result.brs;
+                var brs = [];
+                for(var i=0; i < result.brs.length; i++){
+                    brs.push(result.brs[i].vl_br);
+                }
+                $scope.brs = brs;
                 $scope.showInputBR = true;
-                $scope.showInputSegmento = true;
-                $scope.uf_class = 'col-md-4';
+            }
+        };
+
+        function onResultLote(result) {
+            if (result.lotes.length) {
+                $scope.lotes = result.lotes;
+                $scope.showInputLote = true;
             }
 
         }
 
+        $scope.cleanFilters = function() {
+            $scope.filter = {};
+            $scope.showInputBR = false;
+            $scope.showInputLote = false;
+        };
+
+
         $scope.getBR = function(filter) {
+
             $scope.showInputBR = false;
             $scope.showInputSegmento = false;
+            $scope.showInputLote = false;
             $scope.uf_class = 'col-md-12';
+            $scope.filter.br = null;
+            var brRequest, promises, allPromise;
 
-            var brRequest = RestApi.getObject({
-                type: 'propriedade-lindeira-br',
-                'state': filter.sigla
-            });
-            var promises = {
-                brs: brRequest.$promise,
-            };
+            if (filter && filter.sigla) {
+                brRequest = RestApi.get({
+                    type: 'propriedade-lindeira-br',
+                    'state': filter.sigla
+                });
 
-            var allPromise = $q.all(promises);
-            allPromise.then(onResultBR, onError);
+                promises = {
+                    brs: brRequest.$promise,
+                };
+
+                allPromise = $q.all(promises);
+                allPromise.then(onResultBR, onError);
+            }else{
+                $scope.filter = {};
+            }
         };
+
+
 
 
     });

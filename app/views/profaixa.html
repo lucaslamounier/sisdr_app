@@ -13,7 +13,8 @@
         <mapprofaixa class="row"></mapprofaixa>
         <div class="row">
             <div class="col-md-1 no-padding-left">
-                <button class="btn btn-default" data-toggle="collapse" data-target="#search-form" aria-expanded="false" aria-controls="search-form" ng-click="cleanFilters()">
+                <button class="btn btn-default" data-toggle="collapse" data-target="#search-form" aria-expanded="false" aria-controls="search-form" 
+                ng-click="cleanFilters()">
                       Filtrar Profaixa
                 </button>
             </div>
@@ -24,7 +25,7 @@
             <div class="collapse" id="search-form" style="margin-bottom: 35px;width: 100%;">
                 <form class="form-horizontal formtype" ng-submit='filterProfaixa(filter)'>
                     <div class="row form-line">
-                        <div class="col-xs-6" ng-class="uf_class">
+                        <div class="col-xs-6 col-md-3" ng-class="uf_class">
                             <label class="pull-center">UF</label>
                             <select ng-model="filter.estado" class="form-control" ng-options="estado.nome for estado in estados track by estado.sigla" ng-change='getBR(filter.estado)'>
                            <option value="" default>UF</option>
@@ -50,6 +51,12 @@
                             <label>Segmento Final</label>
                             <input id="row" class="form-control numberInput" ng-model="filter.seg_final" type="number" min="0" />
                         </div>
+                        <div class="col-xs-6 col-md-3">
+
+                            <button class="btn btn-primary" type="submit" ng-class="button_position">
+                                    Pesquisar
+                             </button>
+                        </div>
                     </div>
                     <div class="row form-line"><br /></div>
                     <div class="row form-line">
@@ -57,11 +64,11 @@
                         <div id="bbox" display="none" value="bbox" value=""></div>
                         <div id="formBounds" display="none" value="" /></div>
 
-                    <div class="col-xs-6 col-md-3">
+                    <!-- <div class="col-xs-6 col-md-3">
                         <button class="btn btn-primary" type="submit">
                             Pesquisar
                         </button>
-                    </div>
+                    </div> -->
             </div>
 
             </form>

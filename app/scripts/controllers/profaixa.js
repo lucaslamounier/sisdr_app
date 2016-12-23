@@ -12,10 +12,10 @@ angular.module('sisdrApp')
         $scope.geoJsonLayer = {};
         $scope.profaixas = [];
         $scope.estados = formData.estados;
-        $scope.uf_class = 'col-md-12';
         $scope.showInputLote = false;
-        $scope.class_seg_final = 'padding-0';
-
+        $scope.button_position = 'button-initial';
+        
+        
         if ($cookies.get('user_data')) {
             auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
             $rootScope.dataUser = {};
@@ -75,8 +75,6 @@ angular.module('sisdrApp')
             $scope.showInputBR = false;
             $scope.showInputSegmento = false;
             $scope.showInputLote = false;
-            $scope.class_seg_final = 'padding-0';
-            $scope.uf_class = 'col-md-12';
         };
 
         $scope.filterProfaixa = function(filter) {
@@ -240,7 +238,6 @@ angular.module('sisdrApp')
             $scope.showInputBR = false;
             $scope.showInputSegmento = false;
             $scope.showInputLote = false;
-            $scope.uf_class = 'col-md-12';
             $scope.filter.br = null;
             var brRequest, promises, allPromise;
 
@@ -283,7 +280,6 @@ angular.module('sisdrApp')
             if (result.lotes.length) {
                 $scope.lotes = result.lotes;
                 $scope.showInputLote = true;
-                $scope.class_seg_final = 'padding-10';
             }
 
         }
@@ -294,8 +290,6 @@ angular.module('sisdrApp')
                 $scope.showInputBR = true;
                 $scope.showInputSegmento = true;
                 $scope.showInputLote = true;
-                $scope.uf_class = 'col-md-4';
-                $scope.class_seg_final = 'padding-10';
             }
 
         }
