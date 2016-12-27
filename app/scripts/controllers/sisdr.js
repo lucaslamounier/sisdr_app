@@ -53,6 +53,7 @@ angular.module('sisdrApp')
             }
         }
 
+    
         function propertiesPropLindeira(feature, layer) {
             if (feature.properties) {
                 var properties = {
@@ -120,33 +121,6 @@ angular.module('sisdrApp')
                 $scope.map.fitBounds(e.target.getBounds());
             }
 
-            /*  kmlLayerAC.on("loaded", kmlBounds);
-              kmlLayerAL.on("loaded", kmlBounds);                                           
-              kmlLayerAM.on("loaded", kmlBounds);  
-              kmlLayerAP.on("loaded", kmlBounds);
-              kmlLayerBA.on("loaded", kmlBounds);
-              kmlLayerCE.on("loaded", kmlBounds);
-              kmlLayerDF.on("loaded", kmlBounds);
-              kmlLayerES.on("loaded", kmlBounds);
-              kmlLayerGO.on("loaded", kmlBounds);
-              kmlLayerMA.on("loaded", kmlBounds);
-              kmlLayerMG.on("loaded", kmlBounds);
-              kmlLayerMS.on("loaded", kmlBounds);
-              kmlLayerMT.on("loaded", kmlBounds);
-              kmlLayerPA.on("loaded", kmlBounds);
-              kmlLayerPB.on("loaded", kmlBounds);
-              kmlLayerPE.on("loaded", kmlBounds);
-              kmlLayerPI.on("loaded", kmlBounds);
-              kmlLayerPR.on("loaded", kmlBounds);
-              kmlLayerRJ.on("loaded", kmlBounds);
-              kmlLayerRN.on("loaded", kmlBounds);
-              kmlLayerRO.on("loaded", kmlBounds);
-              kmlLayerRR.on("loaded", kmlBounds);
-              kmlLayerRS.on("loaded", kmlBounds);
-              kmlLayerSC.on("loaded", kmlBounds);
-              kmlLayerSE.on("loaded", kmlBounds);
-              kmlLayerSP.on("loaded", kmlBounds);
-              kmlLayerTO.on("loaded", kmlBounds);*/
 
             $scope.map.addLayer(kmlLayerAC);
             $scope.map.addLayer(kmlLayerAL);
@@ -157,37 +131,16 @@ angular.module('sisdrApp')
             $scope.map.addLayer(kmlLayerDF);
             $scope.map.addLayer(kmlLayerES);
             $scope.map.addLayer(kmlLayerGO);
-            /*$scope.map.addLayer(kmlLayerMA);
-                $scope.map.addLayer(kmlLayerMG);
-                $scope.map.addLayer(kmlLayerMS);
-                $scope.map.addLayer(kmlLayerMT);
-                $scope.map.addLayer(kmlLayerPA);
-                $scope.map.addLayer(kmlLayerPA);
-                $scope.map.addLayer(kmlLayerPB);
-                $scope.map.addLayer(kmlLayerPE);
-                $scope.map.addLayer(kmlLayerPI);
-                $scope.map.addLayer(kmlLayerPR);
-                $scope.map.addLayer(kmlLayerRJ);
-                $scope.map.addLayer(kmlLayerRN);
-                $scope.map.addLayer(kmlLayerRO);
-                $scope.map.addLayer(kmlLayerRR);
-                $scope.map.addLayer(kmlLayerRS);
-                $scope.map.addLayer(kmlLayerSC);
-                $scope.map.addLayer(kmlLayerSE);
-                $scope.map.addLayer(kmlLayerSP);
-                $scope.map.addLayer(kmlLayerTO);
-
-            */
 
             $scope.filter.carregar = false;
         }
 
         function style(feature) {
             return {
-                fillColor: '#000080',
+                //fillColor: '#000080',
                 weight: 5,
                 opacity: 0.7,
-                color: '#000080',
+                color: '#808000',
 
             };
         }
@@ -221,9 +174,6 @@ angular.module('sisdrApp')
             $scope.is_map = true;
             var profaixa = result.profaixa.features;
             var propriedadesLindeiras = result.propriedadesLindeira.features;
-            //var rodovias = result.rodovias.features;
-
-            /* console.log('Total de rodovias: ' + rodovias.length);*/
 
             $scope.initialLayers[profaixaLayerName] = {
                 'layer': L.geoJson(profaixa, {
@@ -236,11 +186,13 @@ angular.module('sisdrApp')
                 }
             };
 
+            var layerPropLindeira = L.geoJson(propriedadesLindeiras, {
+                                            style: stylePropLindeira,
+                                            onEachFeature: propertiesPropLindeira,
+                                    })
+
             $scope.initialLayers[PropriedadesLindeirasLayerName] = {
-                'layer': L.geoJson(propriedadesLindeiras, {
-                    style: stylePropLindeira,
-                    onEachFeature: propertiesPropLindeira,
-                }),
+                'layer': layerPropLindeira,
                 'legend': {
                     'url': 'images/icons/prop-lindeira.png',
                     'type': 'png'
@@ -284,18 +236,6 @@ angular.module('sisdrApp')
                 }
             };
 
-            /*$scope.initialLayers[RodoviaLayerName] = {
-                'layer': L.geoJson(rodovias, {
-                    onEachFeature: propertiesRodovia,
-                    style: styleRodovia,
-                }),
-                'legend': {
-                    'url': 'images/icons/two-roads-cross.png',
-                    'type': 'png'
-                }
-            };*/
-            //KmlLayerLoad();
-
             console.log('add layer to map');
             console.log($scope.initialLayers);
 
@@ -309,8 +249,6 @@ angular.module('sisdrApp')
 
             }
             $scope.filter.carregar = false;
-
-            //$timeout(removeCache, 1000);
         }
 
         /**
@@ -330,15 +268,10 @@ angular.module('sisdrApp')
         var propriedadesLindeirasRequest = RestApi.getPoints({
             type: 'propriedade-lindeira'
         });
-        /*var rodoviasRequest = RestApi.getPoints({
-            type: 'rodovia'
-        });*/
-
 
         var promises = {
             profaixa: profaixaRequest.$promise,
             propriedadesLindeira: propriedadesLindeirasRequest.$promise,
-            /* rodovias: rodoviasRequest.$promise,*/
         };
 
         var allPromise = $q.all(promises);

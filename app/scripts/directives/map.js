@@ -55,7 +55,6 @@ angular.module('sisdrApp')
                     }
 
                     scope.map.setView([-16, -48], 4);
-                    scope.map.setMaxZoom(18);
 
                     scope.control = new L.control.switch({
                             "OpenStreetMap": {

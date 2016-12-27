@@ -1,0 +1,31 @@
+<form ng-submit="PropriedadeLindeiraSearch(filterPropLind)">
+  <md-content layout-padding>
+    <alert type="danger" ng-show="alertPropLindeira">Não foram encontrados registros</alert>
+
+  <md-select ng-model="filterPropLind.uf" placeholder="UF" ng-change='getBR(filterPropLind.uf)' required>
+    <md-option ng-repeat="estado in estados | orderBy: 'nome'" ng-value='estado'>{{estado.nome}}</md-option>
+  </md-select>
+
+  <md-select  ng-show="filterPropLind.uf.sigla" ng-model="filterPropLind.br" ng-change='getLote(filterPropLind.uf, filterPropLind.br)' placeholder="Rodovia">
+    <md-option ng-repeat="br in brs | orderBy: 'br'" ng-value='br'>{{br.vl_br}}</md-option>
+  </md-select>
+
+  <md-select  ng-show="filterPropLind.br" ng-model="filterPropLind.lote" placeholder="Lote">
+    <md-option ng-repeat="lote in lotes | orderBy: 'lote'" ng-value='lote'>{{lote.lote}}</md-option>
+  </md-select>
+
+    <md-progress-linear
+      class="md-warn"
+      md-mode="indeterminate"
+      ng-show="propriedadeLindeiraLoad">
+    </md-progress-linear>
+
+  </md-content>
+
+  <md-button
+    class="md-raised md-warn right"
+    ng-disabled="!filterPropLind.uf"
+    type="submit">
+      enviar
+  </md-button>
+</form>

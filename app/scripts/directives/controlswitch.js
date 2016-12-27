@@ -143,7 +143,7 @@ angular.module('sisdrApp')
                             if (this.options.miscTabs) {
                                 obj = {
                                     icon: "images/icons/layers_black.png",
-                                    selected: true
+                                    selected: false
                                 };
                                 this._createTab(this.options.miscTabsName, obj);
                             }
@@ -274,8 +274,6 @@ angular.module('sisdrApp')
                                 })
                                 this.removeLayer(layer.layer);
                                 this._map.removeLayer(layer.layer);
-
-                                //Deleting from scope.layers var
                                 delete scope.layers[layer.name];
 
                             }), this);
@@ -285,9 +283,6 @@ angular.module('sisdrApp')
                         label = L.DomUtil.create("label", "control-label", controlgroup);
 
                         var legend = "";
-
-                        // console.log(obj);
-
                         if (obj.showLegend) {
                             maxCharLen = maxCharLen - 5;
 
@@ -302,7 +297,6 @@ angular.module('sisdrApp')
 
                         if (obj.name.length > maxCharLen) {
                             name = obj.name.substr(0, maxCharLen) + "…";
-                            // label.innerHTML = legend + "<abbr title=\"" + obj.name + "\">" + name + "</abbr>";
                             label.innerHTML = legend + "<span title=\"" + obj.name + "\">" + name + "</span>";
                         } else {
                             label.innerHTML = legend + "<span title=\"" + obj.name + "\">" + obj.name + "</span>";
@@ -313,50 +307,6 @@ angular.module('sisdrApp')
 
                         input = L.DomUtil.create("input", "", toggle);
 
-                        if (obj.tooltip) {
-
-                            var mensage = "Logar com CPF e senha do Ibamanet em <a style='color:blue' target='_black' href='http://siscom.ibama.gov.br/geoserver'>http://siscom.ibama.gov.br/geoserver</a> e recarregar a página para visualizar esta camada.";
-                            control.setAttribute('data-toggle', 'popover');
-                            control.setAttribute('data-trigger', 'manual');
-                            control.setAttribute('data-placement', 'left');
-                            control.setAttribute('data-html', 'true');
-                            //control.setAttribute('data-delay', 500);
-                            control.setAttribute('data-content', mensage);
-                            $("[data-toggle=popover]").popover({
-                                html: true,
-                                delay: {
-                                    "show": 500,
-                                    "hide": 1000
-                                },
-                            }).on("mouseenter", function(Event) {
-                                // GET src image, for check it load
-                                var imageParent = this.parentElement.firstElementChild.firstChild;
-                                var tooltip = this;
-
-                                function record(url, result, tooltip) {
-                                    if (result === "error") {
-                                        $(tooltip).popover("show");
-                                        $(tooltip).siblings(".popover").on("mouseleave", function() {
-                                            $(tooltip).popover('hide');
-                                        });
-                                    }
-                                };
-                                testImage(imageParent.src, record, tooltip);
-
-                            }).on("mouseleave", function() {
-
-                                var _this = this;
-                                setTimeout(function() {
-                                    if (!$(".popover:hover").length) {
-                                        $(_this).popover("hide")
-                                    }
-                                }, 100);
-
-                            });
-
-
-                        }
-
                         if (obj.overlayer) {
                             input.type = "checkbox";
                             L.DomUtil.addClass(input, "switch-control-layers-selector");
@@ -364,7 +314,6 @@ angular.module('sisdrApp')
                         } else {
                             input.type = "radio";
                             $(input).attr("name", "leaflet-base-layers");
-                            // $(input).addClass("leaflet-base-layers");
                             $(input).attr("data-radio-all-off", "false");
                         }
 
@@ -382,21 +331,11 @@ angular.module('sisdrApp')
 
                         $(input).on("switchChange.bootstrapSwitch", (function(_this) {
                             return function(e, data) {
-
-                                // if (!obj.overlayer) {
-                                //   $('input[name="leaflet-base-layers"]').bootstrapSwitch('state');
-                                // }
-                                // return _this._onInputClick(input, obj);
-
                                 if (!obj.overlayer) {
                                     return $.each(_this._baseLayers, function(key, value) {
                                         _this._onInputClick(value.input, value.obj);
                                     });
-                                    // var base = $('.leaflet-base-layers').toArray();
-                                    // var index = base.indexOf(this);
-                                    // base = base.splice(index,1);
-                                    // $(base).bootstrapSwitch('state');
-                                    // $('input[name="leaflet-base-layers"]').bootstrapSwitch('state');
+     
                                 } else {
                                     return _this._onInputClick(input, obj);
                                 }

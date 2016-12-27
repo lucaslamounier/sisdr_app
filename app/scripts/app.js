@@ -35,6 +35,10 @@ angular
                 templateUrl: 'views/logout.html',
                 controller: 'LogoutCtrl'
             })
+            .when('/sobre', {
+                templateUrl: 'views/sobre.html',
+                //controller: 'SobreCtrl',
+            })
             .when('/', {
                 templateUrl: 'views/sisdr.html',
                 controller: 'sisdrCtrl',

@@ -1,0 +1,30 @@
+<form ng-submit="ProfaixaSearch(filterProfaixa)">
+  <md-content layout-padding>
+    <alert type="danger" ng-show="alertProfaixa">Não foram encontrados registros</alert>
+
+  <md-select ng-model="filterProfaixa.uf" placeholder="UF" ng-change='getBR(filterProfaixa.uf)' required>
+    <md-option ng-repeat="estado in estados | orderBy: 'nome'" ng-value='estado'>{{estado.nome}}</md-option>
+  </md-select>
+
+  <md-select  ng-show="filterProfaixa.uf.sigla" ng-model="filterProfaixa.br" ng-change='getLote(filterProfaixa.uf, filterProfaixa.br)' placeholder="Rodovia">
+    <md-option ng-repeat="br in brs | orderBy: 'br'" ng-value='br'>{{br.br}}</md-option>
+  </md-select>
+
+   <md-select  ng-show="filterProfaixa.br" ng-model="filterProfaixa.lote" placeholder="Lote">
+    <md-option ng-repeat="lote in lotes | orderBy: 'lote'" ng-value='lote'>{{lote.lote}}</md-option>
+  </md-select>
+    <md-progress-linear
+      class="md-warn"
+      md-mode="indeterminate"
+      ng-show="profaixaLoad">
+    </md-progress-linear>
+
+  </md-content>
+
+  <md-button
+    class="md-raised md-warn right"
+    ng-disabled="!filterProfaixa.uf"
+    type="submit">
+      enviar
+  </md-button>
+</form>

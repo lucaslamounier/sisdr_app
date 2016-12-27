@@ -1,128 +1,134 @@
-
 <!-- <md-content> -->
-	<md-sidenav
-		md-component-id="filter"
-		class="md-sidenav-left overMap"
-		layout='column'>
+<md-sidenav md-component-id="filter" class="md-sidenav-left overMap" layout='column'>
 
-        <md-subheader>Funcionalidades do Sistema</md-subheader>
+    <md-subheader>Funcionalidades do Sistema</md-subheader>
 
-		<accordion>
-            <div class="panel panel-default">
-              <div class="panel-heading" ng-keypress="toggleOpen($event)">
+    <accordion>
+        <div class="panel panel-default">
+            <div class="panel-heading" ng-keypress="toggleOpen($event)">
                 <h4 class="panel-title">
-                  <a href="#/dups" tabindex="0" class="accordion-toggle">
-                      <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
+                    <a href="#/dups" tabindex="0" class="accordion-toggle">
+                        <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
                        Declaração de Utilidade Pública (DUP)
-                  </span></span></a>
+                  </span></span>
+                    </a>
                 </h4>
-              </div>
             </div>
-             <div class="panel panel-default">
-              <div class="panel-heading" ng-keypress="toggleOpen($event)">
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" ng-keypress="toggleOpen($event)">
                 <h4 class="panel-title">
-                  <a href="#/estatistica" tabindex="2" class="accordion-toggle">
-                      <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
+                    <a href="#/estatistica" tabindex="2" class="accordion-toggle">
+                        <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
                        Estatísticas
-                  </span></span></a>
+                  </span></span>
+                    </a>
                 </h4>
-              </div>
             </div>
+        </div>
 
-            <div class="panel panel-default" ng-show="!is_map">
-              <div class="panel-heading" ng-keypress="toggleOpen($event)">
+        <div class="panel panel-default" ng-show="!is_map">
+            <div class="panel-heading" ng-keypress="toggleOpen($event)">
                 <h4 class="panel-title">
-                  <a href="#/" tabindex="0" class="accordion-toggle">
-                      <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
+                    <a href="#/" tabindex="0" class="accordion-toggle">
+                        <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
                        Mapa
-                  </span></span></a>
+                  </span></span>
+                    </a>
                 </h4>
-              </div>
             </div>
-             <div class="panel panel-default">
-              <div class="panel-heading" ng-keypress="toggleOpen($event)">
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" ng-keypress="toggleOpen($event)">
                 <h4 class="panel-title">
-                  <a href="#/profaixa" tabindex="1" class="accordion-toggle">
-                      <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
+                    <a href="#/profaixa" tabindex="1" class="accordion-toggle">
+                        <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
                        Programa Federal de Faixas de Domínio (PROFAIXA)
-                  </span></span></a>
+                  </span></span>
+                    </a>
                 </h4>
-              </div>
             </div>
+        </div>
 
-            <div class="panel panel-default">
-              <div class="panel-heading" ng-keypress="toggleOpen($event)">
+        <div class="panel panel-default">
+            <div class="panel-heading" ng-keypress="toggleOpen($event)">
                 <h4 class="panel-title">
-                  <a href="#/projetos" tabindex="1" class="accordion-toggle">
-                      <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
+                    <a href="#/projetos" tabindex="1" class="accordion-toggle">
+                        <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
                        Projetos Geométricos
-                  </span></span></a>
+                  </span></span>
+                    </a>
                 </h4>
-              </div>
             </div>
+        </div>
 
 
-            <div class="panel panel-default">
-              <div class="panel-heading" ng-keypress="toggleOpen($event)">
+        <div class="panel panel-default">
+            <div class="panel-heading" ng-keypress="toggleOpen($event)">
                 <h4 class="panel-title">
-                  <a href="#/propriedades-lindeiras" tabindex="2" class="accordion-toggle">
-                      <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
+                    <a href="#/propriedades-lindeiras" tabindex="2" class="accordion-toggle">
+                        <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
                        Propriedades Lindeiras
-                  </span></span></a>
+                  </span></span>
+                    </a>
                 </h4>
-              </div>
             </div>
+        </div>
 
-    <div ng-show="is_map">    
-  		<md-subheader>Filtrar dados no mapa</md-subheader>
-  		<accordion close-others="true">
+        <div ng-show="is_map">
+            <md-subheader>Filtrar dados no mapa</md-subheader>
+            <accordion close-others="true">
 
-  			<accordion-group >
-  				<accordion-heading>
-  					Profaixa
-  					<i class="pull-right glyphicon glyphicon-small"
-  						ng-class="{'glyphicon-chevron-down': openHelicopters, 'glyphicon-chevron-right': !openHelicopters}">
-  					</i>
-  				</accordion-heading>
+                <accordion-group is-open="openProfaixa">
+                    <accordion-heading>
+                        PROFAIXA (Programa Federal de Faixas de Domínio)
+                        <i class="pull-right glyphicon glyphicon-small" ng-class="{'glyphicon-chevron-down': openProfaixa, 'glyphicon-chevron-right': !openProfaixa}">
+            </i>
+                    </accordion-heading>
 
-  				<helicopter-form></helicopter-form>
+                    <profaixa-form></profaixa-form>
 
-  				</accordion-heading>
-  			</accordion-group>
+                    </accordion-heading>
+                </accordion-group>
 
-  			<accordion-group is-open="openVehicles">
-  				<accordion-heading>
-  					Propriedades Lindeiras
-  					<i class="pull-right glyphicon glyphicon-small"
-  						ng-class="{'glyphicon-chevron-down': openVehicles, 'glyphicon-chevron-right': !openVehicles}">
-  					</i>
-  				</accordion-heading>
+                <accordion-group is-open="openProjetos">
+                    <accordion-heading>
+                        Projetos Geométricos
+                        <i class="pull-right glyphicon glyphicon-small" ng-class="{'glyphicon-chevron-down': openProjetos, 'glyphicon-chevron-right': !openProjetos}">
+            </i>
+                    </accordion-heading>
 
-  				<vehicle-form></vehicle-form>
-  			</accordion-group>
-  		</accordion>
-    </div>
-    <!-- -->
-    <div>    
-      <md-subheader>Ajuda</md-subheader>
-      <accordion close-others="true">
+                    <projetos-form></projetos-form>
 
-        <accordion-group >
-          <accordion-heading>
-            <a href="#">
-              <span style="color:rgba(0, 0, 0, 0.72);"> Sobre o SISDR</span>
-            </a>
-           <!--  <i class="pull-right glyphicon glyphicon-small"
-              ng-class="{'glyphicon-chevron-down': openHelicopters, 'glyphicon-chevron-right': !openHelicopters}">
-            </i> -->
-          </accordion-heading>
+                    </accordion-heading>
+                </accordion-group>
 
-          <helicopter-form></helicopter-form>
+                <accordion-group is-open="openPropLindeiras">
+                    <accordion-heading>
+                        Propriedades Lindeiras
+                        <i class="pull-right glyphicon glyphicon-small" ng-class="{'glyphicon-chevron-down': openPropLindeiras, 'glyphicon-chevron-right': !openPropLindeiras}">
+            </i>
+                    </accordion-heading>
 
-          </accordion-heading>
-        </accordion-group>
-      </accordion>
-    </div>
-    <!-- -->
-	</md-sidenav>
+                    <propriedade-form></propriedade-form>
+                </accordion-group>
+            </accordion>
+        </div>
+        <!-- -->
+        <div>
+            <md-subheader>Ajuda</md-subheader>
+            <div class="panel panel-default">
+                <div class="panel-heading" ng-keypress="toggleOpen($event)">
+                    <h4 class="panel-title">
+                        <a href="#/sobre" tabindex="2" class="accordion-toggle">
+                            <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span class="ng-scope">
+                       Sobre o SISDR
+                  </span></span>
+                        </a>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <!-- -->
+</md-sidenav>
 <!-- </md-content> -->

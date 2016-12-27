@@ -42,7 +42,6 @@ $(document).ready(function() {
 
     imageryMap.addLayer(drawnItems);
     imageryMap.addControl(drawControl);
-
     imageryMap.on('draw:created', drawCreated);
     imageryMap.on('draw:edited', drawEdited);
     imageryMap.on("draw:deleted", drawDeleted);
@@ -55,7 +54,6 @@ $(document).ready(function() {
     imageryMap.on('draw:deletestart', function(e) {
         startDrawing($('#search'))
     });
-
     imageryMap.on('draw:drawstop', function(e) {
         stopDrawing($('#search'))
     });
@@ -77,7 +75,6 @@ $(document).ready(function() {
         var northEast = bbox.getNorthEast();
         var southWest = bbox.getSouthWest();
         bbox = northEast.lng + ',' + northEast.lat + ',' + southWest.lng + ',' + southWest.lat;
-
         lastBbox = bbox;
 
         defineLatLngBounds(lastBbox);
@@ -190,7 +187,6 @@ $(document).ready(function() {
     }
 
     seeOnMap = function(id) {
-        debugger;
         id = $(id).attr('id');
 
         if (lastSelectedLayer)
