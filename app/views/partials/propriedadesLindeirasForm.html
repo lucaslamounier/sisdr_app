@@ -11,7 +11,7 @@
   </md-select>
 
   <md-select  ng-show="filterPropLind.br" ng-model="filterPropLind.lote" placeholder="Lote">
-    <md-option ng-repeat="lote in lotes | orderBy: 'lote'" ng-value='lote'>{{lote.lote}}</md-option>
+    <md-option ng-repeat="lote in lotes | orderBy: 'lote'" ng-value='lote'>{{lote.vl_lote}}</md-option>
   </md-select>
 
     <md-progress-linear

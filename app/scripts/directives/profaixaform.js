@@ -21,7 +21,7 @@ angular.module('sisdrApp')
                 function faultHandler(error) {
                     console.log(error)
                 }
-                
+
             },
 
             controller: function($scope) {
@@ -30,53 +30,53 @@ angular.module('sisdrApp')
                     var restData, layerName, uf, br, lote;
                     $scope.profaixaLoad = true;
 
-                    if(!isEmpty(filter)){
-                        uf = !isEmpty(filter.uf) ? filter.uf.sigla: null;
+                    if (!isEmpty(filter)) {
+                        uf = !isEmpty(filter.uf) ? filter.uf.sigla : null;
                         br = filter.br !== null ? filter.br.br : null;
                         lote = filter.lote != null ? filter.lote.lote : null;
- 
-                        if(uf && !br && !lote){
 
-                           layerName = 'Profaixa: ' + uf;
-                           restData = RestApi.getObject({
+                        if (uf && !br && !lote) {
+
+                            layerName = 'Profaixa: ' + uf;
+                            restData = RestApi.getObject({
                                 type: 'profaixa-filter',
                                 'state': uf,
-                            });                     
+                            });
                             restData.$promise.then(resultHandler, failtHandler);
-                            
 
-                        }else if(uf && br && !lote){
 
-                           layerName = 'Profaixa: ' + uf + '-' + br;
-                           restData = RestApi.getObject({
+                        } else if (uf && br && !lote) {
+
+                            layerName = 'Profaixa: ' + uf + '-' + br;
+                            restData = RestApi.getObject({
                                 type: 'profaixa-filter',
                                 'state': uf,
                                 'br': br,
-                            });                     
+                            });
                             restData.$promise.then(resultHandler, failtHandler);
-                          
-                          
-                        }else if(uf && br && lote){
 
-                           layerName = 'Profaixa: ' +  uf + '-' + br + '-' + lote;
-                           restData = RestApi.getObject({
+
+                        } else if (uf && br && lote) {
+
+                            layerName = 'Profaixa: ' + uf + '-' + br + '-' + lote;
+                            restData = RestApi.getObject({
                                 type: 'profaixa-filter',
                                 'state': uf,
                                 'br': br,
                                 'lote': lote
-                           });                     
-                           restData.$promise.then(resultHandler, failtHandler);
-                           
+                            });
+                            restData.$promise.then(resultHandler, failtHandler);
+
                         }
 
                     }
 
                     function resultHandler(data) {
-                        
+
                         console.log('filter profaixa sucess ...');
 
                         var layer = L.geoJson(data.features, {
-                            onEachFeature: eachLayer
+                            onEachFeature: propertiesProfaixa
                         });
                         $scope.layers[layerName] = layer;
                         $scope.profaixaLoad = false;
@@ -93,22 +93,40 @@ angular.module('sisdrApp')
                             layer.bindPopup(GISHelper.createHTMLPopup(feature.properties));
                         }
                     }
-                
+
+                    function propertiesProfaixa(feature, layer) {
+                        if (feature.properties) {
+                            var url = '#/profaixa/detail/' + feature.id;
+                            var htmlLink = "<br /><a href='" + url + "' target='_blanck'>vizualizar detalhes</a>";
+                            var properties = {
+                                "BR": feature.properties.vl_br,
+                                "Municipíos": feature.properties.li_municipio,
+                                "UF": feature.properties.sg_uf,
+                                "Tipo de Trecho": feature.properties.sg_tipo_trecho_display,
+                                "Código rodovia": feature.properties.vl_codigo_rodovia,
+                                "KM Inicial": feature.properties.vl_km_inicial,
+                                "KM Final": feature.properties.vl_km_final,
+                                ' ': htmlLink,
+                            }
+                            layer.bindPopup(GISHelper.createHTMLPopup(properties));
+                        }
+                    }
+
                 }
 
                 function onResultLote(result) {
 
-                        if (result.length) {
-                            $scope.lotes = result;
-                        }
+                    if (result.length) {
+                        $scope.lotes = result;
+                    }
                 };
 
-                function onResultBR(result){
+                function onResultBR(result) {
                     $scope.brs = result;
                 };
 
-              
-                function onError(error){
+
+                function onError(error) {
                     console.log(error);
                 }
 
@@ -119,7 +137,7 @@ angular.module('sisdrApp')
                         var brRequest = RestApi.get({
                             type: 'profaixa-br',
                             'state': filter.sigla
-                        });                     
+                        });
                         brRequest.$promise.then(onResultBR, onError);
                     }
                 };

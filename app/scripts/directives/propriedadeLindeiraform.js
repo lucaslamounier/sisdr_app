@@ -29,11 +29,11 @@ angular.module('sisdrApp')
                 $scope.PropriedadeLindeiraSearch = function(filter) {
                     var restData, layerName, uf, br, lote;
                     $scope.propriedadeLindeiraLoad = true;
-
+                    debugger;
                     if(!isEmpty(filter)){
                         uf = !isEmpty(filter.uf) ? filter.uf.sigla: null;
-                        br = filter.br !== null ? filter.br.br : null;
-                        lote = filter.lote != null ? filter.lote.lote : null;
+                        br = filter.br !== null ? filter.br.vl_br : null;
+                        lote = filter.lote != null ? filter.lote.vl_lote : null;
  
                         if(uf && !br && !lote){
 
@@ -98,10 +98,9 @@ angular.module('sisdrApp')
                 }
 
                 function onResultLote(result) {
-
-                        if (result.length) {
-                            $scope.lotes = result;
-                        }
+                    if (result.length) {
+                        $scope.lotes = result;
+                    }
                 };
 
                 function onResultBR(result){
@@ -128,12 +127,11 @@ angular.module('sisdrApp')
                 $scope.getLote = function(estado, BR) {
                     var loteRequest, promises, allPromise;
 
-
-                    if (estado && estado.sigla && BR && BR.br) {
+                    if (estado && estado.sigla && BR && BR.vl_br) {
                         loteRequest = RestApi.get({
                             type: 'propriedade-lindeira-lote',
                             'state': estado.sigla,
-                            'br': BR.br
+                            'br': BR.vl_br
                         });
 
                         loteRequest.$promise.then(onResultLote, onError);

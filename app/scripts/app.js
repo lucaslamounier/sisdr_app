@@ -214,8 +214,12 @@ angular
                             value += hora_sep + groups[5];
                             value += hora_sep + groups[6];
                         }
+                    }if(key == ' '){
+                        html += "</b>" + (value ? value : '') + "<br/>";
+                    }else{
+                        html += "<b>" + key + "</b>: " + (value ? value : '') + "<br/>";
                     }
-                    html += "<b>" + key + "</b>: " + (value ? value : '') + "<br/>";
+                    
                 })
                 return html;
             },

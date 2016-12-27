@@ -72,7 +72,7 @@ angular.module('sisdrApp')
                         console.log('filter project sucess ...');
 
                         var layer = L.geoJson(data, {
-                            onEachFeature: eachLayer
+                            onEachFeature: propertiesProjetos
                         });
 
                         $scope.layers[layerName] = layer;
@@ -90,6 +90,27 @@ angular.module('sisdrApp')
                             layer.bindPopup(GISHelper.createHTMLPopup(feature.properties));
                         }
                     }
+
+                    function propertiesProjetos(feature, layer) {
+                        if (feature.properties) {
+                            var url = '#/projetos/detail/' + feature.id;
+                            var htmlLink = "<br /><a href='" + url + "' target='_blanck'>vizualizar detalhes</a>";
+                            var properties = {
+                                'BR': feature.properties.br,
+                                'Empresa responsável': feature.properties.empresa_responsavel,
+                                'Tipo de Obra ': feature.properties.ds_tipo_obra_display,
+                                'Tipo de Projeto': feature.properties.ds_tipo_projeto_display,
+                                'Tipo de Trecho': feature.properties.sg_tipo_trecho_display,
+                                'KM Início': feature.properties.vl_km_inicial,
+                                'KM Fim': feature.properties.vl_km_final,
+                                'UF': feature.properties.sg_uf,
+                                'Lote': feature.properties.vl_lote,
+                                ' ': htmlLink,
+                              
+                            };
+                            layer.bindPopup(GISHelper.createHTMLPopup(properties));
+                    }
+        }
                 
                 }
 
