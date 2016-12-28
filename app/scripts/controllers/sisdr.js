@@ -305,7 +305,7 @@ angular.module('sisdrApp')
                 onEachFeature: onEachFeatureRodovia,
                 style: function() {
                     return {
-                        color: "#808000",
+                        color: "#800000",
                         weight: 3
                     };
                 }
@@ -318,7 +318,19 @@ angular.module('sisdrApp')
                     'fill': '#A0522D'
                 }
             };
+
+
+
+            $scope.wmsLayers['Rodovias Federais'] = {
+                'layer': layerRodoviasFederais,
+                'legend': {
+                    'url': 'images/icons/crossing-roads.png',
+                    'type': 'png'
+                }
+            };
+
             
+          
             $scope.wmsLayers['Rodovias Federais'] = {
                 'layer': layerRodoviasFederais,
                 'legend': {
@@ -336,11 +348,12 @@ angular.module('sisdrApp')
                 }
             };
 
-            $scope.wmsLayers['UF - Unidades da Federação'] = {
-                'layer': layerRegiao,
+            $scope.wmsLayers['PAC - Intervensão'] = {
+                'layer': layerPACintervensao,
                 'legend': {
                     'url': 'images/icons/pol-icon.png',
-                    'type': 'png'
+                    'type': 'png',
+                    'fill': '#A0522D'
                 }
             };
 
@@ -348,17 +361,11 @@ angular.module('sisdrApp')
                 'layer': layerPACsituacao,
                 'legend': {
                     'url': 'images/icons/pol-icon.png',
-                    'type': 'png'
+                    'type': 'png',
+                    'fill': '#A0522D'
                 }
             };
 
-            $scope.wmsLayers['PAC - Intervesão'] = {
-                'layer': layerPACintervensao,
-                'legend': {
-                    'url': 'images/icons/pol-icon.png',
-                    'type': 'png'
-                }
-            };
 
             $scope.wmsLayers['Terras Indígenas'] = {
                 'layer': layerTerraIndigena,
@@ -366,6 +373,15 @@ angular.module('sisdrApp')
                     'url': 'images/icons/circle-icon.png',
                     'type': 'circle',
                     'fill': '#A0522D'
+                }
+            };
+
+
+            $scope.wmsLayers['UF - Unidades da Federação'] = {
+                'layer': layerRegiao,
+                'legend': {
+                    'url': 'images/icons/pol-icon.png',
+                    'type': 'png'
                 }
             };
 

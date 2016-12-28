@@ -39,6 +39,10 @@ angular
                 templateUrl: 'views/sobre.html',
                 //controller: 'SobreCtrl',
             })
+            .when('/manual', {
+                templateUrl: 'views/manual.html',
+                //controller: 'SobreCtrl',
+            })
             .when('/', {
                 templateUrl: 'views/sisdr.html',
                 controller: 'sisdrCtrl',
