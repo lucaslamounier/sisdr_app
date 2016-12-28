@@ -34,6 +34,7 @@
     <top-bar></top-bar>
     <div ng-view="" flex></div>
 
+    <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
@@ -52,14 +53,16 @@
     <script src="bower_components/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
     <script src="bower_components/leaflet-wms-layer-info/dist/Leaflet.WMSLayerInfo.js"></script> 
     <script src="bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.js"></script>
-    <script src="bower_components/ngstorage/ngStorage.min.js"></script>
-
+    <!-- <script src="bower_components/ngstorage/ngStorage.min.js"></script> -->
+    <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
     <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js(.) scripts/extra.js -->
     <script src="scripts/jquery.fileDownload.js"></script>
     <script src="scripts/leaflet.draw.js"></script>
     <script src="scripts/esri-leaflet.js"></script>
-    <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-  
+    <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/acl.js"></script>

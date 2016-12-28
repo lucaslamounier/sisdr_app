@@ -27,14 +27,14 @@ angular.module('sisdrApp')
 
         $scope.$watch(auth.isAuthenticated, function(value, oldValue) {
             if (!value && oldValue) {
-                console.info('User Disconnected');
+                //console.info('User Disconnected');
                 $location.path('#/');
             }
 
             var dataUser = {};
 
             if (value) {
-                console.info('User Connected');
+                //console.info('User Connected');
                 auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
                 dataUser.userName = auth.getUser();
                 $rootScope.dataUser = dataUser;
@@ -218,7 +218,7 @@ angular.module('sisdrApp')
         $scope.msg = false;
         $scope.is_map = false;
         $scope.box_with = 'detalhe-box-50';
-
+        //debugger;
         if ($cookies.get('user_data')) {
             auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
             $rootScope.dataUser = {};
@@ -227,14 +227,12 @@ angular.module('sisdrApp')
 
         $scope.$watch(auth.isAuthenticated, function(value, oldValue) {
             if (!value && oldValue) {
-                console.info('User Disconnected');
                 $location.path('#/');
             }
 
             var dataUser = {};
 
             if (value) {
-                console.info('User Connected');
                 auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
                 dataUser.userName = auth.getUser();
                 $rootScope.dataUser = dataUser;
@@ -242,6 +240,11 @@ angular.module('sisdrApp')
         }, true);
 
         auth.isAuthenticated() ? $rootScope.logged = true : $rootScope.logged = false;
+
+        if (!auth.isAuthenticated()) {
+                $location.path('#/');
+        }
+
 
         if (!$routeParams.id) {
             $scope.msg = "Parâmetro inválido";

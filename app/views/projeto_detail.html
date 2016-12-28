@@ -90,11 +90,11 @@
                 <br />
             </div>
             <div>
-                <div style="font-size: 12px;" ng-show="projeto.lk_pdf_projeto || projeto.lk_dwg_projeto || projeto.lk_shp_projeto">
+                <div style="font-size: 12px;" ng-show="projeto.possui_arquivos.pdf || projeto.possui_arquivos.dwg || projeto.possui_arquivos.shp">
                     <h3>Arquivos</h3>
                     <br />
                     <div class="row">
-                        <div class="col-sm-4" ng-show="projeto.lk_pdf_projeto">
+                        <div class="col-sm-4" ng-show="projeto.possui_arquivos.pdf">
                             <div class="panel panel-red-border">
                                 <div class="panel-heading panel-red">
                                     <img src="/images/pdf-logo.svg" width="25" height="25" /> PDF
@@ -112,7 +112,7 @@
                             </div>
                         </div>
                         <!-- -->
-                        <div class="col-sm-4" ng-show="projeto.lk_dwg_projeto">
+                        <div class="col-sm-4" ng-show="projeto.possui_arquivos.dwg">
                             <div class="panel panel-blue-border">
                                 <div class="panel-heading panel-blue">
                                     <img src="/images/dwg-logo.svg" width="25" height="25" /> DWG
@@ -130,7 +130,7 @@
                             </div>
                         </div>
                         <!-- -->
-                        <div class="col-sm-4" ng-show="projeto.lk_shp_projeto">
+                        <div class="col-sm-4" ng-show="projeto.possui_arquivos.shp">
                             <div class="panel panel-green-border">
                                 <div class="panel-heading panel-green">
                                     <img src="/images/shp-logo.svg" width="25" height="25" /> ShapeFile

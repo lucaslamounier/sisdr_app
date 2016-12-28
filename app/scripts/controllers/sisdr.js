@@ -18,7 +18,7 @@ function isEmpty(obj) {
 }
 
 angular.module('sisdrApp')
-    .controller('sisdrCtrl', function($scope, $rootScope, RestApi, $cookies, $q, symbologies, GISHelper, formData, $timeout, auth, $localStorage, $location) {
+    .controller('sisdrCtrl', function($scope, $rootScope, RestApi, $cookies, $q, symbologies, GISHelper, formData, $timeout, auth, $location) {
 
         $scope.is_map = true;
         var profaixaLayerName = 'PROFAIXAS';
@@ -82,7 +82,7 @@ angular.module('sisdrApp')
                     'Proprietário': feature.properties.nm_proprietario,
                     ' ': htmlLink,
                 }
-                layer.bindPopup(GISHelper.createHTMLPopup(properties));
+               layer.bindPopup(GISHelper.createHTMLPopup(properties));
             }
         }
 
@@ -157,7 +157,6 @@ angular.module('sisdrApp')
 
         function style(feature) {
             return {
-                //fillColor: '#000080',
                 weight: 3,
                 opacity: 0.7,
                 color: '#800080',
@@ -185,57 +184,18 @@ angular.module('sisdrApp')
             };
         }
 
-        function pointToLayer(feature, latlng) {
-            var html = populatePopup(feature);
-            return $scope.markers.addLayer(L.circleMarker(latlng).bindPopup(html));
+     
+        function getRandomLatLng(map) {
+            var bounds = map.getBounds(),
+                southWest = bounds.getSouthWest(),
+                northEast = bounds.getNorthEast(),
+                lngSpan = northEast.lng - southWest.lng,
+                latSpan = northEast.lat - southWest.lat;
+
+            return new L.LatLng(
+                    southWest.lat + latSpan * Math.random(),
+                    southWest.lng + lngSpan * Math.random());
         }
-
-        function populatePopup(object) {
-            debugger;
-              var html = '',
-                categoria = $scope.filter.categoria.nome,
-                subcategoria = $scope.filter.subcategoria ? $scope.filter.subcategoria.nome : null,
-                count = 0,
-                properties;
-
-              properties = object.properties;
-
-              html += '<b>Razão social:</b> ' + properties.nome + '<br/><br/>';
-              html += '<b>CNPJ:</b> ' + properties.cnpj + '<br/>';
-              
-              if(Auth.isLoggedIn())
-              {
-                html += '<b>Fantasia:</b> ' + properties.nome_fantasia + '<br/>';
-                html += '<b>Porte:</b> ' + properties.porte + '<br/>';
-                html += '<b>Certificado regularidade da pessoa jurídica:</b> ' + (properties.regularidade ? 'Possui Certificado de Regularidade Válido' : 'Não Possui Certificado de Regularidade Válido')+ '<br/><br/>';
-                html += '<br/><b>Última atualização do dado em: </b> ' + (properties.data_atualizacao ? properties.data_atualizacao : 'Sem informação de atualização da base de dados')    + '<br/><br/>';
-              }
-
-              angular.forEach(properties.atividades, function(atividade, key) {
-
-                if(atividade.categoria == categoria && (!subcategoria || atividade.subcategoria === subcategoria)) {
-
-                  if(count)
-
-                    html += '<hr />';
-
-                  html += '<b>Categoria:</b> ' + atividade.categoria + '<br/>';
-                  html += '<b>Atividade:</b> ' + atividade.subcategoria + '<br/>';
-
-                  if(Auth.isLoggedIn()){
-                    if( atividade.grau_poluicao == 'Sem')
-                      atividade.grau_poluicao = '---'
-                    html += '<b>Grau de Poluicao:</b> ' + atividade.grau_poluicao  + '<br/>';
-                  }
-
-
-                  count++;
-                }
-        });
-
-      return html;
-    }
-
 
         /**
          * Resultado da requisição
@@ -244,34 +204,36 @@ angular.module('sisdrApp')
         function onResult(result) {
 
             $scope.is_map = true;
-            $scope.markers = new L.MarkerClusterGroup();
+            var markers = L.markerClusterGroup({ chunkedLoading: true });
+            var markers2 = L.markerClusterGroup({ chunkedLoading: true });
             var profaixa = result.profaixa.features;
-            var propriedadesLindeiras = result.propriedadesLindeira.features;
-
-            $scope.markers = new L.MarkerClusterGroup();
-
-            $scope.initialLayers[profaixaLayerName] = {
-                'layer': L.geoJson(profaixa, {
-                    style: style,
-                    onEachFeature: propertiesProfaixa,
-                }),
-                'legend': {
-                    'url': 'images/icons/road-perspective.png',
-                    'type': 'png'
-                }
-            };
+            var propriedadesLindeiras = result.propriedadesLindeira.features;    
 
             var layerPropLindeira = L.geoJson(propriedadesLindeiras, {
-                style: stylePropLindeira,
-                pointToLayer: pointToLayer,
-                onEachFeature: propertiesPropLindeira,
-                
-            })
+                onEachFeature: propertiesPropLindeira,  
+                //style: stylePropLindeira,       
+            });
 
-           $scope.initialLayers[PropriedadesLindeirasLayerName] = {
-                'layer': layerPropLindeira,
+            var layerProfaixa = L.geoJson(profaixa, {
+                    style: style,
+                    onEachFeature: propertiesProfaixa,
+            });
+    
+            markers.addLayer(layerPropLindeira);
+            markers2.addLayer(layerProfaixa);
+           
+            $scope.initialLayers[PropriedadesLindeirasLayerName] = {
+                    'layer': markers,
+                    'legend': {
+                        'url': 'images/icons/prop-lindeira.png',
+                        'type': 'png'
+                    }
+            };
+
+            $scope.initialLayers[profaixaLayerName] = {
+                'layer': markers2,
                 'legend': {
-                    'url': 'images/icons/prop-lindeira.png',
+                    'url': 'images/icons/road-perspective.png',
                     'type': 'png'
                 }
             };
@@ -316,12 +278,6 @@ angular.module('sisdrApp')
                 style: GISHelper.embargoStyle,
             });
 
-            /*pointToLayer (geojson, latlng) {
-      return L.shapeMarkers.diamondMarker(latlng, 5, {
-        color: '#0099FF',
-        weight: 2
-      })
-*/
             var layerFerrovia = L.esri.featureLayer({
                 url: "//10.100.10.231:6080/arcgis/rest/services/DNITGEO/SNV/MapServer/5",
                 onEachFeature: onEachFeatureRodovia,
@@ -332,25 +288,37 @@ angular.module('sisdrApp')
                     };
                 }
             });
-            /*  var layerPAC = L.esri.featureLayer({
-                 url: "//10.100.10.231:6080/arcgis/rest/services/DNITGEO/PAC/MapServer/1",
-                 style: function() {
-                     return {
-                         color: "#FF0000",
-                         weight: 3
-                     };
-                 },onEachFeature: onEachFeatureRodovia,
-             });
 
-             $scope.wmsLayers['Obras do PAC'] = {
-                 'layer': layerPAC,
-                 'legend': {
-                     'url': '//10.100.10.231:6080/arcgis/rest/services/DNITGEO/PAC/MapServer/legend',
-                     'type': 'png'
-                 }
-             };*/
+            var layerPACsituacao = L.esri.featureLayer({
+                url: "//10.100.10.231:6080/arcgis/rest/services/DNITGEO/PAC/MapServer/0",
+                onEachFeature: onEachFeatureRodovia,
+                style: function() {
+                    return {
+                        color: "#800000",
+                        weight: 3
+                    };
+                }
+            });
 
+            var layerPACintervensao = L.esri.featureLayer({
+                url: "//10.100.10.231:6080/arcgis/rest/services/DNITGEO/PAC/MapServer/1",
+                onEachFeature: onEachFeatureRodovia,
+                style: function() {
+                    return {
+                        color: "#808000",
+                        weight: 3
+                    };
+                }
+            });
 
+            $scope.wmsLayers['Ferrovias'] = {
+                'layer': layerFerrovia,
+                'legend': {
+                    'url': 'images/icons/tube-rails.svg',
+                    'fill': '#A0522D'
+                }
+            };
+            
             $scope.wmsLayers['Rodovias Federais'] = {
                 'layer': layerRodoviasFederais,
                 'legend': {
@@ -376,6 +344,22 @@ angular.module('sisdrApp')
                 }
             };
 
+            $scope.wmsLayers['PAC - Situação'] = {
+                'layer': layerPACsituacao,
+                'legend': {
+                    'url': 'images/icons/pol-icon.png',
+                    'type': 'png'
+                }
+            };
+
+            $scope.wmsLayers['PAC - Intervesão'] = {
+                'layer': layerPACintervensao,
+                'legend': {
+                    'url': 'images/icons/pol-icon.png',
+                    'type': 'png'
+                }
+            };
+
             $scope.wmsLayers['Terras Indígenas'] = {
                 'layer': layerTerraIndigena,
                 'legend': {
@@ -385,13 +369,6 @@ angular.module('sisdrApp')
                 }
             };
 
-            $scope.wmsLayers['Ferrovias'] = {
-                'layer': layerFerrovia,
-                'legend': {
-                    'url': 'images/icons/tube-rails.svg',
-                    'fill': '#A0522D'
-                }
-            };
 
             console.log($scope.initialLayers);
 

@@ -20,7 +20,7 @@ angular
         'ngMaterial',
         'ui.bootstrap',
         /* 'ngCsv',*/
-        'ngStorage',
+        //'ngStorage',
     ])
     .config(function($provide, $routeProvider, authProvider, symbologiesProvider, ACCESS_LEVEL) {
 

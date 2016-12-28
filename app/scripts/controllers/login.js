@@ -8,7 +8,7 @@
  * Controller of the sisdrApp
  */
 angular.module('sisdrApp')
-    .controller('LoginCtrl', function($rootScope, $scope, RestApi, auth, $location, $http, $cookies, ACCESS_LEVEL, $localStorage) {
+    .controller('LoginCtrl', function($rootScope, $scope, RestApi, auth, $location, $http, $cookies, ACCESS_LEVEL) {
 
         var user_data = $cookies.get('user_data');
         if (user_data) {
@@ -65,12 +65,10 @@ angular.module('sisdrApp')
          */
         function initApplication(user_data, level) {
             var headers = {};
-            $localStorage = {};
             auth.setUser(level, user_data);
             headers['Authorization'] = 'Token ' + user_data.token;
             $http.defaults.headers.get = headers;
             $location.path('#/');
-            console.log('pass in initApplication');
         }
 
         /**

@@ -30,14 +30,14 @@ angular.module('sisdrApp')
 
         $scope.$watch(auth.isAuthenticated, function(value, oldValue) {
             if (!value && oldValue) {
-                console.info('User Disconnected');
+                //console.info('User Disconnected');
                 $location.path('#/');
             }
 
             var dataUser = {};
 
             if (value) {
-                console.info('User Connected');
+                //console.info('User Connected');
                 auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
                 dataUser.userName = auth.getUser();
                 $rootScope.dataUser = dataUser;

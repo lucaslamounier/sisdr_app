@@ -29,11 +29,10 @@ angular.module('sisdrApp')
                 $scope.PropriedadeLindeiraSearch = function(filter) {
                     var restData, layerName, uf, br, lote;
                     $scope.propriedadeLindeiraLoad = true;
-                    debugger;
                     if(!isEmpty(filter)){
                         uf = !isEmpty(filter.uf) ? filter.uf.sigla: null;
-                        br = filter.br !== null ? filter.br.vl_br : null;
-                        lote = filter.lote != null ? filter.lote.vl_lote : null;
+                        br = filter.br ? filter.br.vl_br : null;
+                        lote = filter.lote ? filter.lote.vl_lote : null;
  
                         if(uf && !br && !lote){
 
@@ -77,24 +76,43 @@ angular.module('sisdrApp')
                         console.log('filter propriedade lindeira sucess ...');
 
                         var layer = L.geoJson(data.features, {
-                            onEachFeature: eachLayer
+                            onEachFeature: propertiesPropLindeira,
+                            style: style,
                         });
                         $scope.layers[layerName] = layer;
                         $scope.propriedadeLindeiraLoad = false;
                         $scope.toggleNav('filter');
-                        $scope.filterProfaixa = {};
+                        $scope.filterPropLind = {};
                     }
 
                     function failtHandler(data) {
                         $scope.propriedadeLindeiraLoad = false;
                     }
 
-                    function eachLayer(feature, layer) {
+                    function style(feature) {
+                            return {
+                                weight: 3,
+                                opacity: 0.7,
+                                color: '#7CFC00',
+
+                            };
+                    }
+
+                    function propertiesPropLindeira(feature, layer) {
                         if (feature.properties) {
-                            layer.bindPopup(GISHelper.createHTMLPopup(feature.properties));
+                            var url = '#/propriedades-lindeiras/detail/' + feature.properties.id_propriedade;
+                            var htmlLink = "<br /><a href='" + url + "' target='_blanck'>vizualizar detalhes</a>";
+                            var properties = {
+                                'Município': feature.properties.nm_municipio,
+                                'UF': feature.properties.sg_uf,
+                                'Propriedade': feature.properties.nm_propriedade,
+                                'Proprietário': feature.properties.nm_proprietario,
+                                ' ': htmlLink,
+                            }
+                           layer.bindPopup(GISHelper.createHTMLPopup(properties));
                         }
                     }
-                
+                            
                 }
 
                 function onResultLote(result) {

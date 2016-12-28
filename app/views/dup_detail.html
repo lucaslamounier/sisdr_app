@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-    <div class="row" ng-show="!msg">
+    <div class="row" ng-show="!msg && dup.possui_arquivos.pdf || dup.possui_arquivos.doc">
         <div ng-show="!dup.has_geometry">
             <br />
             <br /><br />
@@ -68,7 +68,7 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-sm-3" ng-show="dup.lk_doc_publicacao">
+        <div class="col-sm-3" ng-show="dup.possui_arquivos.doc">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <img src="../images/doc-logo.svg" width="25" height="25" /> Word
@@ -84,7 +84,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-3" ng-show="dup.lk_pdf_publicacao">
+        <div class="col-sm-3" ng-show="dup.possui_arquivos.pdf">
             <div class="panel panel-red-border">
                 <div class="panel-heading panel-red">
                     <img src="../images/pdf-logo.svg" width="25" height="25" /> PDF
