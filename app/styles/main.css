@@ -1,15 +1,13 @@
-/* Space out content a bit */
-
 md-select, md-input-container{
 	margin: 0 !important;
 	padding: 0 !important;
 }
 
-@media (min-width: 992px)
+/*@media (min-width: 992px)
 .col-21 {
     width: 17.666667%;
 }
-
+*/
 #map{
   height: 850px;
 }
@@ -349,7 +347,7 @@ body > div > md-content > side-nav > md-sidenav > accordion > div > div.panel.pa
 	margin-top: 3px;
 }
 
-@media (min-width: 1200px)
+/*@media (min-width: 1200px)
 .container {
     width: 1200px !important;
-}
+}*/

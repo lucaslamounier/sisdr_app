@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" />
     <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" />
     <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.css" />
-    <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css" />
     <link rel="stylesheet" href="bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" />
-    <link rel="stylesheet" href="bower_components/c3/c3.css" />
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/LControlSwitch.css">
+
+    <link rel="stylesheet" href="lib/css/MarkerCluster.css" />
+    <link rel="stylesheet" href="lib/css/MarkerCluster.Default.css" />
 
      <!-- endbuild:css(.tmp) styles/main.css -->
     
@@ -53,23 +53,22 @@
     <script src="bower_components/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
     <script src="bower_components/leaflet-wms-layer-info/dist/Leaflet.WMSLayerInfo.js"></script> 
     <script src="bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.js"></script>
-    <!-- <script src="bower_components/ngstorage/ngStorage.min.js"></script> -->
-    <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js(.) scripts/extra.js -->
-    <script src="scripts/jquery.fileDownload.js"></script>
-    <script src="scripts/leaflet.draw.js"></script>
-    <script src="scripts/esri-leaflet.js"></script>
+    <script src="lib/js/KML.js"></script>
+    <script src="lib/js/highcharts.js"></script>
+    <script src="lib/js/highcharts-3d.js"></script>
+    <script src="lib/js/jquery.fileDownload.js"></script>
+    <script src="lib/js/leaflet.draw.js"></script>
+    <script src="lib/js/esri-leaflet.js"></script>
+    <script src="lib/js/leaflet.markercluster-src.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/acl.js"></script>
-    <script src="scripts/app.js"></script>
-    <script src="scripts/KML.js"></script>
-    <script src="scripts/highcharts.js"></script>
-    <script src="scripts/highcharts-3d.js"></script>
+    <script src="scripts/app.js"></script>   
     <script src="scripts/services/formdata.js"></script>
     <script src="scripts/services/restapi.js"></script>
     <script src="scripts/services/symbologies.js"></script>
@@ -96,8 +95,7 @@
     <script src="scripts/controllers/logout.js"></script>
     <script src="scripts/controllers/dup.js"></script>
     <script src="scripts/controllers/estatistica.js"></script>
-    <!-- endbuild -->
-   
+    <!-- endbuild -->  
 </body>
 
 </html>
