@@ -252,29 +252,6 @@ angular.module('sisdrApp')
 
             var id_dup = $routeParams.id;
 
-            function onResult(result) {
-                $scope.dup = result.dup;
-
-                if(!$scope.dup.has_geometry){
-
-                    $scope.box_with = 'detalhe-box-100';
-
-                }else{
-                    
-                    $scope.box_with = 'detalhe-box-50';
-                }
-                $scope.adicionarGeoJSON($scope.dup.geojson);
-            };
-
-            function onError(error) {
-                if (error.status === -1) {
-                    console.log('reload page..');
-                    window.location.reload();
-                } else {
-                    $scope.msg = "Não foi possivel consultar dados.";
-                }
-                console.log('Erro:' + error.statusText, error.status);
-            }
             /* Send request for restAPI */
             var dupRequest = RestApi.getDup({
                 type: 'dups-detail',
@@ -288,23 +265,7 @@ angular.module('sisdrApp')
             var allPromise = $q.all(promises);
             allPromise.then(onResult, onError);
 
-            $scope.adicionarGeoJSON = function(geoString) {
-
-                if(!isEmpty(geoString)){
-                    var json = $.parseJSON(geoString);
-
-                    if (typeof json == 'object') {
-                        var layer = L.geoJson(json, {
-                            style: {
-                                fillColor: '#8B0000',
-                                weight: 3,
-                                color: '#FF0000',
-                            }
-                        }).addTo($scope.map);
-                        $scope.updateFitBounds(layer);
-                    }
-                };
-            };
+         }; 
 
             /**
              * Atualiza a área de visualização do mapa.
@@ -326,7 +287,7 @@ angular.module('sisdrApp')
                 return updated;
             };
 
-        };
+       
 
         $scope.donwload = function(path) {
 
@@ -346,6 +307,48 @@ angular.module('sisdrApp')
                 console.log('error in download file ' + err);
             }
 
+        };
+
+        function onResult(result) {
+                $scope.dup = result.dup;
+
+                if(!$scope.dup.has_geometry){
+
+                    $scope.box_with = 'detalhe-box-100';
+
+                }else{
+                    
+                    $scope.box_with = 'detalhe-box-50';
+                }
+                $scope.adicionarGeoJSON($scope.dup.geojson);
+        };
+
+        function onError(error) {
+                if (error.status === -1) {
+                    console.log('reload page..');
+                    window.location.reload();
+                } else {
+                    $scope.msg = "Não foi possivel consultar dados.";
+                }
+                console.log('Erro:' + error.statusText, error.status);
+        }
+
+        $scope.adicionarGeoJSON = function(geoString) {
+
+                if(!isEmpty(geoString)){
+                    var json = $.parseJSON(geoString);
+
+                    if (typeof json == 'object') {
+                        var layer = L.geoJson(json, {
+                            style: {
+                                fillColor: '#8B0000',
+                                weight: 3,
+                                color: '#FF0000',
+                            }
+                        }).addTo($scope.map);
+                        $scope.updateFitBounds(layer);
+                    }
+                };
         };
 
     });
