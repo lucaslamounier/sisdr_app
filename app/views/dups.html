@@ -13,11 +13,9 @@
         </div>
     </div>
     <br />
-    <div layout="row" layout-sm="column" layout-align="space-around">
-
-        <div class="collapse" id="search-form" style="margin-bottom: 35px;width: 100%;">
+    <div class="collapse row" id="search-form" style="margin-bottom: 35px;width: 100%;">
             <form class="form-horizontal formtype" ng-submit='filterDup(filter)'>
-                <div class="row form-line">
+                <div class="form-line">
                     <div class="col-xs-6 col-md-3">
                         <label class="pull-center">UF</label>
                         <select ng-model="filter.estado" class="form-control" ng-options="estado.nome for estado in estados track by estado.sigla" ng-change='getBR(filter.estado)'>
@@ -45,21 +43,10 @@
                              </button>
                      </div>
                 </div>
-                <div class="row form-line"><br /></div>
-                <div class="row form-line">
-                    <!-- Tags to store value defined by map selection and pagination -->
-                    <div id="bbox" display="none" value="bbox" value=""></div>
-                    <div id="formBounds" display="none" value="" /></div>
 
-                <!-- <div class="col-xs-6 col-md-3">
-                    <button class="btn btn-primary" type="submit">
-                                 Pesquisar
-                        </button>
-                </div> -->
-        </div>
-
-        </form>
+            </form>
     </div>
+   <div class="row" layout-align="space-around">
     <div class="table-responsive" style="margin-top: 25px;">
         <table class="table table-striped">
             <thead>
