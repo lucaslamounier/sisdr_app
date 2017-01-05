@@ -1,38 +1,31 @@
 <md-toolbar class="md-inverse">
-    <div class="md-toolbar-tools" >
-      <md-button
-        ng-click="openNav('filter')"
-        aria-label="toggleLeft"
-        class="md-icon-button">
-        <md-icon md-svg-icon="images/icons/dehaze_md.svg"></md-icon>
-      </md-button>
-     <div>
-      <span>
+    <div class="md-toolbar-tools">
+        <md-button ng-click="openNav('filter')" aria-label="toggleLeft" class="md-icon-button">
+            <md-icon md-svg-icon="images/icons/dehaze_md.svg"></md-icon>
+        </md-button>
+        <div>
+            <span>
           <img src="images/brasil-dnit.jpg" width="55px" height="45px" style="border-radius: 7px;"></img>
         </span>
-        <span style="margin-right: -15px; margin-left: -8px;">
+            <span style="margin-right: -15px; margin-left: -8px;">
           <img src="images/cgdr-logo.svg" width="60px" height="50px"></img>
         </span>
-        <span>
+            <span>
           <img src="images/profaixa-logo.svg" width="60px" height="50px"></img>
         </span>
-     </div>
-      <span>SISDR - Sistema de Desapropriação e Reassentamento</span>
+        </div>
+        <span>SISDR - Sistema de Desapropriação e Reassentamento</span>
 
-      <span flex></span>
+        <span flex></span>
 
-      <div class="dropdown" ng-show="isAuthenticated">
-        <a href=""
-          class="dropdown-toggle"
-          data-toggle="dropdown" role="button"
-          aria-expanded="false">
-            <i class='glyphicon glyphicon-user'></i>
-              {{username}}
-              <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-          <li><a href="" ng-click='logout()'>Sair   <img src="images/logout.png" style="width: 20px; height: 20px; float: right;"/></a></li>
-        </ul>
-      </div>
+        <div class="dropdown" ng-show="isAuthenticated">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                <i class='glyphicon glyphicon-user'></i> {{username}}
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                <li><a href="" ng-click='logout()'>Sair   <img src="images/logout.png" style="width: 20px; height: 20px; float: right;"/></a></li>
+            </ul>
+        </div>
     </div>
-  </md-toolbar>
+</md-toolbar>

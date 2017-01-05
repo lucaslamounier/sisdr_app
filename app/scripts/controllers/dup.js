@@ -106,22 +106,22 @@ angular.module('sisdrApp')
                         dup.projeto.km_final == seg_final)
                 })
 
-            }else if (estado && !br && seg_inicial && seg_final) {
+            } else if (estado && !br && seg_inicial && seg_final) {
                 $scope.dups = $scope.lastResults.filter(function(dup) {
-                    return (dup.projeto.UF === estado 
-                            && dup.projeto.km_inicial == seg_inicial 
-                            && dup.projeto.km_final == seg_final)
+                    return (dup.projeto.UF === estado &&
+                        dup.projeto.km_inicial == seg_inicial &&
+                        dup.projeto.km_final == seg_final)
                 })
 
-            }else if (estado && !br && seg_inicial || seg_inicial != null && !seg_final) {
+            } else if (estado && !br && seg_inicial || seg_inicial != null && !seg_final) {
                 $scope.dups = $scope.lastResults.filter(function(dup) {
                     return (dup.projeto.UF === estado && dup.projeto.km_inicial == seg_inicial)
                 })
 
-            }else if (estado && !br && !seg_inicial && seg_final) {
+            } else if (estado && !br && !seg_inicial && seg_final) {
                 $scope.dups = $scope.lastResults.filter(function(dup) {
-                    return (dup.projeto.UF === estado 
-                            && dup.projeto.km_final == seg_final)
+                    return (dup.projeto.UF === estado &&
+                        dup.projeto.km_final == seg_final)
                 })
             }
         };
@@ -153,8 +153,8 @@ angular.module('sisdrApp')
 
                 allPromise = $q.all(promises);
                 allPromise.then(onResultBR, onError);
-            
-            }else{
+
+            } else {
                 $scope.filter = {};
             };
 
@@ -173,7 +173,7 @@ angular.module('sisdrApp')
         function onResultBR(result) {
             if (result.brs.length) {
                 var brs = [];
-                for(var i=0; i < result.brs.length; i++){
+                for (var i = 0; i < result.brs.length; i++) {
                     brs.push(result.brs[i].vl_br);
                 }
                 $scope.brs = brs;
@@ -242,7 +242,7 @@ angular.module('sisdrApp')
         auth.isAuthenticated() ? $rootScope.logged = true : $rootScope.logged = false;
 
         if (!auth.isAuthenticated()) {
-                $location.path('#/');
+            $location.path('#/');
         }
 
 
@@ -265,29 +265,29 @@ angular.module('sisdrApp')
             var allPromise = $q.all(promises);
             allPromise.then(onResult, onError);
 
-         }; 
+        };
 
-            /**
-             * Atualiza a área de visualização do mapa.
-             * @param layer
-             */
+        /**
+         * Atualiza a área de visualização do mapa.
+         * @param layer
+         */
 
-            $scope.updateFitBounds = function(layer) {
-                $('#map').css('height', '420px');
-                var bounds, layers, updated = false;
-                if ('getBounds' in layer) {
-                    bounds = layer.getBounds();
-                } else if ('getLayers' in layer) {
-                    bounds = layer.getLayers()[0].getBounds();
-                }
-                if (bounds && Object.keys(bounds).length) {
-                    $scope.map.fitBounds(bounds);
-                    updated = true;
-                }
-                return updated;
-            };
+        $scope.updateFitBounds = function(layer) {
+            $('#map').css('height', '420px');
+            var bounds, layers, updated = false;
+            if ('getBounds' in layer) {
+                bounds = layer.getBounds();
+            } else if ('getLayers' in layer) {
+                bounds = layer.getLayers()[0].getBounds();
+            }
+            if (bounds && Object.keys(bounds).length) {
+                $scope.map.fitBounds(bounds);
+                updated = true;
+            }
+            return updated;
+        };
 
-       
+
 
         $scope.donwload = function(path) {
 
@@ -310,45 +310,45 @@ angular.module('sisdrApp')
         };
 
         function onResult(result) {
-                $scope.dup = result.dup;
+            $scope.dup = result.dup;
 
-                if(!$scope.dup.has_geometry){
+            if (!$scope.dup.has_geometry) {
 
-                    $scope.box_with = 'detalhe-box-100';
+                $scope.box_with = 'detalhe-box-100';
 
-                }else{
-                    
-                    $scope.box_with = 'detalhe-box-50';
-                }
-                $scope.adicionarGeoJSON($scope.dup.geojson);
+            } else {
+
+                $scope.box_with = 'detalhe-box-50';
+            }
+            $scope.adicionarGeoJSON($scope.dup.geojson);
         };
 
         function onError(error) {
-                if (error.status === -1) {
-                    console.log('reload page..');
-                    window.location.reload();
-                } else {
-                    $scope.msg = "Não foi possivel consultar dados.";
-                }
-                console.log('Erro:' + error.statusText, error.status);
+            if (error.status === -1) {
+                console.log('reload page..');
+                window.location.reload();
+            } else {
+                $scope.msg = "Não foi possivel consultar dados.";
+            }
+            console.log('Erro:' + error.statusText, error.status);
         }
 
         $scope.adicionarGeoJSON = function(geoString) {
 
-                if(!isEmpty(geoString)){
-                    var json = $.parseJSON(geoString);
+            if (!isEmpty(geoString)) {
+                var json = $.parseJSON(geoString);
 
-                    if (typeof json == 'object') {
-                        var layer = L.geoJson(json, {
-                            style: {
-                                fillColor: '#8B0000',
-                                weight: 3,
-                                color: '#FF0000',
-                            }
-                        }).addTo($scope.map);
-                        $scope.updateFitBounds(layer);
-                    }
-                };
+                if (typeof json == 'object') {
+                    var layer = L.geoJson(json, {
+                        style: {
+                            fillColor: '#8B0000',
+                            weight: 3,
+                            color: '#FF0000',
+                        }
+                    }).addTo($scope.map);
+                    $scope.updateFitBounds(layer);
+                }
+            };
         };
 
     });

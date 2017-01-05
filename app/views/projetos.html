@@ -13,41 +13,40 @@
         <mapprojeto class="row"></mapprojeto>
         <div class="row">
             <div class="col-md-1 no-padding-left">
-                <button class="btn btn-default" data-toggle="collapse" data-target="#search-form" aria-expanded="false" aria-controls="search-form"
-                ng-click="cleanFilters()">
+                <button class="btn btn-default" data-toggle="collapse" data-target="#search-form" aria-expanded="false" aria-controls="search-form" ng-click="cleanFilters()">
                       Filtrar Projeto Geométrico
                 </button>
             </div>
         </div>
         <br />
         <div class="collapse row" id="search-form" style="margin-bottom: 35px;width: 100%;">
-                <form class="form-horizontal formtype" ng-submit='filterProjeto(filter)'>
-                    <div class="form-line">
-                        <div class="col-xs-6" ng-class="uf_class">
-                            <label class="pull-center">UF</label>
-                            <select ng-model="filter.estado" class="form-control" ng-options="estado.nome for estado in estados" ng-change='getBR(filter.estado)'>
+            <form class="form-horizontal formtype" ng-submit='filterProjeto(filter)'>
+                <div class="form-line">
+                    <div class="col-xs-6" ng-class="uf_class">
+                        <label class="pull-center">UF</label>
+                        <select ng-model="filter.estado" class="form-control" ng-options="estado.nome for estado in estados" ng-change='getBR(filter.estado)'>
                                <option value="" default>UF</option>
                           </select>
-                        </div>
-                        <div class="col-xs-6" ng-show="showInputBR" ng-class="br_class">
-                            <label class="pull-center">BR</label>
-                            <select id="br" class="form-control" ng-model="filter.br" ng-options="br.br for br in brs" ng-change='activeFields()'>
+                    </div>
+                    <div class="col-xs-6" ng-show="showInputBR" ng-class="br_class">
+                        <label class="pull-center">BR</label>
+                        <select id="br" class="form-control" ng-model="filter.br" ng-options="br.br for br in brs" ng-change='activeFields()'>
                                 <option value="" default>BR</option>
                           </select>
-                        </div>
-                        <div class="col-xs-6 col-md-2" ng-show="showInputTipoProjeto">
-                            <label class="pull-center">Tipo de Projeto</label>
-                            <select id="tipo_projeto" class="form-control" ng-model="filter.tipo_projeto">
+                    </div>
+                    <div class="col-xs-6 col-md-2" ng-show="showInputTipoProjeto">
+                        <label class="pull-center">Tipo de Projeto</label>
+                        <select id="tipo_projeto" class="form-control" ng-model="filter.tipo_projeto">
                                 <option value="" default>Tipo de Projeto</option>
                                 <option value="A">Anteprojeto</option>
                                 <option value="B">Básico</option>
                                 <option value="E">Executivo</option>
                                 <option value="S">As-Built</option>
                           </select>
-                        </div>
-                        <div class="col-xs-6 col-md-2" ng-show="showInputTipoObra">
-                            <label class="pull-center">Tipo de Obra</label>
-                            <select id="tipo_obra" class="form-control" ng-model="filter.tipo_obra">
+                    </div>
+                    <div class="col-xs-6 col-md-2" ng-show="showInputTipoObra">
+                        <label class="pull-center">Tipo de Obra</label>
+                        <select id="tipo_obra" class="form-control" ng-model="filter.tipo_obra">
                                 <option value="" default>Tipo de Obra</option>
                                 <option value="I">Implantação</option>
                                 <option value="P">Pavimentação</option>
@@ -57,139 +56,139 @@
                                 <option value="A">Readequação</option>
                                 <option value="O">Outros</option>
                           </select>
-                        </div>
-                        <div class="col-xs-6 col-md-3" ng-show="showInputSegmento" ng-class="class_segmento">
-                            <label>Segmento Inicial</label>
-                            <input id="path" class="form-control numberInput" ng-model="filter.seg_inicial" type="number" min="0" />
-                        </div>
-                        <div class="col-xs-6 col-md-3" ng-show="showInputSegmento" ng-class="class_segmento">
-                            <label>Segmento Final</label>
-                            <input id="row" class="form-control numberInput" ng-model="filter.seg_final" type="number" min="0" />
-                        </div>
-                        <div class="col-xs-6 col-md-3">
+                    </div>
+                    <div class="col-xs-6 col-md-3" ng-show="showInputSegmento" ng-class="class_segmento">
+                        <label>Segmento Inicial</label>
+                        <input id="path" class="form-control numberInput" ng-model="filter.seg_inicial" type="number" min="0" />
+                    </div>
+                    <div class="col-xs-6 col-md-3" ng-show="showInputSegmento" ng-class="class_segmento">
+                        <label>Segmento Final</label>
+                        <input id="row" class="form-control numberInput" ng-model="filter.seg_final" type="number" min="0" />
+                    </div>
+                    <div class="col-xs-6 col-md-3">
 
-                            <button class="btn btn-primary" type="submit" ng-class="button_position">
+                        <button class="btn btn-primary" type="submit" ng-class="button_position">
                                     Pesquisar
                              </button>
-                        </div>
                     </div>
+                </div>
             </form>
         </div>
         <div class="row" layout-align="space-around">
-        <div class="table-responsive" style="margin-top: 25px;">
-            <table class="table table-striped table-condensed font-13">
-                <thead>
-                    <tr>
-                        <th ng-click="order='properties.vl_codigo_projeto'; reverseSort = !reverseSort">Código do Projeto
-                            <span ng-show="order=='properties.vl_codigo_projeto' && !reverseSort || order==null">
+            <div class="table-responsive" style="margin-top: 25px;">
+                <table class="table table-striped table-condensed font-13">
+                    <thead>
+                        <tr>
+                            <th ng-click="order='properties.vl_codigo_projeto'; reverseSort = !reverseSort">Código do Projeto
+                                <span ng-show="order=='properties.vl_codigo_projeto' && !reverseSort || order==null">
                                 <img src="images/icons/arrowUp.png"/>
                             </span>
-                            <span ng-show="order=='properties.vl_codigo_projeto' && reverseSort">
+                                <span ng-show="order=='properties.vl_codigo_projeto' && reverseSort">
                                 <img src="images/icons/arrowDown.png"/>
                             </span>
-                        </th>
-                        <th ng-click="order='properties.ds_tipo_projeto_display'; reverseSort = !reverseSort">Tipo de Projeto
-                            <span ng-show="order=='properties.ds_tipo_projeto_display' && !reverseSort || order==null">
+                            </th>
+                            <th ng-click="order='properties.ds_tipo_projeto_display'; reverseSort = !reverseSort">Tipo de Projeto
+                                <span ng-show="order=='properties.ds_tipo_projeto_display' && !reverseSort || order==null">
                                 <img src="images/icons/arrowUp.png"/>
                             </span>
-                            <span ng-show="order=='properties.ds_tipo_projeto_display' && reverseSort">
+                                <span ng-show="order=='properties.ds_tipo_projeto_display' && reverseSort">
                                 <img src="images/icons/arrowDown.png"/>
                             </span>
-                        </th>
-                        <th ng-click="order='properties.ds_tipo_obra_display'; reverseSort = !reverseSort">Tipo de Obra
-                            <span ng-show="order=='properties.ds_tipo_obra_display' && !reverseSort || order==null">
+                            </th>
+                            <th ng-click="order='properties.ds_tipo_obra_display'; reverseSort = !reverseSort">Tipo de Obra
+                                <span ng-show="order=='properties.ds_tipo_obra_display' && !reverseSort || order==null">
                                 <img src="images/icons/arrowUp.png"/>
                             </span>
-                            <span ng-show="order=='properties.ds_tipo_obra_display' && reverseSort">
+                                <span ng-show="order=='properties.ds_tipo_obra_display' && reverseSort">
                                 <img src="images/icons/arrowDown.png"/>
                             </span>
-                        </th>
-                        <th ng-click="order='properties.empresa_responsavel'; reverseSort = !reverseSort">Empresa Resposável
-                            <span ng-show="order=='properties.empresa_responsavel' && !reverseSort || order==null">
+                            </th>
+                            <th ng-click="order='properties.empresa_responsavel'; reverseSort = !reverseSort">Empresa Resposável
+                                <span ng-show="order=='properties.empresa_responsavel' && !reverseSort || order==null">
                                 <img src="images/icons/arrowUp.png"/>
                             </span>
-                            <span ng-show="order=='properties.empresa_responsavel' && reverseSort">
+                                <span ng-show="order=='properties.empresa_responsavel' && reverseSort">
                                 <img src="images/icons/arrowDown.png"/>
                             </span>
-                        </th>
-                        <th ng-click="order='properties.dt_aprovacao_projeto'; reverseSort = !reverseSort">
-                            Data de Aprovação
-                            <span ng-show="order=='properties.dt_aprovacao_projeto' && !reverseSort || order==null">
+                            </th>
+                            <th ng-click="order='properties.dt_aprovacao_projeto'; reverseSort = !reverseSort">
+                                Data de Aprovação
+                                <span ng-show="order=='properties.dt_aprovacao_projeto' && !reverseSort || order==null">
                                 <img src="images/icons/arrowUp.png"/>
                             </span>
-                            <span ng-show="order=='properties.dt_aprovacao_projeto' && reverseSort">
+                                <span ng-show="order=='properties.dt_aprovacao_projeto' && reverseSort">
                                 <img src="images/icons/arrowDown.png"/>
                             </span>
-                        </th>
-                        <th ng-click="order='properties.vl_br'; reverseSort = !reverseSort">BR
-                            <span ng-show="order=='properties.vl_br' && !reverseSort || order==null">
+                            </th>
+                            <th ng-click="order='properties.vl_br'; reverseSort = !reverseSort">BR
+                                <span ng-show="order=='properties.vl_br' && !reverseSort || order==null">
                                 <img src="images/icons/arrowUp.png"/>
                             </span>
-                            <span ng-show="order=='properties.vl_br' && reverseSort">
+                                <span ng-show="order=='properties.vl_br' && reverseSort">
                                 <img src="images/icons/arrowDown.png"/>
                             </span>
-                        </th>
-                        <th ng-click="order='properties.sg_uf'; reverseSort = !reverseSort">UF
-                            <span ng-show="order=='properties.sg_uf' && !reverseSort || order==null">
+                            </th>
+                            <th ng-click="order='properties.sg_uf'; reverseSort = !reverseSort">UF
+                                <span ng-show="order=='properties.sg_uf' && !reverseSort || order==null">
                                 <img src="images/icons/arrowUp.png"/>
                             </span>
-                            <span ng-show="order=='properties.sg_uf' && reverseSort">
+                                <span ng-show="order=='properties.sg_uf' && reverseSort">
                                 <img src="images/icons/arrowDown.png"/>
                             </span>
-                        </th>
-                        <th ng-click="order='properties.vl_km_inicial'; reverseSort = !reverseSort">KM Inicial
-                            <span ng-show="order=='properties.vl_km_inicial' && !reverseSort || order==null">
+                            </th>
+                            <th ng-click="order='properties.vl_km_inicial'; reverseSort = !reverseSort">KM Inicial
+                                <span ng-show="order=='properties.vl_km_inicial' && !reverseSort || order==null">
                                 <img src="images/icons/arrowUp.png"/>
                             </span>
-                            <span ng-show="order=='properties.vl_km_inicial' && reverseSort">
+                                <span ng-show="order=='properties.vl_km_inicial' && reverseSort">
                                 <img src="images/icons/arrowDown.png"/>
                             </span>
-                        </th>
-                        <th ng-click="order='properties.vl_km_final'; reverseSort = !reverseSort">KM Final
-                            <span ng-show="order=='properties.vl_km_final' && !reverseSort || order==null">
+                            </th>
+                            <th ng-click="order='properties.vl_km_final'; reverseSort = !reverseSort">KM Final
+                                <span ng-show="order=='properties.vl_km_final' && !reverseSort || order==null">
                                 <img src="images/icons/arrowUp.png"/>
                             </span>
-                            <span ng-show="order=='properties.vl_km_final' && reverseSort">
+                                <span ng-show="order=='properties.vl_km_final' && reverseSort">
                                 <img src="images/icons/arrowDown.png"/>
                             </span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-show="projetos.length" ng-repeat="projeto in projetos | orderBy : order : reverseSort">
-                        <td><a ng-href="#/projetos/detail/{{projeto.id}}" data-toggle="tooltip" data-placement="top" title="Clique aqui para visualizar detalhes do Projeto.">{{projeto.properties.vl_codigo_projeto}}</a></td>
-                        <td>{{projeto.properties.ds_tipo_projeto_display}}</td>
-                        <td>{{projeto.properties.ds_tipo_obra_display}}</td>
-                        <td>{{projeto.properties.empresa_responsavel}}</td>
-                        <td>
-                            <span ng-bind="projeto.properties.dt_aprovacao_projeto | date:'dd/MM/yyyy'"></span>
-                        </td>
-                        <td>
-                            {{projeto.properties.vl_br}}
-                        </td>
-                        <td>
-                            {{projeto.properties.sg_uf}}
-                        </td>
-                        <td>
-                            {{projeto.properties.vl_km_inicial}}
-                        </td>
-                        <td>
-                            {{projeto.properties.vl_km_final}}
-                        </td>
-                        <td>
-                            <span class="btn glyphicon glyphicon-eye-open" href="#" ng-click="seeOnMap(projeto.id)">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-show="projetos.length" ng-repeat="projeto in projetos | orderBy : order : reverseSort">
+                            <td><a ng-href="#/projetos/detail/{{projeto.id}}" data-toggle="tooltip" data-placement="top" title="Clique aqui para visualizar detalhes do Projeto.">{{projeto.properties.vl_codigo_projeto}}</a></td>
+                            <td>{{projeto.properties.ds_tipo_projeto_display}}</td>
+                            <td>{{projeto.properties.ds_tipo_obra_display}}</td>
+                            <td>{{projeto.properties.empresa_responsavel}}</td>
+                            <td>
+                                <span ng-bind="projeto.properties.dt_aprovacao_projeto | date:'dd/MM/yyyy'"></span>
+                            </td>
+                            <td>
+                                {{projeto.properties.vl_br}}
+                            </td>
+                            <td>
+                                {{projeto.properties.sg_uf}}
+                            </td>
+                            <td>
+                                {{projeto.properties.vl_km_inicial}}
+                            </td>
+                            <td>
+                                {{projeto.properties.vl_km_final}}
+                            </td>
+                            <td>
+                                <span class="btn glyphicon glyphicon-eye-open" href="#" ng-click="seeOnMap(projeto.id)">
                         </span>
-                        </td>
-                    </tr>
-                    <tr ng-show="!projetos.length">
-                        <td colspan="10" style="text-align: center;">
-                            <div class="alert alert-info">
-                                Nenhum registro encontrado.
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            </td>
+                        </tr>
+                        <tr ng-show="!projetos.length">
+                            <td colspan="10" style="text-align: center;">
+                                <div class="alert alert-info">
+                                    Nenhum registro encontrado.
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>

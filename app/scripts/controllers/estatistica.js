@@ -46,12 +46,12 @@ angular.module('sisdrApp')
             var dado_pie3D = [];
             var dado_propriedade = [];
 
-            for(var i = 0; i < $scope.projetos.length; i++ ){
-            	dado_pie3D.push([$scope.projetos[i]['uf'], $scope.projetos[i]['qtd_projetos']])
+            for (var i = 0; i < $scope.projetos.length; i++) {
+                dado_pie3D.push([$scope.projetos[i]['uf'], $scope.projetos[i]['qtd_projetos']])
             }
 
-            for(var i = 0; i <  $scope.propriedades.length; i++ ){
-            	dado_propriedade.push([$scope.propriedades[i]['uf'], $scope.propriedades[i]['qtd_propriedades']])
+            for (var i = 0; i < $scope.propriedades.length; i++) {
+                dado_propriedade.push([$scope.propriedades[i]['uf'], $scope.propriedades[i]['qtd_propriedades']])
             }
 
             Highcharts.chart('pie3DProjetos', {
@@ -80,7 +80,7 @@ angular.module('sisdrApp')
                 }]
             });
 
-       	Highcharts.chart('pie3DPropriedades', {
+            Highcharts.chart('pie3DPropriedades', {
                 chart: {
                     type: 'pie',
                     options3d: {

@@ -74,7 +74,7 @@ angular.module('sisdrApp')
                     $scope.geoJsonLayer[name] = layer;
                     var html = [
                         '<p><strong>',
-                        "<a href=''>",
+                        "<a href='#/propriedades-lindeiras/detail/"+ feature.id +"'>",
                         feature.properties.nm_propriedade,
                         '</a>',
                         '</strong>',
@@ -136,21 +136,21 @@ angular.module('sisdrApp')
                 })
             } else if (estado && br && !lote) {
                 $scope.propriedadesLindeiras = $scope.lastResults.filter(function(prop) {
-                    return (prop.properties.sg_uf === estado 
-                            && prop.properties.profaixa.br === br)
+                    return (prop.properties.sg_uf === estado &&
+                        prop.properties.profaixa.br === br)
                 })
             } else if (estado && !br && lote) {
                 $scope.propriedadesLindeiras = $scope.lastResults.filter(function(prop) {
-                    return (prop.properties.sg_uf === estado 
-                            && prop.properties.profaixa.lote == lote)
+                    return (prop.properties.sg_uf === estado &&
+                        prop.properties.profaixa.lote == lote)
                 })
             } else if (estado && br && lote) {
                 $scope.propriedadesLindeiras = $scope.lastResults.filter(function(prop) {
-                    return (prop.properties.sg_uf === estado 
-                            && prop.properties.profaixa.br === br 
-                            && prop.properties.profaixa.lote == lote)
+                    return (prop.properties.sg_uf === estado &&
+                        prop.properties.profaixa.br === br &&
+                        prop.properties.profaixa.lote == lote)
                 })
-            } 
+            }
         };
 
         $scope.getLote = function(estado, BR) {
@@ -178,12 +178,12 @@ angular.module('sisdrApp')
             if (error.status === -1) {
                 console.log('reload page..');
                 window.location.reload();
-            }else{
+            } else {
                 $scope.msg = "Não foi possivel consultar dados.";
-            } 
+            }
             console.log('Erro:' + error.statusText, error.status);
             $scope.loading = false;
-            
+
         }
 
         $scope.seeOnMap = function(id) {
@@ -226,7 +226,7 @@ angular.module('sisdrApp')
         function onResultBR(result) {
             if (result.brs.length) {
                 var brs = [];
-                for(var i=0; i < result.brs.length; i++){
+                for (var i = 0; i < result.brs.length; i++) {
                     brs.push(result.brs[i].vl_br);
                 }
                 $scope.brs = brs;
@@ -270,7 +270,7 @@ angular.module('sisdrApp')
 
                 allPromise = $q.all(promises);
                 allPromise.then(onResultBR, onError);
-            }else{
+            } else {
                 $scope.filter = {};
             }
         };
@@ -320,9 +320,9 @@ angular.module('sisdrApp')
             if (error.status === -1) {
                 console.log('reload page..');
                 window.location.reload();
-            }else{
+            } else {
                 $scope.msg = "Não foi possivel consultar dados.";
-            } 
+            }
             console.log('Erro:' + error.statusText, error.status);
         }
         $scope.adicionarGeoJSON = function(geoString) {
@@ -338,7 +338,6 @@ angular.module('sisdrApp')
                 }).addTo($scope.map);
 
                 $scope.updateFitBounds(layer);
-                //$scope.map.setZoom(11);
             }
         };
 

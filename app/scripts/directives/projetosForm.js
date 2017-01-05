@@ -21,7 +21,7 @@ angular.module('sisdrApp')
                 function faultHandler(error) {
                     console.log(error)
                 }
-                
+
             },
 
             controller: function($scope) {
@@ -30,40 +30,40 @@ angular.module('sisdrApp')
                     var restData, layerName, uf, br, empreendimento;
                     $scope.projetosLoad = true;
 
-                    if(!isEmpty(filter)){
-                        uf = !isEmpty(filter.uf) ? filter.uf.sigla: null;
+                    if (!isEmpty(filter)) {
+                        uf = !isEmpty(filter.uf) ? filter.uf.sigla : null;
                         br = filter.br !== null ? filter.br.br : null;
                         empreendimento = filter.empreendimento != null ? filter.empreendimento.id_projeto : null;
- 
-                        if(uf && !br && !empreendimento){
 
-                           layerName = 'Projeto: ' + uf;
-                           restData = RestApi.getObject({
+                        if (uf && !br && !empreendimento) {
+
+                            layerName = 'Projeto: ' + uf;
+                            restData = RestApi.getObject({
                                 type: 'projetos-filter',
                                 'state': uf,
-                            });                     
+                            });
                             restData.$promise.then(resultHandler, failtHandler);
-                           
-                        }else if(uf && br && !empreendimento){
 
-                           layerName = 'Projeto: ' + uf + '-' + br;
-                           restData = RestApi.getObject({
+                        } else if (uf && br && !empreendimento) {
+
+                            layerName = 'Projeto: ' + uf + '-' + br;
+                            restData = RestApi.getObject({
                                 type: 'projetos-filter',
                                 'state': uf,
                                 'br': br,
-                            });                     
+                            });
                             restData.$promise.then(resultHandler, failtHandler);
-                                                    
-                        }else if(uf && br && empreendimento){
 
-                           layerName = 'Projeto: ' + filter.empreendimento.vl_codigo_projeto;
-                           restData = RestApi.getObject({
+                        } else if (uf && br && empreendimento) {
+
+                            layerName = 'Projeto: ' + filter.empreendimento.vl_codigo_projeto;
+                            restData = RestApi.getObject({
                                 type: 'projetos-filter',
                                 'state': uf,
                                 'br': br,
                                 'empreendimento': empreendimento
-                           });                     
-                           restData.$promise.then(resultHandler, failtHandler);
+                            });
+                            restData.$promise.then(resultHandler, failtHandler);
                         }
 
                     }
@@ -106,27 +106,27 @@ angular.module('sisdrApp')
                                 'UF': feature.properties.sg_uf,
                                 'Lote': feature.properties.vl_lote,
                                 ' ': htmlLink,
-                              
+
                             };
                             layer.bindPopup(GISHelper.createHTMLPopup(properties));
+                        }
                     }
-        }
-                
+
                 }
 
-                function onResultBR(result){
+                function onResultBR(result) {
                     $scope.brs = result;
                 };
 
-                function onResultEmpreendimento(result){
+                function onResultEmpreendimento(result) {
                     $scope.empreendimentos = result;
                 };
 
-                function onErrorBr(error){
+                function onErrorBr(error) {
                     console.log('error projetos search rodovias', error);
                 }
 
-                function onErrorEmpreendimento(error){
+                function onErrorEmpreendimento(error) {
                     console.log('error projetos search empreendimentos', error);
                 }
 
@@ -139,14 +139,14 @@ angular.module('sisdrApp')
                         var brRequest = RestApi.get({
                             type: 'projetos-br',
                             'state': filter.sigla
-                        });                     
+                        });
                         brRequest.$promise.then(onResultBR, onErrorBr);
                     }
-               };
+                };
 
-               $scope.getEmpreendimento = function(filter){
+                $scope.getEmpreendimento = function(filter) {
 
-                    if(filter && filter.br.br && filter.uf.sigla){
+                    if (filter && filter.br.br && filter.uf.sigla) {
                         var empreendimentoRequest = RestApi.get({
                             type: 'projetos-empreendimentos-list',
                             'state': filter.uf.sigla,
@@ -155,7 +155,7 @@ angular.module('sisdrApp')
 
                         empreendimentoRequest.$promise.then(onResultEmpreendimento, onErrorEmpreendimento);
                     }
-               };
+                };
             }
         };
     });

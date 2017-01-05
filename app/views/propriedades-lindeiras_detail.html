@@ -14,7 +14,11 @@
             <div id="detalhes-box">
                 <div class="box">
                     <div class="nome"><strong>Matrícula:</strong></div>
-                    <div class="detalhe">{{propriedadeLindeira.numero_matricula}}</div>
+                    <div class="detalhe">
+                        <span ng-show="propriedadeLindeira.numero_matricula"> {{propriedadeLindeira.numero_matricula}}</span>
+                        <span ng-show="!propriedadeLindeira.numero_matricula"> - </span>
+
+                    </div>
                 </div>
                 <hr>
                 <div class="box">

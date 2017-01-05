@@ -6,133 +6,132 @@
     </center>
     <div class="row">
         <div class="col-md-1 no-padding-left">
-            <button class="btn btn-default" data-toggle="collapse" data-target="#search-form" aria-expanded="false" 
-                aria-controls="search-form" ng-click="cleanFilters()">
+            <button class="btn btn-default" data-toggle="collapse" data-target="#search-form" aria-expanded="false" aria-controls="search-form" ng-click="cleanFilters()">
                   Filtrar DUP
           </button>
         </div>
     </div>
     <br />
     <div class="collapse row" id="search-form" style="margin-bottom: 35px;width: 100%;">
-            <form class="form-horizontal formtype" ng-submit='filterDup(filter)'>
-                <div class="form-line">
-                    <div class="col-xs-6 col-md-3">
-                        <label class="pull-center">UF</label>
-                        <select ng-model="filter.estado" class="form-control" ng-options="estado.nome for estado in estados track by estado.sigla" ng-change='getBR(filter.estado)'>
+        <form class="form-horizontal formtype" ng-submit='filterDup(filter)'>
+            <div class="form-line">
+                <div class="col-xs-6 col-md-3">
+                    <label class="pull-center">UF</label>
+                    <select ng-model="filter.estado" class="form-control" ng-options="estado.nome for estado in estados track by estado.sigla" ng-change='getBR(filter.estado)'>
                            <option value="" default>UF</option>
                       </select>
-                    </div>
-                    <div class="col-xs-6 col-md-2" ng-show="showInputBR">
-                        <label class="pull-center">BR</label>
-                        <select id="br" class="form-control" ng-model="filter.br" ng-options="br.vl_br for br in brs">
+                </div>
+                <div class="col-xs-6 col-md-2" ng-show="showInputBR">
+                    <label class="pull-center">BR</label>
+                    <select id="br" class="form-control" ng-model="filter.br" ng-options="br.vl_br for br in brs">
                             <option value="" default>BR</option>
                       </select>
-                    </div>
-                    <div class="col-xs-6 col-md-3" ng-show="showInputSegmento">
-                        <label>Segmento Inicial</label>
-                        <input id="path" class="form-control numberInput" ng-model="filter.seg_inicial" type="number" min="0" />
-                    </div>
-                    <div class="col-xs-6 col-md-3" ng-show="showInputSegmento">
-                        <label>Segmento Final</label>
-                        <input id="row" class="form-control numberInput" ng-model="filter.seg_final" type="number" min="0" />
-                    </div>
-                    <div class="col-xs-6 col-md-3">
+                </div>
+                <div class="col-xs-6 col-md-3" ng-show="showInputSegmento">
+                    <label>Segmento Inicial</label>
+                    <input id="path" class="form-control numberInput" ng-model="filter.seg_inicial" type="number" min="0" />
+                </div>
+                <div class="col-xs-6 col-md-3" ng-show="showInputSegmento">
+                    <label>Segmento Final</label>
+                    <input id="row" class="form-control numberInput" ng-model="filter.seg_final" type="number" min="0" />
+                </div>
+                <div class="col-xs-6 col-md-3">
 
-                            <button class="btn btn-primary" type="submit" ng-class="button_position">
+                    <button class="btn btn-primary" type="submit" ng-class="button_position">
                                     Pesquisar
                              </button>
-                     </div>
                 </div>
+            </div>
 
-            </form>
+        </form>
     </div>
-   <div class="row" layout-align="space-around">
-    <div class="table-responsive" style="margin-top: 25px;">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th ng-click="order='projeto.codigo_snv'; reverseSort = !reverseSort">Código SNV
-                        <span ng-show="order=='projeto.codigo_snv' && !reverseSort || order==null">
+    <div class="row" layout-align="space-around">
+        <div class="table-responsive" style="margin-top: 25px;">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th ng-click="order='projeto.codigo_snv'; reverseSort = !reverseSort">Código SNV
+                            <span ng-show="order=='projeto.codigo_snv' && !reverseSort || order==null">
                             <img src="images/icons/arrowUp.png"/>
                         </span>
-                        <span ng-show="order=='projeto.codigo_snv' && reverseSort">
+                            <span ng-show="order=='projeto.codigo_snv' && reverseSort">
                             <img src="images/icons/arrowDown.png"/>
                         </span>
-                    </th>
-                    <th ng-click="order='projeto.cod_projeto'; reverseSort = !reverseSort">Código do Projeto
-                        <span ng-show="order=='projeto.cod_projeto' && !reverseSort || order==null">
+                        </th>
+                        <th ng-click="order='projeto.cod_projeto'; reverseSort = !reverseSort">Código do Projeto
+                            <span ng-show="order=='projeto.cod_projeto' && !reverseSort || order==null">
                             <img src="images/icons/arrowUp.png"/>
                         </span>
-                        <span ng-show="order=='projeto.cod_projeto' && reverseSort">
+                            <span ng-show="order=='projeto.cod_projeto' && reverseSort">
                             <img src="images/icons/arrowDown.png"/>
                         </span>
-                    </th>
-                    <th ng-click="order='portaria'; reverseSort = !reverseSort">Portaria
-                        <span ng-show="order=='portaria' && !reverseSort || order==null">
+                        </th>
+                        <th ng-click="order='portaria'; reverseSort = !reverseSort">Portaria
+                            <span ng-show="order=='portaria' && !reverseSort || order==null">
                             <img src="images/icons/arrowUp.png"/>
                         </span>
-                        <span ng-show="order=='portaria' && reverseSort">
+                            <span ng-show="order=='portaria' && reverseSort">
                             <img src="images/icons/arrowDown.png"/>
                         </span>
-                    </th>
-                    <th ng-click="order='dt_publicacao'; reverseSort = !reverseSort">Data de Publicação
-                        <span ng-show="order=='dt_publicacao' && !reverseSort || order==null">
+                        </th>
+                        <th ng-click="order='dt_publicacao'; reverseSort = !reverseSort">Data de Publicação
+                            <span ng-show="order=='dt_publicacao' && !reverseSort || order==null">
                             <img src="images/icons/arrowUp.png"/>
                         </span>
-                        <span ng-show="order=='dt_publicacao' && reverseSort">
+                            <span ng-show="order=='dt_publicacao' && reverseSort">
                             <img src="images/icons/arrowDown.png"/>
                         </span>
-                    </th>
-                    <th ng-click="order='dt_vencimento'; reverseSort = !reverseSort">Data de Vencimento
-                        <span ng-show="order=='dt_vencimento' && !reverseSort || order==null">
+                        </th>
+                        <th ng-click="order='dt_vencimento'; reverseSort = !reverseSort">Data de Vencimento
+                            <span ng-show="order=='dt_vencimento' && !reverseSort || order==null">
                             <img src="images/icons/arrowUp.png"/>
                         </span>
-                        <span ng-show="order=='dt_vencimento' && reverseSort">
+                            <span ng-show="order=='dt_vencimento' && reverseSort">
                             <img src="images/icons/arrowDown.png"/>
                         </span>
-                    </th>
-                    <th ng-click="order='projeto.br'; reverseSort = !reverseSort">BR
-                        <span ng-show="order=='projeto.br' && !reverseSort || order==null">
+                        </th>
+                        <th ng-click="order='projeto.br'; reverseSort = !reverseSort">BR
+                            <span ng-show="order=='projeto.br' && !reverseSort || order==null">
                             <img src="images/icons/arrowUp.png"/>
                         </span>
-                        <span ng-show="order=='projeto.br' && reverseSort">
+                            <span ng-show="order=='projeto.br' && reverseSort">
                             <img src="images/icons/arrowDown.png"/>
                         </span>
-                    </th>
-                    <th>Segmento</th>
-                    <th ng-click="order='projeto.UF'; reverseSort = !reverseSort">UF
-                        <span ng-show="order=='projeto.UF' && !reverseSort || order==null">
+                        </th>
+                        <th>Segmento</th>
+                        <th ng-click="order='projeto.UF'; reverseSort = !reverseSort">UF
+                            <span ng-show="order=='projeto.UF' && !reverseSort || order==null">
                             <img src="images/icons/arrowUp.png"/>
                         </span>
-                        <span ng-show="order=='projeto.UF' && reverseSort">
+                            <span ng-show="order=='projeto.UF' && reverseSort">
                             <img src="images/icons/arrowDown.png"/>
                         </span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-show="dups.length" ng-repeat="dup in dups | orderBy : order : reverseSort">
-                    <td>{{dup.projeto.codigo_snv}}</td>
-                    <td><a ng-href="#/projetos/detail/{{dup.projeto.id_projeto}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Clique aqui para visualizar detalhes do Projeto.">{{dup.projeto.cod_projeto}}</a></td>
-                    <td><a ng-href="#/dups/detail/{{dup.id_dup}}" data-toggle="tooltip" data-placement="top" title="Clique aqui para visualizar detalhes da DUP.">{{dup.portaria}}</a></td>
-                    <td>
-                        <span ng-bind="dup.dt_publicacao | date:'dd/MM/yyyy'"></span>
-                    </td>
-                    <td>
-                        <span ng-bind="dup.dt_vencimento | date:'dd/MM/yyyy'"></span>
-                    </td>
-                    <td>{{dup.projeto.br}}</td>
-                    <td>{{dup.projeto.km_inicial}} - {{dup.projeto.km_final}} KM</td>
-                    <td>{{dup.projeto.UF}}</td>
-                </tr>
-                <tr ng-show="!dups.length">
-                    <td colspan="8" style="text-align: center;">
-                        <div class="alert alert-info">
-                            Nenhum registro encontrado.
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-show="dups.length" ng-repeat="dup in dups | orderBy : order : reverseSort">
+                        <td>{{dup.projeto.codigo_snv}}</td>
+                        <td><a ng-href="#/projetos/detail/{{dup.projeto.id_projeto}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Clique aqui para visualizar detalhes do Projeto.">{{dup.projeto.cod_projeto}}</a></td>
+                        <td><a ng-href="#/dups/detail/{{dup.id_dup}}" data-toggle="tooltip" data-placement="top" title="Clique aqui para visualizar detalhes da DUP.">{{dup.portaria}}</a></td>
+                        <td>
+                            <span ng-bind="dup.dt_publicacao | date:'dd/MM/yyyy'"></span>
+                        </td>
+                        <td>
+                            <span ng-bind="dup.dt_vencimento | date:'dd/MM/yyyy'"></span>
+                        </td>
+                        <td>{{dup.projeto.br}}</td>
+                        <td>{{dup.projeto.km_inicial}} - {{dup.projeto.km_final}} KM</td>
+                        <td>{{dup.projeto.UF}}</td>
+                    </tr>
+                    <tr ng-show="!dups.length">
+                        <td colspan="8" style="text-align: center;">
+                            <div class="alert alert-info">
+                                Nenhum registro encontrado.
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>

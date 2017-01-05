@@ -90,7 +90,7 @@ angular.module('sisdrApp')
                     $scope.geoJsonLayer[name] = layer;
                     var html = [
                         '<p><strong>',
-                        "<a href=''>",
+                        "<a href='#/projetos/detail/"+ feature.id +"'>",
                         feature.properties.vl_codigo_projeto,
                         '</a>',
                         '</strong>',
@@ -218,25 +218,23 @@ angular.module('sisdrApp')
                         projeto.properties.vl_br === br &&
                         projeto.properties.ds_tipo_obra === tipo_obra)
                 })
-            } 
-            else if (estado && br && !tipo_obra && tipo_projeto && !seg_inicial && !seg_final) {
+            } else if (estado && br && !tipo_obra && tipo_projeto && !seg_inicial && !seg_final) {
                 $scope.projetos = $scope.lastResults.filter(function(projeto) {
                     return (projeto.properties.sg_uf === estado &&
                         projeto.properties.vl_br === br &&
                         projeto.properties.ds_tipo_projeto == tipo_projeto)
                 })
-            }else if (estado && !br && tipo_obra && !tipo_projeto && !seg_inicial && !seg_final) {
+            } else if (estado && !br && tipo_obra && !tipo_projeto && !seg_inicial && !seg_final) {
                 $scope.projetos = $scope.lastResults.filter(function(projeto) {
                     return (projeto.properties.sg_uf === estado &&
-                            projeto.properties.ds_tipo_obra == tipo_obra)
+                        projeto.properties.ds_tipo_obra == tipo_obra)
                 })
-            }else if (estado && !br && !tipo_obra && tipo_projeto && !seg_inicial && !seg_final) {
+            } else if (estado && !br && !tipo_obra && tipo_projeto && !seg_inicial && !seg_final) {
                 $scope.projetos = $scope.lastResults.filter(function(projeto) {
                     return (projeto.properties.sg_uf === estado &&
-                            projeto.properties.ds_tipo_projeto == tipo_projeto)
+                        projeto.properties.ds_tipo_projeto == tipo_projeto)
                 })
-            }
-            else if (estado && br && tipo_obra && tipo_projeto && !seg_inicial && !seg_final) {
+            } else if (estado && br && tipo_obra && tipo_projeto && !seg_inicial && !seg_final) {
                 $scope.projetos = $scope.lastResults.filter(function(projeto) {
                     return (projeto.properties.sg_uf === estado &&
                         projeto.properties.vl_br === br &&
@@ -294,7 +292,7 @@ angular.module('sisdrApp')
 
         }
 
-        $scope.activeFields = function(){
+        $scope.activeFields = function() {
             $scope.showInputTipoProjeto = true;
             $scope.showInputTipoObra = true;
             $scope.showInputSegmento = true;

@@ -7,10 +7,6 @@
  * # SobreCtrl
  * Controller of the sisdrApp
  */
-angular.module('sisdrApp')
-    .controller('SobreCtrl', function($rootScope, $scope, RestApi, auth) {
+angular.module('sisdrApp').controller('SobreCtrl', function($rootScope, $scope, RestApi, auth) {
 
-
-       
-
-    });
+ });

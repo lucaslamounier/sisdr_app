@@ -17,6 +17,10 @@ function isEmpty(obj) {
     return JSON.stringify(obj) === JSON.stringify({});
 }
 
+function sortObject(o) {
+    return Object.keys(o).sort().reduce((r, k) => (r[k] = o[k], r), {});
+}
+
 angular.module('sisdrApp')
     .controller('sisdrCtrl', function($scope, $rootScope, RestApi, $cookies, $q, symbologies, GISHelper, formData, $timeout, auth, $location) {
 
@@ -44,6 +48,8 @@ angular.module('sisdrApp')
         function removeLayers() {
             $scope.map.setView([-16, -48], 4);
         }
+
+
 
         function propertiesProfaixa(feature, layer) {
             if (feature.properties) {
@@ -82,7 +88,7 @@ angular.module('sisdrApp')
                     'Proprietário': feature.properties.nm_proprietario,
                     ' ': htmlLink,
                 }
-               layer.bindPopup(GISHelper.createHTMLPopup(properties));
+                layer.bindPopup(GISHelper.createHTMLPopup(properties));
             }
         }
 
@@ -184,7 +190,7 @@ angular.module('sisdrApp')
             };
         }
 
-     
+
         function getRandomLatLng(map) {
             var bounds = map.getBounds(),
                 southWest = bounds.getSouthWest(),
@@ -193,8 +199,8 @@ angular.module('sisdrApp')
                 latSpan = northEast.lat - southWest.lat;
 
             return new L.LatLng(
-                    southWest.lat + latSpan * Math.random(),
-                    southWest.lng + lngSpan * Math.random());
+                southWest.lat + latSpan * Math.random(),
+                southWest.lng + lngSpan * Math.random());
         }
 
         /**
@@ -204,30 +210,34 @@ angular.module('sisdrApp')
         function onResult(result) {
 
             $scope.is_map = true;
-            var markers = L.markerClusterGroup({ chunkedLoading: true });
-            var markers2 = L.markerClusterGroup({ chunkedLoading: true });
+            var markers = L.markerClusterGroup({
+                chunkedLoading: true
+            });
+            var markers2 = L.markerClusterGroup({
+                chunkedLoading: true
+            });
             var profaixa = result.profaixa.features;
-            var propriedadesLindeiras = result.propriedadesLindeira.features;    
+            var propriedadesLindeiras = result.propriedadesLindeira.features;
 
             var layerPropLindeira = L.geoJson(propriedadesLindeiras, {
-                onEachFeature: propertiesPropLindeira,  
+                onEachFeature: propertiesPropLindeira,
                 //style: stylePropLindeira,       
             });
 
             var layerProfaixa = L.geoJson(profaixa, {
-                    style: style,
-                    onEachFeature: propertiesProfaixa,
+                style: style,
+                onEachFeature: propertiesProfaixa,
             });
-    
+
             markers.addLayer(layerPropLindeira);
             markers2.addLayer(layerProfaixa);
-           
+
             $scope.initialLayers[PropriedadesLindeirasLayerName] = {
-                    'layer': markers,
-                    'legend': {
-                        'url': 'images/icons/prop-lindeira.png',
-                        'type': 'png'
-                    }
+                'layer': markers,
+                'legend': {
+                    'url': 'images/icons/prop-lindeira.png',
+                    'type': 'png'
+                }
             };
 
             $scope.initialLayers[profaixaLayerName] = {
@@ -311,6 +321,97 @@ angular.module('sisdrApp')
                 }
             });
 
+            var layerAcentamentosRurais = L.esri.featureLayer({
+                url: "//servicos.dnit.gov.br/arcgis/rest/services/DNIT_Geo/AREAS_ESPECIAIS/MapServer/6",
+                onEachFeature: onEachFeatureRodovia,
+                style: function() {
+                    return {
+                        color: "#FF7F50",
+                        weight: 3
+                    };
+                }
+            });
+
+            var layerUnidadesConservacao = L.esri.featureLayer({
+                url: "//servicos.dnit.gov.br/arcgis/rest/services/DNIT_Geo/AREAS_ESPECIAIS/MapServer/3",
+                onEachFeature: onEachFeatureRodovia,
+                style: function() {
+                    return {
+                        color: "#ADFF2F",
+                        weight: 3
+                    };
+                }
+            });
+
+            var layerBiomas = L.esri.featureLayer({
+                url: "//servicos.dnit.gov.br/arcgis/rest/services/DNIT_Geo/AREAS_ESPECIAIS/MapServer/5",
+                onEachFeature: onEachFeatureRodovia,
+                style: function() {
+                    return {
+                        color: "#F0E68C",
+                        weight: 3
+                    };
+                }
+            });
+
+            var layerMalhaRodoviaria = L.esri.featureLayer({
+                url: "//servicos.dnit.gov.br/arcgis/rest/services/DNIT_Geo/condicao_malha_rodoviaria/MapServer/0",
+                onEachFeature: onEachFeatureRodovia,
+                style: function() {
+                    return {
+                        color: "#48D1CC",
+                        weight: 3
+                    };
+                }
+            });
+
+
+            var layerPortos = L.esri.featureLayer({
+                url: "//servicos.dnit.gov.br/arcgis/rest/services/DNIT_Geo/INFRAESTRUTURA/MapServer/1",
+                onEachFeature: onEachFeatureRodovia,
+                style: function() {
+                    return {
+                        color: "#DA70D6",
+                        weight: 3
+                    };
+                }
+            });
+
+            var layerRefinaria = L.esri.featureLayer({
+                url: "//servicos.dnit.gov.br/arcgis/rest/services/DNIT_Geo/INFRAESTRUTURA/MapServer/4",
+                onEachFeature: onEachFeatureRodovia,
+                style: function() {
+                    return {
+                        color: "#A0522D",
+                        weight: 3
+                    };
+                }
+            });
+
+            var layerBarragens = L.esri.featureLayer({
+                url: "//servicos.dnit.gov.br/arcgis/rest/services/DNIT_Geo/INFRAESTRUTURA/MapServer/5",
+                onEachFeature: onEachFeatureRodovia,
+                style: function() {
+                    return {
+                        color: "#800080",
+                        weight: 3
+                    };
+                }
+            });
+
+
+            var layerEixoDutoviario = L.esri.featureLayer({
+                url: "//servicos.dnit.gov.br/arcgis/rest/services/DNIT_Geo/INFRAESTRUTURA/MapServer/6",
+                onEachFeature: onEachFeatureRodovia,
+                style: function() {
+                    return {
+                        color: "#FA8072",
+                        weight: 3
+                    };
+                }
+            });
+
+
             $scope.wmsLayers['Ferrovias'] = {
                 'layer': layerFerrovia,
                 'legend': {
@@ -329,8 +430,8 @@ angular.module('sisdrApp')
                 }
             };
 
-            
-          
+
+
             $scope.wmsLayers['Rodovias Federais'] = {
                 'layer': layerRodoviasFederais,
                 'legend': {
@@ -351,7 +452,7 @@ angular.module('sisdrApp')
             $scope.wmsLayers['PAC - Intervensão'] = {
                 'layer': layerPACintervensao,
                 'legend': {
-                    'url': 'images/icons/pol-icon.png',
+                    'url': 'images/icons/skyline.png',
                     'type': 'png',
                     'fill': '#A0522D'
                 }
@@ -360,7 +461,7 @@ angular.module('sisdrApp')
             $scope.wmsLayers['PAC - Situação'] = {
                 'layer': layerPACsituacao,
                 'legend': {
-                    'url': 'images/icons/pol-icon.png',
+                    'url': 'images/icons/RoadClosure-100.png',
                     'type': 'png',
                     'fill': '#A0522D'
                 }
@@ -377,14 +478,77 @@ angular.module('sisdrApp')
             };
 
 
-            $scope.wmsLayers['UF - Unidades da Federação'] = {
+            $scope.wmsLayers['Unidades da Federação - UF'] = {
                 'layer': layerRegiao,
                 'legend': {
-                    'url': 'images/icons/pol-icon.png',
+                    'url': 'images/icons/brazil-map.png',
                     'type': 'png'
                 }
             };
 
+            $scope.wmsLayers['Assentamentos Rurais - INCRA'] = {
+                'layer': layerAcentamentosRurais,
+                'legend': {
+                    'url': 'images/icons/farm.png',
+                    'type': 'png'
+                }
+            };
+
+            $scope.wmsLayers['Unidades de Conservação - MMA'] = {
+                'layer': layerUnidadesConservacao,
+                'legend': {
+                    'url': 'images/icons/1483656243_environmental_engineer.png',
+                    'type': 'png'
+                }
+            };
+
+            $scope.wmsLayers['Biomas - MMA'] = {
+                'layer': layerBiomas,
+                'legend': {
+                    'url': 'images/icons/bio.png',
+                    'type': 'png'
+                }
+            };
+
+            $scope.wmsLayers['Condição da Malha Rodoviária'] = {
+                'layer': layerMalhaRodoviaria,
+                'legend': {
+                    'url': 'images/icons/road.png',
+                    'type': 'png'
+                }
+            };
+
+            $scope.wmsLayers['Portos - ANTAQ'] = {
+                'layer': layerPortos,
+                'legend': {
+                    'url': 'images/icons/crane.png',
+                    'type': 'png'
+                }
+            };
+
+            $scope.wmsLayers['Refinarias - PNLT'] = {
+                'layer': layerRefinaria,
+                'legend': {
+                    'url': 'images/icons/refinery.png',
+                    'type': 'png'
+                }
+            };
+
+            $scope.wmsLayers['Barragens Eclusas - PNLT '] = {
+                'layer': layerBarragens,
+                'legend': {
+                    'url': 'images/icons/Dam-100.png',
+                    'type': 'png'
+                }
+            };
+
+            $scope.wmsLayers['Eixo Dutoviario - PNLT '] = {
+                'layer': layerEixoDutoviario,
+                'legend': {
+                    'url': 'images/icons/axis.png',
+                    'type': 'png'
+                }
+            };
 
             console.log($scope.initialLayers);
 

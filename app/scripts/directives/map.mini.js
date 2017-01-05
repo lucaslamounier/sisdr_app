@@ -15,9 +15,16 @@ angular.module('sisdrApp')
 
                 var date,
                     mapOSM,
+                    googleSat,
+                    googleStreets,
+                    googleHybrid,
+                    googleTerrain,
                     mapPositron,
                     mapDark,
-                    googleSat,
+                    OpenStreetMap_city,
+                    OpenMapSurfer_Roads,
+                    Esri_WorldImagery,
+                    HikeBike_HikeBike,
                     layers = {},
                     baseMaps = {},
                     initialLayers = {},
@@ -43,6 +50,41 @@ angular.module('sisdrApp')
                     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
                 });
 
+                googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+                    maxZoom: 20,
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+                });
+                googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+                    maxZoom: 20,
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+                });
+
+                googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+                    maxZoom: 20,
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+                });
+
+                OpenStreetMap_city = L.tileLayer('http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                    maxZoom: 20,
+                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                });
+
+                OpenMapSurfer_Roads = L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
+                    maxZoom: 19,
+                    attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                });
+
+                Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    maxZoom: 17,
+                    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                });
+
+                HikeBike_HikeBike = L.tileLayer('http://{s}.tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png', {
+                    maxZoom: 18,
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                });
+
+
                 if (date.getHours() >= 18 || date.getHours() <= 5) {
                     scope.map = L.map('mapdetail', {
                         layers: [mapDark]
@@ -59,6 +101,18 @@ angular.module('sisdrApp')
                     "OpenStreetMap": {
                         layer: mapOSM
                     },
+                    "OpenStreetMap City": {
+                        layer: OpenStreetMap_city
+                    },
+                    "OpenStreetMap Roads": {
+                        layer: OpenMapSurfer_Roads
+                    },
+                    "OpenStreetMap Bike": {
+                        layer: HikeBike_HikeBike
+                    },
+                    "Esri World Imagery": {
+                        layer: Esri_WorldImagery
+                    },
                     "CartoDB Positron": {
                         layer: mapPositron
                     },
@@ -67,6 +121,15 @@ angular.module('sisdrApp')
                     },
                     "Google Satellite": {
                         layer: googleSat
+                    },
+                    "Google Streets": {
+                        layer: googleStreets
+                    },
+                    "Google Hybrid": {
+                        layer: googleHybrid
+                    },
+                    "Google Terrain": {
+                        layer: googleTerrain
                     }
                 }, {}).addTo(scope.map);
 

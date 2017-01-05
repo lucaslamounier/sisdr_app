@@ -335,7 +335,7 @@ angular.module('sisdrApp')
                                     return $.each(_this._baseLayers, function(key, value) {
                                         _this._onInputClick(value.input, value.obj);
                                     });
-     
+
                                 } else {
                                     return _this._onInputClick(input, obj);
                                 }

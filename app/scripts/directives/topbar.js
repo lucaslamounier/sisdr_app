@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc directive
- * @name operationsApp.directive:topBar
+ * @name sisdrApp.directive:topBar
  * @description
  * # topBar
  */

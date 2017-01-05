@@ -35,7 +35,7 @@ angular.module('sisdrApp')
             request.$promise.then(obtainPassResult, obtainPassError)
 
             function obtainPassResult(user_data) {
-                
+
                 console.log('SUCESS');
                 if (user_data && user_data.permited) {
                     user_data.username = username;

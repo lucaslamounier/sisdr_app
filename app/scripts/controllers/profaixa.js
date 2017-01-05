@@ -14,8 +14,8 @@ angular.module('sisdrApp')
         $scope.estados = formData.estados;
         $scope.showInputLote = false;
         $scope.button_position = 'button-initial';
-        
-        
+
+
         if ($cookies.get('user_data')) {
             auth.setUser(ACCESS_LEVEL.USER, JSON.parse($cookies.get('user_data')));
             $rootScope.dataUser = {};
@@ -129,9 +129,6 @@ angular.module('sisdrApp')
                 })
             } else if (estado && br && !lote && !seg_inicial && !seg_final) {
                 $scope.profaixas = $scope.lastResults.filter(function(profaixa) {
-                    //console.log("profaixa: " + JSON.stringify(profaixa.properties) );
-                    //console.log("estado: " + estado + "br: " + br );
-                    //debugger;
                     return (profaixa.properties.sg_uf === estado && profaixa.properties.vl_br === br)
                 })
             } else if (estado && br && lote && !seg_inicial && !seg_final) {
@@ -174,7 +171,7 @@ angular.module('sisdrApp')
                     $scope.geoJsonLayer[name] = layer;
                     var html = [
                         '<p><strong>',
-                        "<a href=''>",
+                        "<a href='#/profaixa/detail/"+ feature.id +"'>",
                         feature.properties.vl_codigo_rodovia,
                         '</a>',
                         '</strong>',
@@ -398,8 +395,6 @@ angular.module('sisdrApp')
                 }
             };
         };
-
-
 
         if (!$routeParams.id) {
             $scope.msg = "Parâmetro inválido";

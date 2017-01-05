@@ -7,134 +7,133 @@
     <mapfilter class="row"></mapfilter>
     <div class="row">
         <div class="col-md-1 no-padding-left">
-            <button class="btn btn-default" data-toggle="collapse" data-target="#search-form" aria-expanded="false" 
-            aria-controls="search-form" ng-click="cleanFilters()">
+            <button class="btn btn-default" data-toggle="collapse" data-target="#search-form" aria-expanded="false" aria-controls="search-form" ng-click="cleanFilters()">
                   Filtrar Propriedade Lindeira
           </button>
         </div>
     </div>
     <br />
     <div class="collapse row" id="search-form" style="margin-bottom: 35px;width: 100%;">
-            <form class="form-horizontal formtype" ng-submit='filterPropLindeira(filter)'>
-                <div class="form-line">
-                    <div class="col-xs-6 col-md-3" ng-class="uf_class">
-                        <label class="pull-center">UF</label>
-                        <select ng-model="filter.estado" class="form-control" ng-options="estado.nome for estado in estados" ng-change='getBR(filter.estado)'>
+        <form class="form-horizontal formtype" ng-submit='filterPropLindeira(filter)'>
+            <div class="form-line">
+                <div class="col-xs-6 col-md-3" ng-class="uf_class">
+                    <label class="pull-center">UF</label>
+                    <select ng-model="filter.estado" class="form-control" ng-options="estado.nome for estado in estados" ng-change='getBR(filter.estado)'>
                            <option value="" default>UF</option>
                       </select>
-                    </div>
-                    <div class="col-xs-6 col-md-2" ng-show="showInputBR">
-                        <label class="pull-center">BR</label>
-                        <select id="br" class="form-control" ng-model="filter.br" ng-options="br for br in brs | orderBy:'br' " ng-change='getLote(filter.estado, filter.br)'>
+                </div>
+                <div class="col-xs-6 col-md-2" ng-show="showInputBR">
+                    <label class="pull-center">BR</label>
+                    <select id="br" class="form-control" ng-model="filter.br" ng-options="br for br in brs | orderBy:'br' " ng-change='getLote(filter.estado, filter.br)'>
                             <option value="" default>BR</option>
                       </select>
-                    </div>
-                     <div class="col-xs-6 col-md-2" ng-show="showInputLote">
-                            <label class="pull-center">Lote</label>
-                            <select id="br" class="form-control" ng-model="filter.lote" ng-options="lote.vl_lote for lote in lotes | orderBy:'vl_lote'">
+                </div>
+                <div class="col-xs-6 col-md-2" ng-show="showInputLote">
+                    <label class="pull-center">Lote</label>
+                    <select id="br" class="form-control" ng-model="filter.lote" ng-options="lote.vl_lote for lote in lotes | orderBy:'vl_lote'">
                                 <option value="" default>Lote</option>
                           </select>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
+                </div>
+                <div class="col-xs-6 col-md-3">
                     <button class="btn btn-primary" type="submit" ng-class="button_position">
                                  Pesquisar
                      </button>
                 </div>
-                </div>
+            </div>
         </form>
     </div>
     <div class="row" layout-align="space-around">
-    <div class="table-responsive" style="margin-top: 25px;">
-        <table class="table table-striped table-condensed">
-            <thead>
-                <tr>
-                    <th ng-click="order='properties.numero_matricula'; reverseSort = !reverseSort">
-                        Matrícula
-                        <span ng-show="order=='properties.numero_matricula' && !reverseSort || order==null">
+        <div class="table-responsive" style="margin-top: 25px;">
+            <table class="table table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th ng-click="order='properties.numero_matricula'; reverseSort = !reverseSort">
+                            Matrícula
+                            <span ng-show="order=='properties.numero_matricula' && !reverseSort || order==null">
                             <img src="images/icons/arrowUp.png"/>
                         </span>
-                        <span ng-show="order=='properties.numero_matricula' && reverseSort">
+                            <span ng-show="order=='properties.numero_matricula' && reverseSort">
                             <img src="images/icons/arrowDown.png"/>
                         </span>
-                    </th>
-                    <th ng-click="order='properties.nm_propriedade'; reverseSort = !reverseSort">Nome da Propriedade
-                        <span ng-show="order=='properties.nm_propriedade' && !reverseSort || order==null">
+                        </th>
+                        <th ng-click="order='properties.nm_propriedade'; reverseSort = !reverseSort">Nome da Propriedade
+                            <span ng-show="order=='properties.nm_propriedade' && !reverseSort || order==null">
                             <img src="images/icons/arrowUp.png"/>
                         </span>
-                        <span ng-show="order=='properties.nm_propriedade' && reverseSort">
+                            <span ng-show="order=='properties.nm_propriedade' && reverseSort">
                             <img src="images/icons/arrowDown.png"/>
                         </span>
-                    </th>
-                    <th ng-click="order='properties.nm_proprietario'; reverseSort = !reverseSort">Nome do Proprietário
-                        <span ng-show="order=='properties.nm_proprietario' && !reverseSort || order==null">
+                        </th>
+                        <th ng-click="order='properties.nm_proprietario'; reverseSort = !reverseSort">Nome do Proprietário
+                            <span ng-show="order=='properties.nm_proprietario' && !reverseSort || order==null">
                             <img src="images/icons/arrowUp.png"/>
                         </span>
-                        <span ng-show="order=='properties.nm_proprietario' && reverseSort">
+                            <span ng-show="order=='properties.nm_proprietario' && reverseSort">
                             <img src="images/icons/arrowDown.png"/>
                         </span>
-                    </th>
-                    <th ng-click="order='properties.profaixa.br'; reverseSort = !reverseSort">BR
-                        <span ng-show="order=='properties.profaixa.br' && !reverseSort || order==null">
+                        </th>
+                        <th ng-click="order='properties.profaixa.br'; reverseSort = !reverseSort">BR
+                            <span ng-show="order=='properties.profaixa.br' && !reverseSort || order==null">
                             <img src="images/icons/arrowUp.png"/>
                         </span>
-                        <span ng-show="order=='properties.profaixa.br' && reverseSort">
+                            <span ng-show="order=='properties.profaixa.br' && reverseSort">
                             <img src="images/icons/arrowDown.png"/>
                         </span>
-                    </th>
-                    <th ng-click="order='properties.profaixa.lote'; reverseSort = !reverseSort">
-                        Lote
-                        <span ng-show="order=='properties.profaixa.lote' && !reverseSort || order==null">
+                        </th>
+                        <th ng-click="order='properties.profaixa.lote'; reverseSort = !reverseSort">
+                            Lote
+                            <span ng-show="order=='properties.profaixa.lote' && !reverseSort || order==null">
                             <img src="images/icons/arrowUp.png"/>
                         </span>
-                        <span ng-show="order=='properties.profaixa.lote' && reverseSort">
+                            <span ng-show="order=='properties.profaixa.lote' && reverseSort">
                             <img src="images/icons/arrowDown.png"/>
                         </span>
-                    </th>
-                    <th ng-click="order='properties.sg_uf'; reverseSort = !reverseSort">UF
-                        <span ng-show="order=='properties.sg_uf' && !reverseSort || order==null">
+                        </th>
+                        <th ng-click="order='properties.sg_uf'; reverseSort = !reverseSort">UF
+                            <span ng-show="order=='properties.sg_uf' && !reverseSort || order==null">
                             <img src="images/icons/arrowUp.png"/>
                         </span>
-                        <span ng-show="order=='properties.sg_uf' && reverseSort">
+                            <span ng-show="order=='properties.sg_uf' && reverseSort">
                             <img src="images/icons/arrowDown.png"/>
                         </span>
-                    </th>
-                    <th ng-click="order='properties.nm_municipio'; reverseSort = !reverseSort">Município
-                        <span ng-show="order=='properties.nm_municipio' && !reverseSort || order==null">
+                        </th>
+                        <th ng-click="order='properties.nm_municipio'; reverseSort = !reverseSort">Município
+                            <span ng-show="order=='properties.nm_municipio' && !reverseSort || order==null">
                             <img src="images/icons/arrowUp.png"/>
                         </span>
-                        <span ng-show="order=='properties.nm_municipio' && reverseSort">
+                            <span ng-show="order=='properties.nm_municipio' && reverseSort">
                             <img src="images/icons/arrowDown.png"/>
                         </span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-show="propriedadesLindeiras.length" ng-repeat="prop in propriedadesLindeiras | orderBy : order : reverseSort">
-                    <td>
-                        <span ng-show="!prop.properties.numero_matricula"> - </span>
-                        <span ng-show="prop.properties.numero_matricula"> {{prop.properties.numero_matricula}} </span>
-                    </td>
-                    <td>
-                        <a ng-href="#/propriedades-lindeiras/detail/{{prop.id}}">{{prop.properties.nm_propriedade}}</a>
-                    </td>
-                    <td>{{prop.properties.nm_proprietario}}</td>
-                    <td>{{prop.properties.profaixa.br}}</td>
-                    <td>{{prop.properties.profaixa.lote}}</td>
-                    <td>{{prop.properties.sg_uf}}</td>
-                    <td>{{prop.properties.nm_municipio}}</td>
-                    <td>
-                        <span ng-show="prop.properties.has_geom" class="btn glyphicon glyphicon-eye-open" href="#" ng-click="seeOnMap(prop.id)">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-show="propriedadesLindeiras.length" ng-repeat="prop in propriedadesLindeiras | orderBy : order : reverseSort">
+                        <td>
+                            <span ng-show="!prop.properties.numero_matricula"> - </span>
+                            <span ng-show="prop.properties.numero_matricula"> {{prop.properties.numero_matricula}} </span>
+                        </td>
+                        <td>
+                            <a ng-href="#/propriedades-lindeiras/detail/{{prop.id}}">{{prop.properties.nm_propriedade}}</a>
+                        </td>
+                        <td>{{prop.properties.nm_proprietario}}</td>
+                        <td>{{prop.properties.profaixa.br}}</td>
+                        <td>{{prop.properties.profaixa.lote}}</td>
+                        <td>{{prop.properties.sg_uf}}</td>
+                        <td>{{prop.properties.nm_municipio}}</td>
+                        <td>
+                            <span ng-show="prop.properties.has_geom" class="btn glyphicon glyphicon-eye-open" href="#" ng-click="seeOnMap(prop.id)">
                     </span>
-                    </td>
-                </tr>
-                <tr ng-show="!propriedadesLindeiras.length">
+                        </td>
+                    </tr>
+                    <tr ng-show="!propriedadesLindeiras.length">
                         <td colspan="10" style="text-align: center;">
                             <div class="alert alert-info">
                                 Nenhum registro encontrado.
                             </div>
                         </td>
                     </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
