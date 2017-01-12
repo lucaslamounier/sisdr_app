@@ -105,8 +105,6 @@ angular.module('sisdrApp')
                     data: dado_propriedade
                 }]
             });
-
-
         }
 
         function onError(error) {

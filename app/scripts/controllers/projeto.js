@@ -90,7 +90,7 @@ angular.module('sisdrApp')
                     $scope.geoJsonLayer[name] = layer;
                     var html = [
                         '<p><strong>',
-                        "<a href='#/projetos/detail/"+ feature.id +"'>",
+                        "<a href='#/projetos/detail/'"+ feature.id +">",
                         feature.properties.vl_codigo_projeto,
                         '</a>',
                         '</strong>',
@@ -362,41 +362,21 @@ angular.module('sisdrApp')
             $(this).tab('show')
         });
 
-        if (!$routeParams.id) {
-            $scope.msg = "Parâmetro inválido";
+        function onResult(result) {
+            $scope.projeto = result.projeto;
+        };
 
-        } else {
-
-            var id_project = $routeParams.id;
-
-            function onResult(result) {
-                $scope.projeto = result.projeto;
-            };
-
-            function onError(error) {
-                if (error.status === -1) {
+        function onError(error) {
+           if (error.status === -1) {
                     console.log('reload page..');
                     window.location.reload();
                 } else {
                     $scope.msg = "Não foi possivel consultar dados.";
                 }
                 console.log('Erro:' + error.statusText, error.status);
-            }
+        }
 
-            /* Send request for restAPI */
-            var projetoRequest = RestApi.getProjetoDetail({
-                type: 'projetos-c-detail',
-                id: id_project
-            });
-
-            var promises = {
-                projeto: projetoRequest.$promise,
-            };
-
-            var allPromise = $q.all(promises);
-            allPromise.then(onResult, onError);
-
-            $scope.adicionarGeoJSON = function(geoJSON) {
+        $scope.adicionarGeoJSON = function(geoJSON) {
 
                 if (typeof geoJSON == 'object') {
                     var layer = L.geoJson(geoJSON, {
@@ -409,14 +389,14 @@ angular.module('sisdrApp')
 
                     $scope.updateFitBounds(layer);
                 }
-            };
+        };
 
-            /**
+        /**
              * Atualiza a área de visualização do mapa.
              * @param layer
-             */
+        */
 
-            $scope.updateFitBounds = function(layer) {
+        $scope.updateFitBounds = function(layer) {
                 $('#map').css('height', '420px');
                 var bounds, layers, updated = false;
                 if ('getBounds' in layer) {
@@ -429,9 +409,9 @@ angular.module('sisdrApp')
                     updated = true;
                 }
                 return updated;
-            };
+        };
 
-            $scope.pegarBuffer = function(buffer) {
+        $scope.pegarBuffer = function(buffer) {
 
                 buffer = JSON.parse(buffer);
 
@@ -447,22 +427,21 @@ angular.module('sisdrApp')
                     $scope.checked = false;
                     $scope.adicionarGeoJSON(JSON.parse(buffer_geoJson));
                 }
-            }
+        };
 
-            function printHelp() {
+        function printHelp() {
                 document.getElementById('texto-ctrl-c').style.display = 'initial';
-            };
+        };
 
-            function printWKT(buffer_wkt) {
+        function printWKT(buffer_wkt) {
                 document.getElementById('wkt-text1').innerHTML = buffer_wkt;
-            };
+        };
 
-            function printWktText(buffer_wkt) {
+        function printWktText(buffer_wkt) {
                 document.getElementById('wkt-text2').innerHTML = buffer_wkt;
-            };
+        };
 
-
-            $scope.selectText = function(element) {
+        $scope.selectText = function(element) {
                 var doc = document,
                     text = doc.getElementById(element),
                     range,
@@ -489,7 +468,28 @@ angular.module('sisdrApp')
                     console.log('Oops, unable to copy');
                 }
 
+        };
+
+        if (!$routeParams.id) {
+            $scope.msg = "Parâmetro inválido";
+
+        } else {
+
+            var id_project = $routeParams.id;
+
+            /* Send request for restAPI */
+            var projetoRequest = RestApi.getProjetoDetail({
+                type: 'projetos-c-detail',
+                id: id_project
+            });
+
+            var promises = {
+                projeto: projetoRequest.$promise,
             };
+
+            var allPromise = $q.all(promises);
+            allPromise.then(onResult, onError);
+
         };
         /* End else */
 

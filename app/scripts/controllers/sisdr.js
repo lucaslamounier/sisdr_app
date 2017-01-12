@@ -12,14 +12,9 @@ function isEmpty(obj) {
     for (var prop in obj) {
         if (obj.hasOwnProperty(prop))
             return false;
-    }
-
+        }
     return JSON.stringify(obj) === JSON.stringify({});
-}
-
-function sortObject(o) {
-    return Object.keys(o).sort().reduce((r, k) => (r[k] = o[k], r), {});
-}
+};
 
 angular.module('sisdrApp')
     .controller('sisdrCtrl', function($scope, $rootScope, RestApi, $cookies, $q, symbologies, GISHelper, formData, $timeout, auth, $location) {
@@ -49,8 +44,6 @@ angular.module('sisdrApp')
             $scope.map.setView([-16, -48], 4);
         }
 
-
-
         function propertiesProfaixa(feature, layer) {
             if (feature.properties) {
                 var url = '#/profaixa/detail/' + feature.id;
@@ -74,6 +67,30 @@ angular.module('sisdrApp')
             if (feature.properties) {
                 layer.bindPopup(GISHelper.createHTMLPopup(feature.properties));
             }
+        }
+
+        function onEachFeatureProjeto(feature, layer) {
+                    var html = [
+                        '<p><strong>',
+                        "<a href='#/projetos/detail/'"+ feature.id +">",
+                        feature.properties.vl_codigo_projeto,
+                        '</a>',
+                        '</strong>',
+                        '</p>',
+                        '<div class="btn-group btn-group-sm">',
+                        '<div>',
+                        '<p><strong>BR:</strong> ' + feature.properties.vl_br + '<br />',
+                        '<strong>UF: </strong>: ' + feature.properties.sg_uf + '<br />',
+                        '<strong>KM Inicial: </strong>: ' + feature.properties.vl_km_inicial + '<br />',
+                        '<strong>KM Final: </strong> ' + feature.properties.vl_km_final + '<br />',
+                        '<strong>Empresa Responsável: </strong> ' + feature.properties.empresa_responsavel + '<br />',
+                        '<strong>Tipo de Projeto: </strong> ' + feature.properties.ds_tipo_projeto_display + '<br />',
+                        '<strong>Tipo de Trecho: </strong> ' + feature.properties.sg_tipo_trecho_display + '<br />',
+                        '<strong>Tipo de Obra: </strong>: ' + feature.properties.ds_tipo_obra_display + '</p>',
+                        '</div>',
+                        '</div>'
+                    ].join('');
+                    layer.bindPopup(html);
         }
 
 
@@ -163,9 +180,10 @@ angular.module('sisdrApp')
 
         function style(feature) {
             return {
-                weight: 3,
-                opacity: 0.7,
-                color: '#800080',
+                weight: 4,
+                opacity: 0.6,
+                //color: '#800080',
+                color: '#2E8B57',
 
             };
         }
@@ -210,18 +228,24 @@ angular.module('sisdrApp')
         function onResult(result) {
 
             $scope.is_map = true;
+            
             var markers = L.markerClusterGroup({
                 chunkedLoading: true
             });
             var markers2 = L.markerClusterGroup({
                 chunkedLoading: true
             });
+
+            var markers3 = L.markerClusterGroup({
+                chunkedLoading: true
+            });
+
             var profaixa = result.profaixa.features;
             var propriedadesLindeiras = result.propriedadesLindeira.features;
+            var projetos = result.projetos.features;
 
             var layerPropLindeira = L.geoJson(propriedadesLindeiras, {
-                onEachFeature: propertiesPropLindeira,
-                //style: stylePropLindeira,       
+                onEachFeature: propertiesPropLindeira,    
             });
 
             var layerProfaixa = L.geoJson(profaixa, {
@@ -229,8 +253,21 @@ angular.module('sisdrApp')
                 onEachFeature: propertiesProfaixa,
             });
 
+            var layerProjeto = L.geoJson(projetos, {
+                style: function(feature) {
+                    return {
+                        color: '#FF0000',
+                        weight: 3,
+                        //fillColor: '#03f',
+                    }
+                },
+                onEachFeature: onEachFeatureProjeto,
+
+            });
+
             markers.addLayer(layerPropLindeira);
             markers2.addLayer(layerProfaixa);
+            markers3.addLayer(layerProjeto);
 
             $scope.initialLayers[PropriedadesLindeirasLayerName] = {
                 'layer': markers,
@@ -244,6 +281,14 @@ angular.module('sisdrApp')
                 'layer': markers2,
                 'legend': {
                     'url': 'images/icons/road-perspective.png',
+                    'type': 'png'
+                }
+            };
+
+            $scope.initialLayers['Projetos Geométricos'] = {
+                'layer': markers3,
+                'legend': {
+                    'url': 'images/icons/placeholder-pointing-on-a-road.png',
                     'type': 'png'
                 }
             };
@@ -284,7 +329,6 @@ angular.module('sisdrApp')
             var layerTerraIndigena = L.esri.featureLayer({
                 url: "//servicos.dnit.gov.br/arcgis/rest/services/DNIT_Geo/LOCALIDADES/MapServer/3",
                 onEachFeature: onEachFeatureRodovia,
-                pointToLayer: $scope.embargosToMarker,
                 style: GISHelper.embargoStyle,
             });
 
@@ -570,11 +614,12 @@ angular.module('sisdrApp')
          */
 
         function onError(error) {
-            console.error(error);
+            console.log(error);
             $scope.filter.carregar = false;
         }
 
         $scope.filter.carregar = true;
+
         var profaixaRequest = RestApi.getPoints({
             type: 'profaixa'
         });
@@ -582,9 +627,14 @@ angular.module('sisdrApp')
             type: 'propriedade-lindeira'
         });
 
+        var projetosRequest = RestApi.getProjetos({
+            type: 'projetos-list',
+        });
+
         var promises = {
             profaixa: profaixaRequest.$promise,
             propriedadesLindeira: propriedadesLindeirasRequest.$promise,
+            projetos: projetosRequest.$promise,
         };
 
         var allPromise = $q.all(promises);

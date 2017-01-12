@@ -70,7 +70,7 @@ angular.module('sisdrApp')
                 isArray: false
             },
             getProjetos: {
-                url: settings.server.url + '/:type',
+                //url: settings.server.url + '/:type',
                 method: 'GET',
                 params: {
                     format: 'json'

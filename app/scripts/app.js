@@ -88,7 +88,7 @@ angular
         // Application settings
         $provide.constant('settings', {
             'server': {
-                //'url': '//localhost:8000/sisdr-api'
+                //'url': '://localhost:8000/sisdr-api'
                 'url': '//10.100.11.139/sisdr-api'
             },
             'server_user_auth': {
